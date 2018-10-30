@@ -1,0 +1,102 @@
+{# ////////////////////////////////////////////////////////////////////////// #}
+{# Main Template                                                              #}
+{# ////////////////////////////////////////////////////////////////////////// #}
+
+{# Redirect users using unsupported browsers ================================ #}
+
+{{ agentEnabled ? craft.agent.redirect(browsers) }}
+
+{% spaceless %}
+
+{% minify %}
+
+<!DOCTYPE html>
+
+<html lang="{{ craft.app.language|default('en') }}" {{ craft.agent.data|default }}>
+
+  {# Document Head ========================================================== #}
+
+  <head>
+
+    {% include "_sections/head" %}
+
+    {{ craft.helpers.loadStylesheets() }}
+
+  </head>
+
+  {# Document Body ========================================================== #}
+
+  <body id="{{ page }}" class="{{ craft.helpers.classes(classes|default) }}">
+
+    <site-wrapper>
+
+      {# Navigation Bar ----------------------------------------------------- #}
+
+      {% block navigation %}
+        {% include "_sections/navigation" %}
+      {% endblock %}
+
+      {# Header ----------------------------------------------------------------
+      The 'header' block is reserved for the header content.
+      Using {% block header %} within a template will replace the header element entirely.
+      Using {% set header %} within a template will add to the existing the header element.
+      Using {% set header = false %} within a template will disable the header from rendering at all. #}
+
+      {% set header = header ?? block('header') ?? false %}
+
+      {% if header is not empty and header is string %}
+        {{ '<header' in header ? header|raw : ('<header>' ~ header ~ '</header>')|raw }}
+      {% elseif header != false  %}
+        {% include "_sections/header" %}
+      {% endif %}
+
+      {# Main and Aside --------------------------------------------------------
+      'body', 'main', and 'content' blocks are all reserved for the main body content.
+      'aside' and 'sidebar' are reserved for the aside content. #}
+
+      {% set main  = main  ?? block('body')  ?? block('main')    ?? block('content') ?? false %}
+      {% set aside = aside ?? block('aside') ?? block('sidebar') ?? false %}
+
+      {# If both main and aside block types exist. Wrap them in their own custom element. #}
+
+      {{ main is not empty and aside is not empty ? '<main-and-aside>' }}
+
+      {# Wrap the main block content with the <main> element if it's not present. #}
+
+      {% if main is not empty %}
+        {{ '<main' in main ? main|raw : ('<main>' ~ main ~ '</main>')|raw }}
+      {% endif %}
+
+      {# Wrap the aside block content with the <aside> element if it's not present. #}
+
+      {% if aside is not empty %}
+        {{ '<aside' in aside ? aside|raw : ('<aside>' ~ aside ~ '</aside>')|raw }}
+      {% endif %}
+
+      {{ main is not empty and aside is not empty ? '</main-and-aside>' }}
+
+      {# Footer ------------------------------------------------------------- #}
+
+      {% block footer %}
+        {% include "_sections/footer" %}
+      {% endblock %}
+
+    </site-wrapper>
+
+    {# Javascript ----------------------------------------------------------- #}
+
+    {% include "_scripts" %}
+
+    {# SVG Symbols ---------------------------------------------------------- #}
+
+  	{% cache globally using key 'symbols' if symbols ?? false %}
+      {{ (symbols ?? false) ? svg('symbols') }}
+    {% endcache %}
+
+  </body>
+
+</html>
+
+{% endminify %}
+
+{% endspaceless %}

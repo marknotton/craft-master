@@ -1,0 +1,54 @@
+{# ////////////////////////////////////////////////////////////////////////// #}
+{# Loader                                                                     #}
+{# ////////////////////////////////////////////////////////////////////////// #}
+
+{# What does this do? ==========================================================
+
+   The princible for this loader is to allow entries to point to a template
+   respective of the URI stucture, whilst also offering a number of fallbacks
+   should the URI not meet the correct format.
+
+   Essentially making it very hard for a template not to be found and
+   allowing all pages to work with very little intervention via the CMS.
+
+============================================================================= #}
+
+{% set segments = segments ?? craft.app.request.segments %}
+
+{%- set template -%}
+  {%- set entry = entry ?? category ?? tag ?? false -%}
+  {% if entry %}
+    {{- entry.uri == '__home__' ? 'index' : entry.uri -}}
+  {% endif %}
+{%- endset -%}
+
+{% set paths = [
+  '/'~template,
+  '/'~segments|slice(0,-1)|join('/') ~ '/_' ~ segments|last,
+  '/'~template~'/_entry',
+  (segments is not empty ? '/'~segments[0]~(entry is entry ? '/_entry' : '/_category')),
+  ( entry.type ?? false ? '_layouts/' ~ entry.type ?? category.type),
+  '_layouts/generic',
+  '_layouts/main'
+]%}
+
+{# This variaion is designed for multisites ------------------------------------
+
+{# {% set paths = [
+  '/'~currentSite.handle~'/'~template,
+  '/'~currentSite.handle~'/'~template~'/_entry',
+  '/'~currentSite.handle~'/'~segments|slice(0,-1)|join('/') ~ '/_' ~ segments|last,
+  '/'~currentSite.handle~(segments is not empty ? '/'~segments[0]~'/_entry'),
+  '/'~currentSite.handle~'/_layouts/generic',
+  '/'~template,
+  '/'~template~'/_entry',
+  (segments is not empty ? '/'~segments[0]~'/_entry'),
+  'global/'~(segments is not empty ? segments[0]~'/_entry'),
+  'global/layouts/generic',
+  '/'~currentSite.handle~'/_layouts/main',
+  'global/layouts/main'
+]%} #}
+
+{# <pre>{{ dump(paths) }}</pre> #}
+
+{% extends paths %}

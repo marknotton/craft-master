@@ -1,0 +1,47 @@
+{% import "_components/macros/input-field" as input %}
+
+{% if not craft.agent.isRobot() %}
+
+  <form method="post" action="" id="contact" accept-charset="UTF-8">
+
+    <fieldset>
+
+    {{ (legend ?? false) ? legend|t|wrap('legend') }}
+
+    {{ csrfInput() }}
+      <input type="hidden" name="action" value="contact-form/send">
+      {{ redirectInput('/thankyou') }}
+
+      {% set select %}
+        <select required>
+          <option value="" disabled selected>Select</option>
+          <option value="option1">Option 1</option>
+          <option value="option2">Option 2</option>
+          <option value="option3">Option 3</option>
+          <option value="option4">Option 4</option>
+          <option value="option5">Option 5</option>
+        </select>
+      {% endset %}
+
+      {{ input.field({ type : 'text',     name : 'name',     placeholder : 'F005' }, true ) }}
+      {{ input.field({ type : 'text',     name : 'company',  placeholder : 'F013' }) }}
+      {{ input.field({ type : 'email',    name : 'email',    placeholder : 'F004' }, true ) }}
+      {{ input.field({ type : select,     name : 'dropdown', placeholder : 'F014' }, true ) }}
+      {{ input.field({ type : 'textarea', name : 'message',  placeholder : 'F008' }) }}
+
+      {% set privacyLink = craft.entries.id(8).one.uri ?? 'legal/privacy-policy' %}
+
+      <input required id="consent1" type="checkbox" name="consent1" value="Yes">
+      <label for="consent1">{{ 'F012'|t|replace('F011'|t, '<a target="_blank" href=/'~ privacyLink ~'>'~'F011'|t~'</a>')|raw }}</label>
+
+      <button type="submit">{{ 'F015'|t }}</button>
+
+    </fieldset>
+
+  </form>
+
+{% elseif devmode %}
+
+  {{ "E011"|t|p }}
+
+{% endif %}

@@ -1,0 +1,13 @@
+<modal-wrapper data-type="{{ type|default('default') }}">
+
+  <modal-background></modal-background>
+
+  <modal-container>
+
+    <button class='close'>{{ svg('close')}} </button>
+
+    {% block modal %}{% endblock %}
+
+  </modal-container>
+
+</modal-wrapper>

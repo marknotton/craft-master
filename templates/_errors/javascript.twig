@@ -1,0 +1,27 @@
+{% extends "_layouts/error" %}
+
+{% if craft.app.request.referrer is empty %}
+	{% exit 404 %}
+{% endif %}
+
+{% set page = 'error-invalid-javascript' %}
+
+{% block content %}
+
+	<style>
+		html, body { text-align: center;}
+		svg, img[src*='.svg'] { display:none; }
+		.back-button { display:table; margin-left:auto; margin-right:auto; margin-top:20px; }
+	</style>
+
+	<main>
+
+		<h1>{{ 'E015'|t }}</h1>
+
+		<p>{{ 'E016'|t|raw }}</p>
+
+		<a class="back-button" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">{{ 'E004'|t }}</a>
+
+	</main>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "_layouts/error" %}
+
+{% if craft.agent.check(browsers) %}
+	{% redirect "/" %}
+{% endif %}
+
+{% set page = 'error-browser' %}
+
+{% block content %}
+
+	<style>
+		html, body { text-align: center;}
+		svg, img[src*='.svg'] { display:none; }
+		.back-button { display:table; margin-left:auto; margin-right:auto; margin-top:20px;  }
+	</style>
+
+	<main>
+
+		{% set browser = (agentEnabled ?? false) ? craft.agent.full.name ~ ' ' ~ craft.agent.full.version|round : "Browser" %}
+
+    <h1>{{ browser }} {{ 'E002'|t }}</h1>
+
+	  <p>{{ 'E003'|t }}</p>
+
+		<a class="back-button" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">{{ 'E004'|t }}</a>
+
+  </main>
+
+{% endblock %}

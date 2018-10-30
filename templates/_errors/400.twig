@@ -1,0 +1,12 @@
+{% extends "_layouts/error" %}
+
+{% set page = 'error-400' %}
+
+{% block content %}
+	<main>
+		{{ svg('logo') }}
+    <h1>{{ "E017"|t }}</h1>
+    <p>{{ "E018"|t }}</p>
+    <button class="back-button" onclick="history.back(-1)">{{ 'E001'|t }}</button>
+  </main>
+{% endblock %}

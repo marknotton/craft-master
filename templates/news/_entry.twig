@@ -1,0 +1,15 @@
+{% extends "_layouts/generic" %}
+
+{% block extra %}
+
+  <section id="quick-news-links">
+
+    <h2>{{ "C003"|t }}</h2>
+
+    <div>
+      {% include "news/_articles" with { limit : 3 } %}
+    </div>
+
+  </section>
+
+{% endblock %}

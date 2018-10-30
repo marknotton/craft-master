@@ -1,0 +1,54 @@
+{% import "_components/macros/input-field" as input %}
+
+{% if not craft.agent.isRobot() %}
+
+  <form method="post" id="login" accept-charset="UTF-8">
+
+    {{ csrfInput() }}
+
+    <input type="hidden" name="action" value="users/login">
+
+    {% if redirectUrl is defined %}
+      {{ redirectInput(redirectUrl) }}
+    {% endif %}
+
+    <fieldset>
+
+      {{ legend is defined ? legend|t|wrap('legend') }}
+
+      {% set message = message is defined ? message %}
+      {{ message|t|p }}
+
+      {% if errorMessage is defined %}
+        <p class="error">{{ errorMessage }}</p>
+      {% endif %}
+
+      {{ input.field({
+        type        : 'text',
+        name        : 'loginName',
+        placeholder : 'F020',
+        required    : true,
+        value       : craft.app.user.rememberedUsername|default()
+      })}}
+
+      {{ input.field({ type : 'password', name : 'password', placeholder : 'F007' }, true ) }}
+
+      <input type="checkbox" id="rememberMe" name="rememberMe" value="1">
+      <label for="rememberMe">{{ 'F025'|t }}</label>
+
+      <div class="buttons">
+        <a class="button" href='/forgot-password'>{{ "F023"|t }}</a>
+        <button type="submit">{{ "F026"|t }}</button>
+      </div>
+
+      {{ extra is defined ? extra|p('extra') }}
+
+    </fieldset>
+
+  </form>
+
+{% elseif devmode %}
+
+  {{ "E011"|t|p }}
+
+{% endif %}

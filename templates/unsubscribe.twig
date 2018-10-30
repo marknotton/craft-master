@@ -1,0 +1,23 @@
+{% extends '_layouts/main' %}
+
+{% if not (campaignsID ?? false) or not (keys.campaignsID ?? false) and not (campaignsDomain ?? false) or not (keys.campaignsDomain ?? false) %}
+	{% exit 404 %}
+{% endif  %}
+
+{% set page = "unsubscribe" %}
+
+{% block content %}
+
+	{% cache globally using key 'unsubscribe' %}
+
+		<main>
+
+      <h2>{{ "C004"|t }}</h2>
+
+			{% include "_components/forms/unsubscribe" with { legend : 'M010'} %}
+
+		</main>
+
+	{% endcache %}
+
+{% endblock %}

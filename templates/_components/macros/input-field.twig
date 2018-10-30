@@ -1,0 +1,96 @@
+{# ////////////////////////////////////////////////////////////////////////// #}
+{# Input Field                                                                #}
+{# ////////////////////////////////////////////////////////////////////////// #}
+
+{% macro field(settings, required) %}
+
+  {% set default = {
+    type         : 'text',
+    name         : null,
+    placeholder  : 'arrow-right',
+    required     : required ?? false,
+    asterisk     : '*',
+    note         : false,
+    value        : false
+  } %}
+
+  {% set settings = settings is not empty ? default|merge(settings) : default %}
+
+  {% set custom = settings.type is object ? settings.type %}
+
+  {% set type        = custom ? ((custom|trim|split(' '))[0]|trim('<', 'left')) : settings.type %}
+  {% set name        = settings.name ?? type ?? null %}
+  {% set placeholder = settings.placeholder ?? name ?? type ?? null %}
+  {% set required    = settings.required ?? false ? 'required' %}
+  {% set asterisk    = settings.asterisk ?? true %}
+  {% set note        = settings.note ?? message.getErrors(name) ?? settings.note|default('F009')|t %}
+  {% set value       = settings.value %}
+
+  {% if type and name %}
+
+    <input-field data-type='{{ type }}'>
+
+      <label for="{{name}}-input">
+
+      {% if custom ?? false %}
+
+        {{ custom|raw }}
+
+        {% if type == 'select' %}
+          {{ symbol('arrow-down') }}
+        {% endif %}
+
+      {% elseif type == 'textarea' %}
+
+        <textarea
+          {{ required }}
+          type="email"
+          id="{{name}}-input"
+          value="{{ value ?? false }}"
+          name="{{name}}"
+          onkeyup="this.setAttribute('value', this.value);"
+          placeholder=" ">
+        </textarea>
+
+      {% else %}
+
+        <input
+          {{ required }}
+          type="{{type}}"
+          id="{{name}}-input"
+          value="{{ value ?? false }}"
+          name="{{name}}"
+          {% if type == 'email' %}pattern="[a-zA-Z0-9_]+(?:\.[A-Za-z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?!([a-zA-Z0-9]*\.[a-zA-Z0-9]*\.[a-zA-Z0-9]*\.))(?:[A-Za-z0-9](?:[a-zA-Z0-9-]*[A-Za-z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?" {% endif %}
+          onkeyup="this.setAttribute('value', this.value);"
+          placeholder=" ">
+
+      {% endif %}
+
+        <field-placeholder>{{ placeholder|t|ucfirst }}</field-placeholder>
+        <field-status-bar></field-status-bar>
+        {% if required and asterisk is not empty %}
+          <field-asterisk data-notice="{{'F010'|t}}"></field-asterisk>
+        {% endif %}
+
+        {% if type == 'password' %}
+
+          <password-toggle class="{{name}}-input"></password-toggle>
+
+          {% js %}
+            $("password-toggle.{{name}}-input").click(function() {
+              var input = $('#{{name}}-input');
+              input.attr("type", (input.attr("type") == "password") ? "text" : "password");
+            })
+          {% endjs %}
+
+        {% endif %}
+
+      </label>
+
+      <field-note>{{ note|raw }}</field-note>
+
+    </input-field>
+
+  {% endif %}
+
+{% endmacro %}

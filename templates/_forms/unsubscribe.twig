@@ -1,0 +1,33 @@
+{% import "_components/macros/input-field" as input %}
+
+{% if (campaignsID ?? false) or (keys.campaignsID ?? false) and (campaignsDomain ?? false) or (keys.campaignsDomain ?? false) %}
+
+  {% if not craft.agent.isRobot() %}
+
+    <form action="{{ campaignsDomain ?? keys.campaignsDomain }}/t/r/u/{{ campaignsID ?? keys.campaignsID }}/" method="post">
+
+      <fieldset>
+
+        {{ (legend ?? false) ? legend|t|wrap('legend') }}
+
+        {% set name = 'cm-' ~ (campaignsID ?? keys.campaignsID) ~ '-' ~ (campaignsID ?? keys.campaignsID) %}
+
+        {{ input.field({ type : 'email', name : name, placeholder : 'F016' }, true ) }}
+
+        <button type="submit">{{ "F018"|t }}</button>
+
+      </fieldset>
+
+    </form>
+
+  {% elseif devmode %}
+
+    {{ "E011"|t|p }}
+
+  {% endif %}
+
+{% elseif devmode %}
+
+  {{ "E012"|t|p }}
+
+{% endif %}

@@ -1,0 +1,64 @@
+////////////////////////////////////////////////////////////////////////////////
+// Main
+////////////////////////////////////////////////////////////////////////////////
+
+main {
+
+  position:relative;
+  padding-top:spacer();
+  padding-bottom:spacer();
+  @include flex-grow(1);
+  @include container();
+
+  > featured-image {
+    position:relative; height:500px; display:block;
+  }
+
+  > * { position:relative; }
+
+  > ol, > ul { margin-bottom:$gap;
+    li { position:relative; display:block; padding-left:20px;
+      &:not(:last-of-type) { margin-bottom:5 + $gap0; }
+      a { text-decoration:none;}
+      &:before { @include var(color); position:absolute; top:1px; left:0; }
+    }
+  }
+  > ul li:before { content:$circle; }
+  > ol { counter-reset: counter;
+    > li:before {
+      content: counter(counter)'.';
+      counter-increment: counter;
+      font-weight:bold;
+    }
+  }
+
+  h1, h2, h3, h4, h5, h6 {  @include var(color); }
+
+  p + * { margin-top:$gap; }
+
+  p, li {
+    @include font-size($font-size $font-size*2);
+  }
+
+  a { @include var(color, secondary);
+    &:hover { @include var(color, primary); }
+  }
+
+  hr { border:none; background-color:$grey; margin-top:$gap2; margin-bottom:$gap2;  }
+
+  featured-image {
+    @extend %full;
+    background-position:center center;
+    background-size:cover;
+    img { margin-top:0; margin-bottom:0; }
+  }
+
+  > img, .video-container { margin-top:$gap2; margin-bottom:$gap2; }
+
+  img { max-width:100%; }
+
+  figure {
+    margin-bottom:$gap;
+    figcaption { font-style: italic; text-align:center; margin-top:$gap0; }
+  }
+}

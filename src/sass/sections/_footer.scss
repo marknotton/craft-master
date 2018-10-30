@@ -1,0 +1,21 @@
+////////////////////////////////////////////////////////////////////////////////
+// Footer
+////////////////////////////////////////////////////////////////////////////////
+
+site-wrapper > footer {
+
+  padding:spacer(2) $gap;
+
+  small {
+    text-align:center; font-size:12px;
+    &, a { color:#5C5D5E; }
+    a { margin-left:5px;
+      em { font-style:normal; @include transition(color); }
+      &:hover em { @include var(color);  }
+    }
+    @include break($small, '<') {
+      a { display:block; margin-left:0; }
+    }
+  }
+
+}

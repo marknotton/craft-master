@@ -1,0 +1,43 @@
+{% import "_components/macros/input-field" as input %}
+
+{% if (campaignsID ?? false) and (campaignsKey ?? false) or (keys.campaignsID ?? false) and (keys.campaignsKey ?? false) %}
+
+  {% if not craft.agent.isRobot() %}
+
+    <form id="subscribe" class="js-cm-form" action="https://www.createsend.com/t/subscribeerror?description=" method="post" data-id="{{ campaignsKey ?? keys.campaignsKey ?? false }}">
+
+      <fieldset>
+
+        {{ (legend ?? false) ? legend|t|wrap('legend') }}
+        {{ (description ?? false) ? description|t|p }}
+
+        {% set name = 'cm-' ~ (campaignsID ?? keys.campaignsID) ~ '-' ~ (campaignsID ?? keys.campaignsID) %}
+        {% set privacyLink = craft.entries.id(8).one.uri ?? 'legal/privacy-policy' %}
+
+        {{ input.field({ type : 'text', name : 'cm-name', placeholder : 'F005' }, true ) }}
+        {{ input.field({ type : 'email', name : name, placeholder : 'F004' }, true ) }}
+
+        {# This will add the full translated message into the label. Then find a seperate
+        tranaltion for the word 'Privacy Policy' and wrap that in it's own 'a' tag #}
+        <input required id="consent1" type="checkbox" name="consent1" value="Yes">
+        <label for="consent1">{{ 'F012'|t|replace('F011'|t, '<a target="_blank" href=/'~ privacyLink ~'>'~'F011'|t~'</a>')|raw }}</label>
+
+        <button class="js-cm-submit-button" type="submit">{{ cta ?? 'F017'|t }}</button>
+
+      </fieldset>
+
+    </form>
+
+    {% do view.registerJsFile('https://js.createsend1.com/javascript/copypastesubscribeformlogic.js', {'position' : constant('\\yii\\web\\View::POS_HEAD')}) %}
+
+  {% elseif devmode %}
+
+    {{ "E011"|t|p }}
+
+  {% endif %}
+
+{% elseif devmode %}
+
+  {{ "E012"|t|p }}
+
+{% endif %}

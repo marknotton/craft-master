@@ -1,0 +1,88 @@
+////////////////////////////////////////////////////////////////////////////////
+// General Settings
+////////////////////////////////////////////////////////////////////////////////
+
+// =============================================================================
+// Colours
+// =============================================================================
+
+$black      : #3F4041;
+$yellow     : #EB9F24;
+$selection  : $yellow;
+
+// =============================================================================
+// Units
+// =============================================================================
+
+$border-radius : 5;
+$gaps          : 16;
+$font-size     : 18;
+$spacer        : 5vh;
+$gutters       : $gaps*2;
+
+// =============================================================================
+// Breakpoints
+// =============================================================================
+
+$min           : 320;
+$small         : 480;
+$medium        : 800;
+$large         : 970;
+$max           : 1200;
+
+// =============================================================================
+// Fonts
+// =============================================================================
+
+// @import url('https://fonts.googleapis.com/css?family=Montserrat:400,400i,700');
+
+// @include font-face("Montserrat", "Montserrat-Regular", eot svg ttf woff);
+// @include font-face("Montserrat Bold", "Montserrat-Bold", eot svg ttf woff);
+// @include font-face("Montserrat Italic", "Montserrat-Italic", eot svg ttf woff);
+
+.regular, .default { font-family:Arial, Helvetica, sans-serif; @extend %font-smooth; }
+.bold   { font-family:Arial, Helvetica, sans-serif; @extend %font-smooth; }
+.italic { font-family:Arial, Helvetica, sans-serif; @extend %font-smooth; }
+
+// =============================================================================
+// Miscellaneous
+// =============================================================================
+
+$show-breakpoints : true;
+
+// $support-css-variable-alpha-colours : true;
+
+// Custom Properties / CSS Variables
+// These will be assigned to the html root.
+// Colours should always be in hex format where possible.
+$custom-properties : (
+  primary   : if(variable-exists(primary), $primary, $black),
+  secondary : if(variable-exists(secondary), $secondary, $yellow)
+);
+
+// =============================================================================
+// Plyr video blocks
+// =============================================================================
+
+$plyr-color-main: if(variable-exists(primary), $primary, $black);
+
+// =============================================================================
+// Post-import settings
+// =============================================================================
+// Some settings need to be applied after all initial imports have been set.
+// This mixin will be called at the end of the 'doggystyle/imports.scss' file.
+// If defining any variables, make sure any variables include
+// a !global flag so they can be accessed outside of this mixin.
+
+@mixin update-settings() {
+  @include add-variables((gap:$gap, gutter:add-unit($gutters)));
+  @include set-variables();
+  @include add-breakpoint(
+    'max' $max,
+    'large' $large,
+    'medium' $medium,
+    'small-medium' $small-medium,
+    'small' $small,
+    'min' $min
+  );
+}

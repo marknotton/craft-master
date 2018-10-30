@@ -1,0 +1,49 @@
+{# ////////////////////////////////////////////////////////////////////////// #}
+{# Confirmation Template                                                      #}
+{# ////////////////////////////////////////////////////////////////////////// #}
+
+{# More Information ============================================================
+Please review config/routes.php file for more details on how this layout gets used #}
+
+{% extends '_layouts/main' %}
+
+{% set page = 'confirmation' %}
+{% set type = segments[0]|replace('-') %}
+{% set classes = type %}
+
+{% set messages = {
+	subscribed : {
+		title : "M001"|t,
+		heading : "M002"|t,
+		content : "M003"|t
+	},
+	unsubscribed : {
+		title : "M004"|t,
+		heading : "M005"|t,
+	},
+	thankyou : {
+		title : "M006"|t,
+		heading : "M007"|t,
+	},
+	passwordreset : {
+		title : "M008"|t,
+		heading : "M009"|t,
+	}
+} %}
+
+{% set title = messages[type].title|t ?? title|t %}
+
+{% block content %}
+
+	{% cache globally using key type %}
+
+		<main>
+
+			{{ messages[type].heading is defined ? include(template_from_string(messages[type].heading))|h2 }}
+			{{ messages[type].content is defined ? include(template_from_string(messages[type].content))|p }}
+
+		</main>
+
+	{% endcache %}
+
+{% endblock %}

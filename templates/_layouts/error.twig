@@ -1,0 +1,37 @@
+{# ////////////////////////////////////////////////////////////////////////// #}
+{# Error Template                                                             #}
+{# ////////////////////////////////////////////////////////////////////////// #}
+
+{% spaceless %}
+
+{% set title = craft.helpers.title() %}
+{% set status = craft.app.getResponse.getStatusCode() %}
+{% set message = status != 200 ? craft.helpers.errors[status]['message'] %}
+
+<!DOCTYPE html>
+
+<html lang="{{ craft.app.language|default('en') }}">
+
+  <head>
+
+    {% include "_components/structure/head" %}
+
+    {{ craft.helpers.loadStylesheets() }}
+
+  </head>
+
+  <body id="{{ page ?? craft.helpers.page() }}" class="{{ craft.helpers.classes(classes ?? null) }}">
+
+    <site-wrapper>
+
+      {% block content %}{% endblock %}
+
+      {% include "_components/structure/footer" %}
+
+    </site-wrapper>
+
+  </body>
+
+</html>
+
+{% endspaceless %}

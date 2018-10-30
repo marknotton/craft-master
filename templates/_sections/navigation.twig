@@ -1,0 +1,98 @@
+{% if navigation ?? true %}
+
+  {% cache globally using key 'navigation' %}
+
+    <navigation-bar>
+
+      <a itemprop="logo" href="/">{{ svg('logo') }}</a>
+
+      <nav>
+
+        {# The following is an over engineered method for listing out all
+        sections/channels and their entries. Whilst exluding sections/channels
+        that have no entries and also managing the logic required to merge
+        companioning singles to their respective sections/channels.
+        This is intended to only be used for development testing. It should be
+        noted that this only works when singles with handles suffixed with 'Intro'
+        and the first part of the handle matches the companioning section/channel exactly.
+        A bespoke navigation should be built on a per-project basis. #}
+
+        {# Grab all the sections available for this site #}
+        {% set sections = craft.app.sections.allSections %}
+
+        {% set skipNext = false %}
+
+        {# Loop through all the sections #}
+        {% for section in sections %}
+
+          {# Get all entries for each section if that section has URL's #}
+          {% set entries = section.getSiteSettings()[currentSite.id].hasUrls ? craft.entries.sectionId(section.id).all : [] %}
+
+          {# Exclude sections that have no entries #}
+          {% if not skipNext and entries|length %}
+
+            {# Different circomstances will yeild a different method to get the top-level section link #}
+            {% set sectionLink %}
+              {%- if section.handle != "home" -%}
+                {#- For sections that have been skipped (because they are introduction singles) -#}
+                {#- A check is needed make sure it exists in an array of section handles -#}
+                {%- if section.handle~'Intro' in sections|getAttributes('handle') -%}
+                  {{ craft.entries.section(section.handle~'Intro').one.uri }}
+                {%- else -%}
+                  {#- Otherwise we assume it's a single and grab the first link -#}
+                  {%- if section.type == 'single'-%}
+                    {{ craft.entries.section(section.handle).one.uri }}
+                  {%- else -%}
+                    {#- And fallback to this if a section does not have a companioning introduction single -#}
+                    {#- You can ommit this and use the above method to just get the first entry of a section/channel -#}
+                    #
+                  {%- endif -%}
+                {%- endif -%}
+              {%- endif -%}
+            {% endset %}
+
+            {# Generate the list of links, with the first list element being the top-level section link.  #}
+            <ul>
+              <li><a href="/{{ sectionLink }}">{{ section|replace('Introduction') }}</a></li>
+
+              {% for entry in entries if section.type != 'single' and 'intro' not in section.handle|lower %}
+                <li>
+                  <a data-id="{{ entry.id }}" data-template="{{ entry.uri }}" data-section="{{ entry.section.handle }}" href="/{{ entry.uri != '__home__' ? entry.uri }}" data-slug="{{entry.slug}}">{{ entry.title|replace(' Introduction') }}</a>
+                </li>
+              {% endfor %}
+
+              {% if section.handle == "home" %}
+                <li><a href="/a-page-that-doesnt-exists">Broken Page</a></li>
+                <li><a href="/stylesheet">Stylesheet</a></li>
+              {% endif %}
+
+            </ul>
+
+          {% endif %}
+
+          {# Where there is a section/channel with an companioning single, #}
+          {# These checks will determine wether the next section in the loop #}
+          {# should be skipped or not. Logic above will accomodation for the top-level link #}
+          {% set skipNext =
+            entries|length and
+            section.type != 'single' and
+            'intro' not in section.handle|lower and
+            section.handle~'Intro' in sections|getAttributes('handle')
+          %}
+
+        {% endfor %}
+      </nav>
+
+      <button class="menu">
+        <svg viewBox="0 0 50 50">
+          <line x1="0" y1="0" x2="50" y2="0"/>
+          <line x1="0" y1="25" x2="50" y2="25"/>
+          <line x1="0" y1="50" x2="50" y2="50"/>
+        </svg>
+      </button>
+
+    </navigation-bar>
+
+  {% endcache %}
+
+{% endif %}

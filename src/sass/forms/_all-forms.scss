@@ -1,0 +1,85 @@
+////////////////////////////////////////////////////////////////////////////////
+// Forms
+////////////////////////////////////////////////////////////////////////////////
+
+@import "forms/contact",
+        "forms/forgot-password",
+        "forms/login",
+        "forms/reset-password",
+        "forms/subscribe",
+        "forms/unsubscribe";
+
+form {
+
+  $form-greyed-out : #a9a9a9 !global;
+  $form-border-width : 1px !global;
+
+  legend { @extend h2; }
+
+  select::-ms-expand { display: none; }
+
+  // ===========================================================================
+  // Checkboxes
+  // ===========================================================================
+
+  input[type="checkbox"] {
+    display:none;
+    & + label {
+      width:100%;
+      user-select:none;
+      position:relative;
+      display:block;
+      padding-left:20 + $gap;
+      a { @include var(color); }
+      cursor:pointer;
+      &:before {
+        content:"";
+        margin-right:$gap0;
+        position:absolute;
+        left:0; top:0;
+        background-color:white;
+        border:$form-border-width solid $form-greyed-out;
+        @include size(20);
+      }
+      a { text-decoration:underline;
+        &:hover { @include var(color) }
+      }
+    }
+    &:checked + label {
+			@include inline-svg('tick', null, $purple, 10);
+      &:after {
+        content:"";
+        position:absolute; left:3px; top:-3px;
+        @include size(20);
+      }
+    }
+  }
+
+  // ===========================================================================
+  // Submit Button
+  // ===========================================================================
+
+  button[type="submit"] {
+    @extend .button; border:1px solid transparent;
+    &:hover { @include var(border-color); }
+    &:focus { box-shadow: 0 0 3pt 2pt $blue; }
+    @include break($small, '>') {
+      @include flex-align-self(start);
+    }
+  }
+
+
+
+  input[type="password"] {
+    font-family:Arial serif;
+    letter-spacing:2px;
+    font-size:20px;
+  }
+
+  &:not(:valid) button[type="submit"] {
+    pointer-events:none;
+    border-color:$form-greyed-out;
+    background-color:transparent;
+    color:$form-greyed-out;
+  }
+}

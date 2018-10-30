@@ -1,0 +1,41 @@
+{% if footer ?? true %}
+
+  <footer>
+
+    {% if 'error' not in page and not craft.helpers.holdingpage() %}
+
+      {% set links = craft.entries.section('help').all %}
+
+      {% if links|length %}
+        <ul>
+          {% for entry in links %}
+            <li>
+              <a href="/{{ entry.uri }}">
+                {{ entry.title }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      {% if admin or devmode %}
+        <admin-links>
+          <a class="admin-cp" href="/admin" title="Go to Control Panel" target="_blank">Control Panel</a>
+          {% if entry is defined and entry is not empty %}
+            <a class="admin-edit" href="{{ entry.cpEditUrl}}" title="Edit this page" target="_blank">Edit this page</a>
+          {% endif %}
+        </admin-links>
+      {% endif %}
+
+    {% endif %}
+
+    <small>
+      {{ ("&copy; Copyright " ~ ' ' ~ siteName|default ~ ' ' ~ ("now")|date('Y'))|raw }}<br>
+      <a class="yello" href="http://www.yellostudio.co.uk" title="Designed and developed by Yello Studio" target="_blank">Website developed by <em>Yello Studio</em></a>
+    </small>
+
+    {% include "_components/social" ignore missing %}
+
+  </footer>
+
+{% endif %}

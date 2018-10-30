@@ -1,0 +1,22 @@
+{
+"pluginName":"General",
+"pluginDescription":"Custom module template",
+"pluginVersion":"1.0.0",
+"pluginAuthorName":"Mark Notton",
+"pluginAuthorUrl":"www.yello.studio",
+"codeComments":"",
+"pluginComponents":"",
+"consolecommandName":"",
+"controllerName":"",
+"cpsectionName":"",
+"elementName":"",
+"fieldName":"",
+"modelName":"",
+"purchasableName":"",
+"recordName":"",
+"serviceName":"",
+"taskName":"",
+"utilityName":"",
+"widgetName":"",
+"apiVersion":"module_api_version_3_0"
+}

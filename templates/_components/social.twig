@@ -1,0 +1,24 @@
+{% if general.socialmedia ?? socialmedia ?? seomaticEnabled ?? false %}
+
+  {% cache globally using key 'social-links' %}
+
+    {% set socialmedia = general.socialmedia ?? socialmedia ?? seomatic.site.sameAsLinks ?? null %}
+
+    {% if socialmedia is not empty %}
+
+      <social-media>
+
+        {% for site in socialmedia if site.url is not empty %}
+          <a class="{{ site.handle }}" aria-label="{{ site.siteName }}" href="{{ site.url }}" target="_blank">
+            {{ symbol('icon-'~site.handle) }}
+            <span>{{ site.siteName }}</span>
+          </a>
+        {% endfor %}
+
+      </social-media>
+
+    {% endif %}
+
+  {% endcache %}
+
+{% endif %}

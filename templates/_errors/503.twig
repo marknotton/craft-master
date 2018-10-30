@@ -1,0 +1,17 @@
+{% extends "_layouts/error" %}
+
+{% set page = 'holding-page' %}
+
+{% block content %}
+  <main>
+    {{ svg('logo') }}
+    {% if environment == "staging" %}
+      <h1>{{ include(template_from_string("E008"|t)) }}</h1>
+      <p>{{ "E009"|t }}</p>
+      <a class="back-button" href="{{ siteUrl|replace('staging.', 'www.') }}">{{ "E010"|t }}</a>
+    {% else %}
+      <h1>{{ "E025"|t }}</h1>
+      <p>{{ "E026"|t }}</p>
+    {% endif %}
+  </main>
+{% endblock %}

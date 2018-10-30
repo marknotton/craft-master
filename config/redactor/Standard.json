@@ -1,0 +1,34 @@
+{
+  "buttons": [ "html", "format", "bold", "italic", "line", "undo", "redo", "ol", "ul", "image", "link", "file" ],
+  "plugins": [ "fullscreen", "fontcolor", "video"],
+  "imageResizable": true,
+  "imagePosition": true,
+  "fontcolors": ["#97080E", "#DA4B0F", "#E9B104", "#488C13", "#1B55C0", "#E05D6B", "#613D5A", "#787878", "#774F38", "#FFFFFF", "#000000"],
+  "formatting": ["h2", "h3", "h4", "p"],
+  "formattingAdd": {
+    "h2": {
+      "title": "Header (H2)",
+      "api": "module.block.format",
+      "args": {
+        "tag" : "h2",
+        "class" : "themed-h2"
+      }
+    },
+    "h3": {
+      "title": "Sub-header (h3)",
+      "api": "module.block.format",
+      "args": {
+        "tag" : "h3",
+        "class" : "themed-h3"
+      }
+    },
+    "h4": {
+      "title": "Small header (h4)",
+      "api": "module.block.format",
+      "args": {
+        "tag" : "h4",
+        "class" : "themed-h4"
+      }
+    }
+  }
+}

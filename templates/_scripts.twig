@@ -1,0 +1,172 @@
+{# ////////////////////////////////////////////////////////////////////////// #}
+{# Scripts                                                                    #}
+{# ////////////////////////////////////////////////////////////////////////// #}
+
+{# ========================================================================== #}
+{# jQuery                                                                     #}
+{# ========================================================================== #}
+
+{% if jquery ?? true %}
+  {% do view.registerJsFile(
+    '//cdnjs.cloudflare.com/ajax/libs/jquery/' ~ jquery|default("3.3.1") ~ '/jquery.min.js',
+    {'position' : constant('\\yii\\web\\View::POS_HEAD')}
+  )%}
+{% endif %}
+
+{# ========================================================================== #}
+{# CSRF Tokens                                                                #}
+{# ========================================================================== #}
+
+{% if craft.app.config.general.enableCsrfProtection ?? true %}
+  {% js at head %}
+    window.csrfTokenName = "{{ craft.app.config.general.csrfTokenName|e('js') }}";
+    window.csrfTokenValue = "{{ craft.app.request.csrfToken|e('js') }}";
+  {% endjs %}
+{% endif %}
+
+{# ========================================================================== #}
+{# ShareThis                                                                  #}
+{# ========================================================================== #}
+
+{% if keys.sharethis ?? false and keys.sharethis is not empty %}
+  {% do view.registerJsFile(
+    '//platform-api.sharethis.com/js/sharethis.js#property=' ~ keys.sharethis ~ '&product=social-ab',
+    {'position' : constant('\\yii\\web\\View::POS_HEAD')}
+  )%}
+{% endif %}
+
+{# ========================================================================== #}
+{# Google Tag Manager                                                         #}
+{# ========================================================================== #}
+
+{% if keys.googleTagManager ?? false and keys.googleTagManager is not empty %}
+  {% js at head %}
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-{{keys.googleTagManager|replace('GTM-', '')}}');
+  {% endjs %}
+{% endif %}
+
+{# ========================================================================== #}
+{# ES6 & ES5 Support Checks                                                   #}
+{# ========================================================================== #}
+
+{% js at head %}
+
+  {# Check to see if ES6 is supported by the developer and by the browser #}
+  window.ES6Support = {{ ES6Support ?? true ? 'function(){try{return new Function("(a = 0) => a"),!0}catch(n){return!1}}()' : 'false'}};
+
+  {# Check to see if ES5 is supported by the developer #}
+  window.ES5Support = {{ ES5Support ?? true ? 'true' : 'false'}};
+
+  {# If ES6 is not supported by the browser, and ES5 is not supported by the developer. Then redirect the user #}
+  if ( !ES6Support && !ES5Support ) {
+    window.location.replace("/javascript");
+  }
+
+{% endjs %}
+
+{# ========================================================================== #}
+{# Script loader with render blocking                                         #}
+{# ========================================================================== #}
+
+{% js %}
+
+  {# Function that loads scripts #}
+  function loadscripts(files) {
+
+    // Security Check
+    if ( typeof files == 'object' && files['isTrusted'] !== 'undefined' ) {
+      files = undefined;
+    }
+
+    // Fallback to scripts if nothing was passed
+    var files = files || scripts || undefined;
+
+    // Put a single string into it's own array.
+    if ( typeof files == 'string' ) {
+      files = [files];
+    }
+
+    // Loop through files and render each script
+    if ( files ) {
+      for (var i in files) {
+        var element = document.createElement("script");
+        element.src   = files[i];
+        element.async = false;
+        element.defer = i > 0;
+        // If it's the last script file, add a load listener to it
+        if (i == files.length - 1) {
+          element.addEventListener('load', function (e) {
+            // Once the last file is loaded, and if the a dom object exits,
+            if ( typeof dom !== undefined) {
+              // Change the status to loaded. This will act as a trigger.
+              dom.status = 'loaded';
+            }
+          }, false);
+        }
+        document.body.appendChild(element);
+      }
+    }
+  }
+
+  {# Javascript to render in the head #}
+  {% if scripts is defined %}
+
+    // Script files to load
+    {# This will manage the file names as per the versioning options #}
+    {# Or you can simply return an array #}
+    var scripts = {{ craft.helpers.getScripts(js)|raw }};
+
+    {% if ES5Support %}
+
+      // Tell the browser that dom loaded status is false;
+      var loaded = false;
+
+      // Files that have no ES5 support and should not be suffixed with .es5
+      var es5Exclusions = ["{{ filenames.js.vendors ?? false }}"];
+
+      // If ES6 is not supported, use script files that contain 'es5.'
+      if (!ES6Support && ES5Support) {
+        for(var i=0; i < scripts.length; i++) {
+          {% if minify %}
+            if ( es5Exclusions.some(function(v){ return scripts[i].indexOf(v) > -1 }) ) {
+              scripts[i] = scripts[i].replace(/\.min\.js/, '.min.js');
+            } else {
+              scripts[i] = scripts[i].replace(/\.min\.js/, '.es5.min.js');
+            }
+          {% else %}
+            if ( es5Exclusions.some(function(v){ return scripts[i].indexOf(v) > -1 }) ) {
+              scripts[i] = scripts[i];
+            } else {
+              scripts[i] = scripts[i].replace(/\.js/, '.es5.js');
+            }
+          {% endif %}
+        }
+      }
+    {% endif %}
+
+    {# Render Blocking =========================================================
+
+    If you don't want to render block the scripts (not advised),
+    then set renderBlocking to false in config/settings.php Scripts will be
+    rendered exactly when this component was included. Otherwise scripts will
+    load at the bottom of the document and after Dom is ready
+
+    ========================================================================= #}
+
+    {% if renderBlocking ?? true %}
+      {# Call the loadscripts function after Dom is ready #}
+      if (window.addEventListener) { window.addEventListener("load", loadscripts, false) }
+      else if (window.attachEvent) { window.attachEvent("onload", loadscripts) }
+      else { window.onload = loadscripts }
+    {% else %}
+      {# Or just load scripts immediately #}
+      loadscripts();
+    {% endif %}
+
+  {% endif %}
+
+{% endjs %}

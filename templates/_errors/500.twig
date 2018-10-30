@@ -1,0 +1,12 @@
+{% extends "_layouts/error" %}
+
+{% set page = 'error-500' %}
+
+{% block content %}
+  <main>
+    {{ svg('logo') }}
+    <h1>{{ "E023"|t }}</h1>
+    <p>{{ "E024"|t }}</p>
+    <a class="back-button" href="{{ craft.app.request.getFullPath in craft.app.request.referrer ? '/' : craft.app.request.referrer|default('/') }}">{{ 'E001'|t }}</a>
+  </main>
+{% endblock %}

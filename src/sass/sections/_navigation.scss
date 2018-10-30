@@ -1,0 +1,97 @@
+////////////////////////////////////////////////////////////////////////////////
+// Navigation Bar
+////////////////////////////////////////////////////////////////////////////////
+
+navigation-bar {
+  display:block;
+  position:relative;
+  padding-top:$gap;
+  @include container();
+
+  > a {
+    display:block;
+    &:hover svg.logo polygon {
+      @include rotate(180);
+    }
+    svg.logo {
+      @include symbol-size(logo, 200px);
+      polygon {
+        @include var(fill, secondary)
+        @include transform-origin(50 50);
+        @include transition(rotate 0 1)
+      }
+      path { @include var(fill, primary) }
+    }
+  }
+
+  nav {
+    padding-top:$gap2;  padding-bottom:$gap2;
+    @include flex-container();
+    ul {
+      & + ul { margin-left:$gap2;}
+      li {
+        &:first-of-type { font-weight:bold; }
+        a {
+          &:hover {
+            @include var(color, secondary);
+          }
+        }
+      }
+    }
+  }
+
+  // ===========================================================================
+  // Hamburger Menu button
+  // ===========================================================================
+
+  button.menu {
+
+    display:block;
+    position:absolute;
+    top:$gap; right:$gap;
+
+    $icon-menu-stroke:10px;
+    $icon-menu-size:20px;
+    $icon-menu-viewport:50px;
+    $icon-menu-rounded:false;
+
+    width: $icon-menu-size;
+    height: $icon-menu-size;
+    margin-left:$gap;
+
+    svg {
+      @include size(100%);
+      line {
+        @include var(stroke, primary);
+        stroke-width:$icon-menu-stroke;
+        stroke-linecap:if($icon-menu-rounded,round,butt);
+        @include transform-origin($icon-menu-viewport/2 $icon-menu-viewport/2);
+        &:nth-of-type(1), &:nth-of-type(3) {
+          @include transition(stroke, y rotate $ease-out-back);
+        }
+        &:nth-of-type(1) { @include transform(rotate 0, y $icon-menu-stroke/2); }
+        &:nth-of-type(3) { @include transform(rotate 0, y (- $icon-menu-stroke/2)); }
+        &:nth-of-type(2) {
+          @include transition(stroke scale opacity 0.1 0.2 $ease-out-back);
+          @include transition-delay(0.2);
+        }
+      }
+      &:hover {
+        line {
+          @include var(stroke, secondary);
+        }
+      }
+    }
+
+    @at-root navigation-bar.open button.menu svg {
+      line {
+        @include var(stroke, secondary);
+        &:nth-of-type(1), &:nth-of-type(3) { @include transition-delay(0.4); }
+        &:nth-of-type(1) { @include transform(rotate 45, y 25); }
+        &:nth-of-type(2) { @include scale(0); opacity:0; @include transition-delay(0.2); @include transition-timing-function($ease-in-out);}
+        &:nth-of-type(3) { @include transform(rotate -45, y -25); }
+      }
+    }
+  }
+
+}

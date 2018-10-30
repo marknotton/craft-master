@@ -1,0 +1,260 @@
+////////////////////////////////////////////////////////////////////////////////
+// Global Styling
+////////////////////////////////////////////////////////////////////////////////
+
+// =============================================================================
+// Imports
+// =============================================================================
+
+// Dependencies ----------------------------------------------------------------
+
+@import "settings";
+
+// Sections ------------------------------------------------------------------
+
+@import "sections/main",
+        "sections/header",
+        "sections/footer",
+        "sections/sidebar",
+        "sections/navigation";
+
+// Components ------------------------------------------------------------------
+
+@import "components/social-media",
+        "components/article";
+
+// Miscellaneous ---------------------------------------------------------------
+
+@import "layouts",
+        "forms/all-forms";
+
+// Pages -----------------------------------------------------------------------
+
+@import "pages/home";
+
+// =============================================================================
+// Global styling
+// =============================================================================
+
+body {
+  site-wrapper {
+    display:flex;
+    flex-direction:column;
+    overflow-x:hidden;
+    min-height: 100vh;
+    min-width:$min;
+    width:100%;
+  }
+  &.locked {
+    --scrollbar-width : 0;
+    overflow:hidden;
+    height: 100vh;
+    site-wrapper:before {
+      @extend %sudo;
+      position:fixed;
+      background-color:col(white, 0.9);
+      z-index:10;
+    }
+    @include devices(mobile tablet) {
+      site-wrapper { height:inherit; }
+    }
+  }
+  @include selection(secondary);
+}
+
+:root {
+  @include break($medium, '<') {
+    --gutter : add-unit($gutter/2);
+  }
+}
+
+h1 { font-weight:bold; margin-bottom:$gap; }
+h2, h3, h4, h5, h6 { margin-bottom:$gap0; }
+
+h1, %h1 { @include responsive-fontsize($h1, $h2); }
+h2, %h2 { @include responsive-fontsize($h2, $h3); }
+h3, %h3 { @include responsive-fontsize($h3, $h4); }
+h4, %h4 { @include responsive-fontsize($h4, $h5); }
+h5, %h5 { @include responsive-fontsize($h5, $h6); }
+h6, %h6 { @include responsive-fontsize($h6, $font-size); }
+
+q, blockquote {
+  quotes: "“" "”" "‘" "’";
+  &:before { content: open-quote; }
+  &:after { content: close-quote; }
+}
+
+a { @include transition(color); }
+
+pre {
+  background-color:white;
+  color:black;
+  text-transform:none;
+  text-decoration:none;
+  text-align:left;
+  display:block;
+  padding:$gap;
+  position:relative;
+  z-index:999;
+}
+
+// =============================================================================
+// Logo
+// =============================================================================
+
+svg.logo {
+
+}
+
+.icon {
+
+}
+
+// =============================================================================
+// Buttons
+// =============================================================================
+
+%button {
+  display:table;
+  padding:$gap0/2 $gap;
+  text-align:center;
+  text-transform: uppercase;
+  border-style: solid;
+  border-width: 1px;
+  @extend .bold;
+  @include border-radius(50);
+  @include transition(background-color border-color color);
+  &:focus { box-shadow: 0 0 3pt 2pt $blue; }
+}
+
+.button { @extend %button; @include button(white primary); }
+
+.button-small {
+  @extend %button;
+  font-size:12px; line-height:16px;
+  padding-top:$gap0/2; padding-bottom:$gap0/2;
+}
+.button-large {
+  @extend %button;
+  font-size:30px;
+  padding:$gap $gap2;
+}
+
+.buttons {
+  margin-top:$gap;
+  @include flex-container(between center);
+  button, a {
+    @include flex-grow(1);
+    &:not(:last-of-type) { margin-right:$gap; }
+  }
+}
+
+// =============================================================================
+// Srcset Images
+// =============================================================================
+
+%srcset-image {
+  display:block;
+  background-position:center 33%;
+  background-size:cover;
+  img {
+    display:block;
+    position:absolute;
+    object-fit:cover;
+    object-position: 50% 50%;
+    width:100%; height:100%; max-width:100%; max-height:100%;
+    top:0; left:0;
+    @include browsers(ie, edge) { display:none; }
+  }
+}
+
+// =============================================================================
+// Notch Devices
+// =============================================================================
+
+@if ( $support-notches ) {
+  html[data-notch] {
+    &[data-notch="left"]  body {  }
+    &[data-notch="right"] body {  }
+    &[data-notch="top"]   body {  }
+  }
+}
+
+// =============================================================================
+// Admin links
+// =============================================================================
+
+admin-links {
+  @include flex-container(center center);
+  a {
+    display:block; font-size:smaller;
+    &:hover { @include var(color); }
+    & + a { margin-left:$gap0; }
+  }
+}
+
+// =============================================================================
+// Error pages
+// =============================================================================
+
+body[id^='error'], body[id='holding-page'] {
+  main {
+    text-align:center;
+    @include flex-container(column center center);
+    @include flex-grow(1);
+    @include container();
+    svg.icon { position:absolute; opacity:0.1; }
+    .back-button {
+      @extend %button; @include button(primary white);
+    }
+  }
+  footer { background:none; }
+}
+
+// =============================================================================
+// Special styling for developers
+// =============================================================================
+
+body.devmode {
+  img:not([alt]) {
+    border: 2px red dashed;
+  }
+}
+
+// =============================================================================
+// Notifications
+// =============================================================================
+
+%notification-bar {
+  content:var(--notification);
+  position:relative;
+  width:100%; display:block;
+  text-align:center;
+  font-size:18px; font-weight:bold; line-height:23px;
+  color:white;
+  padding:$gap0 $gap2;
+  @include var(background-color, secondary);
+  color:colour-contrast(secondary);
+}
+
+body {
+
+  &.staging-environment.logged-in {
+    --notification : "This is the staging site. Any changes to the CMS may not be transferabled to the live site.";
+    site-wrapper:before {
+      @extend %notification-bar;
+      background-color:$yellow;
+      color:colour-contrast($yellow);
+    }
+  }
+
+  &.dev-environment:not(.devmode) {
+    --notification : "You are in a developer environment, but Craft's devmode is switched off.";
+    site-wrapper:before {
+      @extend %notification-bar;
+      background-color:$red;
+      color:colour-contrast($red);
+    }
+  }
+
+}

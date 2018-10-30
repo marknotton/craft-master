@@ -1,0 +1,13 @@
+{% extends '_layouts/main' %}
+
+{% set page = "login" %}
+
+{% block content %}
+
+  <main>
+
+    {% include '_components/forms/login' with { legend : 'Login' }%}
+
+  </main>
+
+{% endblock %}
