@@ -5,10 +5,10 @@
 // =============================================================================
 // Requirements
 // =============================================================================
-
 const gulp        = require('gulp'),                   // Gulp.
       babel       = require('gulp-babel'),             // ES6 to ES5 transpiler.
       browserSync = require('browser-sync').create(),  // Browser watcher.
+			shell       = require('gulp-shell'),             // Triggers CLI commands.
       chalk       = require('chalk'),                  // Style Terminal logs (already included via gulp-util).
       concat      = require('gulp-concat'),            // Concatenate files.
       configs     = require('gulp-config-grabber'),    // Parse data from the config.json file for the current env.
@@ -27,10 +27,10 @@ const gulp        = require('gulp'),                   // Gulp.
       versioniser = require("gulp-versioniser");       // Manages versioning of filenames via .emv.
 
 // PostCSS
-const postcss                = require('gulp-postcss'),
-      autoprefixer           = require('autoprefixer'),
-      postcssInlineSvg       = require('postcss-inline-svg'),
-      postcssAssets          = require('postcss-assets');
+const postcss          = require('gulp-postcss'),
+      autoprefixer     = require('autoprefixer'),
+      postcssInlineSvg = require('postcss-inline-svg'),
+      postcssAssets    = require('postcss-assets');
 
 // =============================================================================
 // Settings & Directories - See config.json
@@ -108,22 +108,26 @@ const icon = config.icon || 'icon.png'
 // Map directory name that will be exlcuded from versioning relative to css and js output paths
 const maps = 'maps'
 
+let logs = [];
+
 // =============================================================================
 // Watchers
 // =============================================================================
 
-gulp.task('serve', ['default'], () => {
+gulp.task('watch', ['default'], () => {
 
   if ( environment == 'dev' ) {
 
     browserSync.init({
-      watchTask : true,
-      open      : "external",
-      proxy     : host,
-      host      : host,
-      notify    : false,
-      port      : config.port || 3000,
-      injectChanges : true
+      watchTask      : true,
+      open           : "external",
+      proxy          : host,
+      host           : host,
+      notify         : false,
+			logPrefix      : chalk.yellow(project),
+      port           : config.port || 3000,
+			logFileChanges : false,
+      injectChanges  : true
     });
 
     for (const watcher of Object.values(config.watchers)) {
@@ -146,7 +150,7 @@ gulp.task('serve', ['default'], () => {
 });
 
 // An alias for the serve task.
-gulp.task('watch', ['serve']);
+gulp.task('serve', shell.task('gulp watch --silent'))
 
 // =============================================================================
 // Project Scripts
@@ -165,7 +169,7 @@ gulp.task('scripts', ['ES5'], () => {
   }
 
   return gulp.src(config.sources.scripts)
-    .pipe(gulpif(notifcations, source(config.sources.scripts)))
+    .pipe(gulpif(notifcations, source(config.sources.scripts, false, (message) => logs.push(message))))
     .pipe(plumber({errorHandler: notifier.error }))
     .pipe(gulpif(sourceMaps, sourcemaps.init()))
     .pipe(concat(filename))
@@ -176,6 +180,7 @@ gulp.task('scripts', ['ES5'], () => {
     .pipe(gulpif(versioning, rename(filenames.js.scripts)))
     .pipe(gulpif(versioning, gulp.dest(js)))
     .pipe(browserSync.stream())
+		.on('end', () => { notifier.logs(true) })
 
 });
 
@@ -200,13 +205,15 @@ gulp.task('vendors', () => {
   }
 
   return gulp.src(config.sources.vendors)
-    .pipe(gulpif(notifcations, source(config.sources.vendors)))
+    // .pipe(gulpif(notifcations, source(config.sources.vendors)))
+		.pipe(gulpif(notifcations, source(config.sources.vendors, false, (message) => logs.push(message))))
     .pipe(concat(filename))
     .pipe(gulpif(minify, uglify()))
     .pipe(gulp.dest(js))
     .pipe(notifier.success('vendors'))
     .pipe(gulpif(versioning, rename(filenames.js.vendors)))
     .pipe(gulpif(versioning, gulp.dest(js)))
+		.on('end', () => { notifier.logs(true) })
 
 });
 
@@ -242,7 +249,7 @@ gulp.task('sass', () => {
   .pipe(gulp.dest(css))
   .pipe(notifier.success('sass'))
   .pipe(browserSync.stream())
-
+	.on('end', () => { notifier.logs(true) })
 });
 
 // Aliases for the sass task.
@@ -272,7 +279,7 @@ gulp.task('symbols', () => {
     .pipe(concat('symbols.svg'))
     .pipe(gulp.dest(images))
     .pipe(notifier.success('symbols', {extra : sass + filenames.sass.symbols}))
-
+		.on('end', () => { notifier.logs(true) })
   }
 
 });
@@ -288,7 +295,7 @@ gulp.task('svg', ['symbols']);
 gulp.task('ES5', () => {
 
   if (!ES5Support) {
-    log(chalk.yellow("ES5 Scripts task was skipped"));
+    logs.push(chalk.yellow("ES5 Scripts task was skipped"));
     return false;
   }
 
@@ -311,6 +318,7 @@ gulp.task('ES5', () => {
     .pipe(notifier.success('scripts', {suffix:'with ES5 transpilation'}))
     .pipe(gulpif(versioning, rename(filenames.js.scripts.replace('.js', '.es5.js'))))
     .pipe(gulpif(versioning, gulp.dest(js)))
+		.on('end', () => { notifier.logs(true) })
 
 });
 
@@ -324,6 +332,7 @@ gulp.task('es5', ['ES5']);
 notifier.defaults({
   project    : project,
   success    : icon,
+	delay      : true,
   popups     : environment == 'dev',
   suffix     : 'successfully',
   exclusions : '.map',
@@ -349,9 +358,13 @@ gulp.task('config', () => {
 
 gulp.task('default', () => {
   sequence(['vendors', 'scripts', 'symbols'], ['sass'])((err) => {
+
     if (!err) {
-      return log(chalk.green("All gulp tasks completed"));
+			logs.forEach(message => log(message))
+			notifier.logs();
+			log(`${chalk.yellow('Completed:')} ${chalk.green("All gulp tasks")}`)
     } else {
+			notifier.logs()
       console.log(err)
     }
   })
