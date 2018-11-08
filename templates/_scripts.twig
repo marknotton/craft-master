@@ -101,7 +101,7 @@
         if (i == files.length - 1) {
           element.addEventListener('load', function (e) {
             // Once the last file is loaded, and if the a dom object exits,
-            if ( typeof dom !== undefined) {
+            if ( typeof dom !== 'undefined') {
               // Change the status to loaded. This will act as a trigger.
               dom.status = 'loaded';
             }
