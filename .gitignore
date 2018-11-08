@@ -19,9 +19,6 @@ modules/helpers
 **/assets/uploads/_*/
 **/assets/uploads/**/_*/
 
-storage/**/*
-!storage/rebrand/**/*
-
 cpresources
 **/assets/resources/**/*
 
