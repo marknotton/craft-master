@@ -1,174 +1,186 @@
+{# ////////////////////////////////////////////////////////////////////////// #}
+{# Stylesheet                                                                 #}
+{# ////////////////////////////////////////////////////////////////////////// #}
+
+{# What is this for? ===========================================================
+
+   Output all template components into one page so you can manage the styling
+	 consistency for every possible reusable element. It's also a place to test
+	 and expriment with new concepts without messing with existing templates.
+
+============================================================================= #}
+
 {% if not devmode %}
-  {% redirect '/' 301 %}
+  {% exit 404 %}
 {% endif %}
 
 {% extends '_layouts/main' %}
 
 {% block main %}
 
-    <h1>Heading H1 Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere</h1>
+  <h1>Heading H1 Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere</h1>
 
-    <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Donec rutrum congue leo eget malesuada. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.</p>
+  <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Donec rutrum congue leo eget malesuada. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.</p>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in ipsum id orci porta dapibus. Sed porttitor lectus nibh.</p>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in ipsum id orci porta dapibus. Sed porttitor lectus nibh.</p>
 
-    <h2>Heading H2 Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere</h2>
+  <h2>Heading H2 Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere</h2>
 
-    <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
+  <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
 
-    <a href="#" class="button">Hello World</a>
-    <a href="#" class="button-small invert">Hello World</a>
-    <a href="#" class="button-large">Hello World</a>
+  <a href="#" class="button">Hello World</a>
+  <a href="#" class="button-small invert">Hello World</a>
+  <a href="#" class="button-large">Hello World</a>
 
-    <ul>
-      <li>Lorem ipsum dolor sit amet, consectetur adip <a href="#">dfgkdfjgldkfg</a></li>
-      <li>Lorem ipsum dolor sit amet, consectetur adip <a href="#">dfgkdfjgldkfg</a></li>
-      <li>Lorem ipsum dolor sit amet, consectetur adip <a href="#">dfgkdfjgldkfg</a></li>
-      <li>Lorem ipsum dolor sit amet, consectetur adip <a href="#">dfgkdfjgldkfg</a></li>
-      <li>Lorem ipsum dolor sit amet, consectetur adip <a href="#">dfgkdfjgldkfg</a></li>
-    </ul>
+  <ul>
+    <li>Lorem ipsum dolor sit amet, consectetur adip <a href="#">dfgkdfjgldkfg</a></li>
+    <li>Lorem ipsum dolor sit amet, consectetur adip <a href="#">dfgkdfjgldkfg</a></li>
+    <li>Lorem ipsum dolor sit amet, consectetur adip <a href="#">dfgkdfjgldkfg</a></li>
+    <li>Lorem ipsum dolor sit amet, consectetur adip <a href="#">dfgkdfjgldkfg</a></li>
+    <li>Lorem ipsum dolor sit amet, consectetur adip <a href="#">dfgkdfjgldkfg</a></li>
+  </ul>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in ipsum id orci porta dapibus. Sed porttitor lectus nibh.</p>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in ipsum id orci porta dapibus. Sed porttitor lectus nibh.</p>
 
-    <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
-    <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
+  <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
+  <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Breed</th>
-          <th>Lifespan</th>
-          <th>Country of Origin</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td data-label="Breed"><span>Persian Cat</span></td>
-          <td data-label="Lifespan"><span>12-17 years</span></td>
-          <td data-label="Country of Origin"><span>Iran</span></td>
-          <td data-label="Description"><span>The Persian cat is a long-haired breed of cat characterized by its round face and short muzzle.</span></td>
-        </tr>
-        <tr>
-          <td data-label="Breed"><span>Maine Coon</span></td>
-          <td data-label="Lifespan"><span>10-15 years</span></td>
-          <td data-label="Country of Origin"><span>United States of America</span></td>
-          <td data-label="Description"><span>The Maine Coon is one of the largest domesticated breeds of cat. It has excellent hunting skills.</span></td>
-        </tr>
-        <tr>
-          <td data-label="Breed"><span>British Shorthair</span></td>
-          <td data-label="Lifespan"><span>14-20 years</span></td>
-          <td data-label="Country of Origin"><span>Great Britain</span></td>
-          <td data-label="Description"><span>The British Shorthair has a distinctively chunky body, a dense coat, and a broad face.</span></td>
-        </tr>
-      </tbody>
-    </table>
+  <table>
+    <thead>
+      <tr>
+        <th>Breed</th>
+        <th>Lifespan</th>
+        <th>Country of Origin</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-label="Breed"><span>Persian Cat</span></td>
+        <td data-label="Lifespan"><span>12-17 years</span></td>
+        <td data-label="Country of Origin"><span>Iran</span></td>
+        <td data-label="Description"><span>The Persian cat is a long-haired breed of cat characterized by its round face and short muzzle.</span></td>
+      </tr>
+      <tr>
+        <td data-label="Breed"><span>Maine Coon</span></td>
+        <td data-label="Lifespan"><span>10-15 years</span></td>
+        <td data-label="Country of Origin"><span>United States of America</span></td>
+        <td data-label="Description"><span>The Maine Coon is one of the largest domesticated breeds of cat. It has excellent hunting skills.</span></td>
+      </tr>
+      <tr>
+        <td data-label="Breed"><span>British Shorthair</span></td>
+        <td data-label="Lifespan"><span>14-20 years</span></td>
+        <td data-label="Country of Origin"><span>Great Britain</span></td>
+        <td data-label="Description"><span>The British Shorthair has a distinctively chunky body, a dense coat, and a broad face.</span></td>
+      </tr>
+    </tbody>
+  </table>
 
+  <img src="{{ images }}/default-featured.jpg" alt="default image">
+
+  <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
+
+  <h3>Heading H3 Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuereVestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere</h3>
+
+  <ol>
+    <li>Lorem ipsum dolor sit amet, consectetur adip <a href="#">dfgkdfjgldkfg</a></li>
+    <li>Lorem ipsum dolor sit amet, consectetur adip <a href="#">dfgkdfjgldkfg</a></li>
+    <li>Lorem ipsum dolor sit amet, consectetur adip <a href="#">dfgkdfjgldkfg</a></li>
+    <li>Lorem ipsum dolor sit amet, consectetur adip <a href="#">dfgkdfjgldkfg</a></li>
+    <li>Lorem ipsum dolor sit amet, consectetur adip <a href="#">dfgkdfjgldkfg</a></li>
+  </ol>
+
+  <h4>Heading H4 Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuereVestibulum ante ipsum primis in faucibus orci luctus et ultrices posuereVestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere</h4>
+
+  <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
+
+  {# <iframe src="https://www.youtube.com/embed/uM16mPwYVRE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> #}
+
+  <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
+
+  <figure>
     <img src="{{ images }}/default-featured.jpg" alt="default image">
+    <figcaption>Vestibulum ante ipsum primis in faucibus orci.</figcaption>
+  </figure>
 
-    <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
+  <h5>Heading H5 Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuereVestibulum ante ipsum primis in faucibus orci luctus et ultrices posuereVestibulum ante ipsum primis in faucibus orci luctus et ultrices posuereVestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere</h5>
 
-    <h3>Heading H3 Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuereVestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere</h3>
+  <blockquote cite="#">
+    Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci.
+  </blockquote>
 
-    <ol>
-      <li>Lorem ipsum dolor sit amet, consectetur adip <a href="#">dfgkdfjgldkfg</a></li>
-      <li>Lorem ipsum dolor sit amet, consectetur adip <a href="#">dfgkdfjgldkfg</a></li>
-      <li>Lorem ipsum dolor sit amet, consectetur adip <a href="#">dfgkdfjgldkfg</a></li>
-      <li>Lorem ipsum dolor sit amet, consectetur adip <a href="#">dfgkdfjgldkfg</a></li>
-      <li>Lorem ipsum dolor sit amet, consectetur adip <a href="#">dfgkdfjgldkfg</a></li>
-    </ol>
+  <h6>Heading H6 Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuereVestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere</h6>
 
-    <h4>Heading H4 Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuereVestibulum ante ipsum primis in faucibus orci luctus et ultrices posuereVestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere</h4>
-
-    <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
-
-    {# <iframe src="https://www.youtube.com/embed/uM16mPwYVRE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> #}
-
-    <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
-
-    <figure>
-      <img src="{{ images }}/default-featured.jpg" alt="default image">
-      <figcaption>Vestibulum ante ipsum primis in faucibus orci.</figcaption>
-    </figure>
-
-    <h5>Heading H5 Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuereVestibulum ante ipsum primis in faucibus orci luctus et ultrices posuereVestibulum ante ipsum primis in faucibus orci luctus et ultrices posuereVestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere</h5>
-
-    <blockquote cite="#">
-      Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci.
-    </blockquote>
-
-    <h6>Heading H6 Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuereVestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere</h6>
-
-    <section class="accordion">
-      <h3>
-        Dropdown Heading 1
-        {{ symbol('icon-arrow-right') }}
-      </h3>
+  <section class="accordion">
+    <h3>
+      Dropdown Heading 1
+      {{ symbol('icon-arrow-right') }}
+    </h3>
+    <div>
       <div>
-        <div>
-          <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
-          <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
-          <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
-        </div>
+        <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
+        <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
+        <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="accordion">
-      <h3>
-        Dropdown Heading 1
-        {{ symbol('icon-arrow-right') }}
-      </h3>
+  <section class="accordion">
+    <h3>
+      Dropdown Heading 1
+      {{ symbol('icon-arrow-right') }}
+    </h3>
+    <div>
       <div>
-        <div>
-          <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
-          <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
-          <section class="accordion">
-            <h4>
-              Subdropdown Heading 1
-              {{ symbol('icon-arrow-right') }}
-            </h4>
+        <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
+        <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
+        <section class="accordion">
+          <h4>
+            Subdropdown Heading 1
+            {{ symbol('icon-arrow-right') }}
+          </h4>
+          <div>
             <div>
-              <div>
-                <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
-                <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
-                <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
-              </div>
+              <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
+              <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
+              <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
             </div>
-          </section>
-          <section class="accordion">
-            <h4>
-              Subdropdown Heading 2 tortor eget felis porttitor volutpattortor eget felis porttitor volutpat
-              {{ symbol('icon-arrow-right') }}
-            </h4>
+          </div>
+        </section>
+        <section class="accordion">
+          <h4>
+            Subdropdown Heading 2 tortor eget felis porttitor volutpattortor eget felis porttitor volutpat
+            {{ symbol('icon-arrow-right') }}
+          </h4>
+          <div>
             <div>
-              <div>
-                <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
-                <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
-                <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
-              </div>
+              <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
+              <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
+              <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
             </div>
-          </section>
-          <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
-        </div>
+          </div>
+        </section>
+        <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="accordion">
-      <h3>
-        Dropdown Heading 3 tortor eget felis porttitor volutpat.
-        {{ symbol('icon-arrow-right') }}
-      </h3>
+  <section class="accordion">
+    <h3>
+      Dropdown Heading 3 tortor eget felis porttitor volutpat.
+      {{ symbol('icon-arrow-right') }}
+    </h3>
+    <div>
       <div>
-        <div>
-          <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
-          <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
-          <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
-        </div>
+        <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
+        <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
+        <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
+  <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
 
-    <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
+  <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
 
 {% endblock %}

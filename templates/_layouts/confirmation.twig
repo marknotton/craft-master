@@ -1,14 +1,14 @@
 {# ////////////////////////////////////////////////////////////////////////// #}
-{# Confirmation Template                                                      #}
+{# Confirmation Layout                                                        #}
 {# ////////////////////////////////////////////////////////////////////////// #}
 
 {# More Information ============================================================
-Please review config/routes.php file for more details on how this layout gets used #}
+Check out config/routes.php file for more details on how this layout gets used #}
 
 {% extends '_layouts/main' %}
 
-{% set page = 'confirmation' %}
-{% set type = segments[0]|replace('-') %}
+{% set page    = 'confirmation' %}
+{% set type    = segments[0]|replace('-') %}
 {% set classes = type %}
 
 {% set messages = {

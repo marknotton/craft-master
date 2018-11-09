@@ -23,7 +23,7 @@ return [
     'generateTransformsBeforePageLoad' => true,
     'autoLoginAfterAccountActivation'  => true,
     'csrfTokenName'                    => 'X-CSRF-Token',
-    'backupOnUpdate'		               => false,
+    'backupOnUpdate'		               => true,
     'errorTemplatePrefix'              => "_errors/",
     'defaultTemplateExtensions'        => array('twig', 'html'),
     'devMode'                          => false,
