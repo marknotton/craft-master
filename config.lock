@@ -6,7 +6,7 @@
   "settings": {
     "sourceMaps": true,
     "minify": false,
-    "versioning": false,
+    "versioning": true,
     "ES5Support": false,
     "symbols": true,
     "combineCSS": true
@@ -42,7 +42,6 @@
   "sources": {
     "scripts": [
       "modules/helpers/src/assets/scripts/helpers.js",
-      "modules/helpers/src/assets/scripts/classes/pluginify.js",
       "src/scripts/inits.js",
       "src/scripts/*/**.js"
     ],

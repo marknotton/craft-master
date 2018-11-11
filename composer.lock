@@ -479,12 +479,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/craftcms/cms.git",
-                "reference": "be927bc2e3a7cbc19b6f31251a687459ac276834"
+                "reference": "e4a7078250ac68fb315c1992da8a2b519d7b354a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craftcms/cms/zipball/be927bc2e3a7cbc19b6f31251a687459ac276834",
-                "reference": "be927bc2e3a7cbc19b6f31251a687459ac276834",
+                "url": "https://api.github.com/repos/craftcms/cms/zipball/e4a7078250ac68fb315c1992da8a2b519d7b354a",
+                "reference": "e4a7078250ac68fb315c1992da8a2b519d7b354a",
                 "shasum": ""
             },
             "require": {
@@ -556,7 +556,7 @@
                 "craftcms",
                 "yii2"
             ],
-            "time": "2018-10-25T10:45:19+00:00"
+            "time": "2018-11-08T22:45:35+00:00"
         },
         {
             "name": "craftcms/oauth2-craftid",
@@ -1887,12 +1887,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/marknotton/craft-module-helpers.git",
-                "reference": "22bf6496c3587f9f6ab62f23a8a2307e8a3f79bd"
+                "reference": "0482775f2618cf42b87cfc2470c3a2ca68a28309"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/marknotton/craft-module-helpers/zipball/22bf6496c3587f9f6ab62f23a8a2307e8a3f79bd",
-                "reference": "22bf6496c3587f9f6ab62f23a8a2307e8a3f79bd",
+                "url": "https://api.github.com/repos/marknotton/craft-module-helpers/zipball/0482775f2618cf42b87cfc2470c3a2ca68a28309",
+                "reference": "0482775f2618cf42b87cfc2470c3a2ca68a28309",
                 "shasum": ""
             },
             "type": "craft-module",
@@ -1922,7 +1922,7 @@
                 "craft-module",
                 "craftcms"
             ],
-            "time": "2018-10-29T14:58:05+00:00"
+            "time": "2018-11-09T10:43:47+00:00"
         },
         {
             "name": "mikehaertl/php-shellcommand",
@@ -2017,16 +2017,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.23.0",
+            "version": "1.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "fd8c787753b3a2ad11bc60c063cff1358a32a3b4"
+                "reference": "bfc9ebb28f97e7a24c45bdc3f0ff482e47bb0266"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/fd8c787753b3a2ad11bc60c063cff1358a32a3b4",
-                "reference": "fd8c787753b3a2ad11bc60c063cff1358a32a3b4",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/bfc9ebb28f97e7a24c45bdc3f0ff482e47bb0266",
+                "reference": "bfc9ebb28f97e7a24c45bdc3f0ff482e47bb0266",
                 "shasum": ""
             },
             "require": {
@@ -2091,7 +2091,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2017-06-19T01:22:40+00:00"
+            "time": "2018-11-05T09:00:11+00:00"
         },
         {
             "name": "mrclay/jsmin-php",

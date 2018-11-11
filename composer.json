@@ -50,9 +50,7 @@
     }
   },
   "scripts": {
-    "post-install-cmd": [
-      "npm install"
-    ],
+
     "post-root-package-install": [
       "@php -r \"file_exists('.env') || copy('.env.dev', '.env');\""
     ],
