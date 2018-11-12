@@ -182,12 +182,7 @@ gulp.task('scripts', ['ES5'], () => {
     .pipe(gulpif(versioning, rename(filenames.js.scripts)))
     .pipe(gulpif(versioning, gulp.dest(js)))
     .pipe(browserSync.stream())
-		.on('end', () => {
-			logs = [...logs, ...notifier.logs(false, true), ...versioniser.logs(false, true)];
-			if ( !test ) {
-				notifier.renderLogs(logs);
-			}
-		})
+		.on('end', notify)
 
 });
 
@@ -219,12 +214,7 @@ gulp.task('vendors', () => {
     .pipe(notifier.success('vendors'))
     .pipe(gulpif(versioning, rename(filenames.js.vendors)))
     .pipe(gulpif(versioning, gulp.dest(js)))
-		.on('end', () => {
-			logs = [...logs, ...notifier.logs(false, true), ...versioniser.logs(false, true)];
-			if ( !test ) {
-				notifier.renderLogs(logs);
-			}
-		})
+		.on('end', notify)
 
 });
 
@@ -260,12 +250,7 @@ gulp.task('sass', () => {
   .pipe(gulp.dest(css))
   .pipe(notifier.success('sass'))
   .pipe(browserSync.stream())
-	.on('end', () => {
-		logs = [...logs, ...notifier.logs(false, true), ...versioniser.logs(false, true)];
-		if ( !test ) {
-			notifier.renderLogs(logs);
-		}
-	})
+	.on('end', notify)
 
 });
 
@@ -297,12 +282,7 @@ gulp.task('symbols', () => {
     .pipe(concat('symbols.svg'))
     .pipe(gulp.dest(images))
     .pipe(notifier.success('symbols', {extra : sass + filenames.sass.symbols}))
-		.on('end', () => {
-			logs = [...logs, ...notifier.logs(false, true), ...versioniser.logs(false, true)];
-			if ( !test ) {
-				notifier.renderLogs(logs);
-			}
-		})
+		.on('end', notify)
   }
 
 });
@@ -318,7 +298,7 @@ gulp.task('svg', ['symbols']);
 gulp.task('ES5', () => {
 
   if (!ES5Support) {
-    logs.unshift(notifier.timestamp(chalk.hex('#DB5A48')("Skipped: ES5 Scripts task was not run. Check your config.json settings.")));
+    logs.unshift(notifier.timestamp(chalk.hex('#DB5A48')("Skipped: ES5 Scripts task will not run in '"+ environment +"' environments. Check your settings in config.json to change this.")));
     return false;
   }
 
@@ -365,6 +345,14 @@ notifier.defaults({
     sass     : 'SASS files ' + (combineCSS ? (versioning ? 'combined and versionised' : 'combined') : (versioning ? 'versionised' : 'compiled')),
   }
 });
+
+function notify() {
+	console.log('nofity');
+	logs = [...logs, ...notifier.logs(false, true), ...versioniser.logs(false, true)];
+	if ( !test ) {
+		notifier.renderLogs(logs);
+	}
+}
 
 // =============================================================================
 // Config settings task
