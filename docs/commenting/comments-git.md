@@ -1,8 +1,10 @@
 The following is a sample of how commits are commonly formatted:
 
-Note: You should perform a composer update/install.
+Notes
+- You should perform a composer update/install.
 
-Warning: You MUST perform a composer update/install.
+To Do
+- You MUST perform a composer update/install.
 
 Added
 - A new sub navigation bar to the header.
