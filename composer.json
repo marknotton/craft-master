@@ -26,7 +26,8 @@
     "nystudio107/craft-minify": "^1.2.6",
     "marknotton/agent": "^1.1.3",
     "marknotton/doggistyle": "v0.3.0.x-dev",
-    "marknotton/helpers": "dev-expirments",
+    "marknotton/helpers": "dev-experiments",
+    "marknotton/template-maker": "dev-experiments",
     "deployer/deployer": "^6.2",
     "deployer/recipes": "^6.1"
   },

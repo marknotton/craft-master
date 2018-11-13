@@ -36,7 +36,8 @@
       "sprites": "'/assets/images/sprites/'"
     },
     "imports": [
-      "vendor/marknotton/doggistyle/dist/_doggistyle"
+      "vendor/marknotton/doggistyle/dist/_doggistyle",
+      "_symbols.scss"
     ]
   },
   "sources": {
