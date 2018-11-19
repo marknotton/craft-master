@@ -22,19 +22,23 @@
 
 			{% cleanup %}
 
-				{{ not entry.isFieldEmpty('body') ? entry.body }}
+				{% if entry ?? false %}
+
+					{{ not entry.isFieldEmpty('body') ? entry.body }}
+
+				{% endif %}
 
 				{% include "_components/content-blocks" ignore missing %}
 
-				{# Extra Content -------------------------------------------------------
-				Wrap extra block content with the <extra-content> element if it's not present. #}
-
-				{% set extra = extra ?? block('extra') ?? false %}
-				{% if extra is not empty %}
-					{{ '<extra-content' in extra ? extra|raw : ('<extra-content>' ~ extra ~ '</extra-content>')|raw }}
-				{% endif %}
-
 			{% endcleanup %}
+
+			{# Extra Content -------------------------------------------------------
+			Wrap extra block content with the <extra-content> element if it's not present. #}
+
+			{% set extra = extra ?? block('extra') ?? false %}
+			{% if extra is not empty %}
+				{{ '<extra-content' in extra ? extra|raw : ('<extra-content>' ~ extra ~ '</extra-content>')|raw }}
+			{% endif %}
 
 		</main>
 
