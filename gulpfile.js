@@ -14,7 +14,7 @@ const gulp        = require('gulp'),                   // Gulp.
       configs     = require('gulp-config-grabber'),    // Parse data from the config.json file for the current env.
       gulpif      = require('gulp-if'),                // Add conditionals inline.
       gulpsass    = require('gulp-sass'),              // Sass precompiler.
-      log         = require('fancy-log'),              // Output terminal messages.
+      log         = require('loggerer'),              // Output terminal messages.
       notifier    = require('gulp-notifier'),          // Manage notification messages and other aesthetics.
       plumber     = require('gulp-plumber'),           // Asynchronous concatenator.
       sequence    = require('gulp-sequence'),          // Run Gulp taks in a particular order
@@ -24,7 +24,8 @@ const gulp        = require('gulp'),                   // Gulp.
       injectScss  = require('gulp-inject-scss'),       // Inject JS variables into SCSS
       symbols     = require('gulp-svg-to-symbols'),    // SVG Symbols creator.
       uglify      = require('gulp-uglify-es').default, // ES6 supported minifier/uglifier.
-      versioniser = require("gulp-versioniser");       // Manages versioning of filenames via .emv.
+      versioniser = require("gulp-versioniser"),       // Manages versioning of filenames via .emv.
+			path     = require('path');
 
 // PostCSS
 const postcss          = require('gulp-postcss'),
@@ -90,6 +91,12 @@ const sprites = root + webroot + config.paths.sprites
 
 // Miscellaneous ---------------------------------------------------------------
 
+// Tell the loggerer to cache logs by default.
+log.settings({cache:true});
+
+// Rendering it toggled around depending on watcher or manual logging
+let render = true;
+
 // Sass variables that will be passed before compiling.
 const sassVariables = config['sass-injections']['variables'] || []
 
@@ -108,11 +115,6 @@ const icon = config.icon || 'icon.png'
 // Map directory name that will be exlcuded from versioning relative to css and js output paths
 const maps = 'maps'
 
-// Store task logs to be rendered later on.
-let logs = [];
-
-let test = false;
-
 // =============================================================================
 // Watchers
 // =============================================================================
@@ -130,20 +132,28 @@ gulp.task('serve', ['default'], () => {
 			logPrefix      : chalk.yellow(project),
       port           : config.port || 3000,
 			logFileChanges : false,
-      injectChanges  : true
+      injectChanges  : true,
+			callbacks: {
+				ready: () => { render = true; log.clear(); }
+			}
     });
 
     for (const watcher of Object.values(config.watchers)) {
       if ( watcher.reload ) {
-        gulp.watch(watcher.patterns, [watcher.tasks]).on('change', browserSync.reload);
+        gulp.watch(watcher.patterns, [watcher.tasks]).on('change', (event) => {
+					log(`Reloading Browser because you ${event.type} this file:`, path.relative(process.cwd(), event.path), false);
+					return browserSync.reload()
+				});
       } else {
-        gulp.watch(watcher.patterns, [watcher.tasks])
+        gulp.watch(watcher.patterns, [watcher.tasks]).on('change', (event) => {
+					log(`Updating Browser because you ${event.type} this file:`, path.relative(process.cwd(), event.path), false);
+				});
       }
     }
 
   } else {
 
-    log(chalk.red("You can only run Gulp Serve in a local development environment."));
+    log("You can only run Gulp Serve in a local development environment.", false, ['red']);
 
     return false;
 
@@ -171,7 +181,7 @@ gulp.task('scripts', ['ES5'], () => {
   }
 
   return gulp.src(config.sources.scripts)
-    .pipe(gulpif(notifcations, source(config.sources.scripts, (message) => logs.push(message))))
+    .pipe(gulpif(notifcations, source(config.sources.scripts, message => log(...message))))
     .pipe(plumber({errorHandler: notifier.error }))
     .pipe(gulpif(sourceMaps, sourcemaps.init()))
     .pipe(concat(filename))
@@ -182,7 +192,7 @@ gulp.task('scripts', ['ES5'], () => {
     .pipe(gulpif(versioning, rename(filenames.js.scripts)))
     .pipe(gulpif(versioning, gulp.dest(js)))
     .pipe(browserSync.stream())
-		.on('end', notify)
+		.on('end', () => !render || log.render())
 
 });
 
@@ -207,14 +217,14 @@ gulp.task('vendors', () => {
   }
 
   return gulp.src(config.sources.vendors)
-		.pipe(gulpif(notifcations, source(config.sources.vendors, (message) => logs.push(message))))
+		.pipe(gulpif(notifcations, source(config.sources.vendors, message => log(...message))))
     .pipe(concat(filename))
     .pipe(gulpif(minify, uglify()))
     .pipe(gulp.dest(js))
     .pipe(notifier.success('vendors'))
     .pipe(gulpif(versioning, rename(filenames.js.vendors)))
     .pipe(gulpif(versioning, gulp.dest(js)))
-		.on('end', notify)
+		.on('end', () => !render || log.render())
 
 });
 
@@ -250,7 +260,7 @@ gulp.task('sass', () => {
   .pipe(gulp.dest(css))
   .pipe(notifier.success('sass'))
   .pipe(browserSync.stream())
-	.on('end', notify)
+	.on('end', () => !render || log.render())
 
 });
 
@@ -282,7 +292,7 @@ gulp.task('symbols', () => {
     .pipe(concat('symbols.svg'))
     .pipe(gulp.dest(images))
     .pipe(notifier.success('symbols', {extra : sass + filenames.sass.symbols}))
-		.on('end', notify)
+		.on('end', () => !render || log.render())
   }
 
 });
@@ -298,7 +308,7 @@ gulp.task('svg', ['symbols']);
 gulp.task('ES5', () => {
 
   if (!ES5Support) {
-    logs.unshift(notifier.timestamp(chalk.hex('#DB5A48')("Skipped: ES5 Scripts task will not run in '"+ environment +"' environments. Check your settings in config.json to change this.")));
+		log('Skipped', `ES5 Scripts task will not run in "${environment}" environments. Check your settings in config.json to change this.`)
     return false;
   }
 
@@ -331,7 +341,7 @@ gulp.task('es5', ['ES5']);
 // Notification message settings
 // =============================================================================
 
-notifier.defaults({
+notifier.settings({
   project    : project,
   success    : icon,
   popups     : environment == 'dev',
@@ -346,14 +356,6 @@ notifier.defaults({
   }
 });
 
-function notify() {
-	console.log('nofity');
-	logs = [...logs, ...notifier.logs(false, true), ...versioniser.logs(false, true)];
-	if ( !test ) {
-		notifier.renderLogs(logs);
-	}
-}
-
 // =============================================================================
 // Config settings task
 // =============================================================================
@@ -367,11 +369,11 @@ gulp.task('config', () => {
 // =============================================================================
 
 gulp.task('default', () => {
-	test = true;
+	render = false;
   sequence(['vendors', 'scripts', 'symbols'], ['sass'])((err) => {
     if (!err) {
-			notifier.renderLogs(logs);
-			log(`${chalk.yellow('Done:')} ${chalk.green("All Gulp tasks completed")}`)
+			log('Done:', "All Gulp tasks completed");
+			log.render();
     } else {
       console.log(err)
     }
