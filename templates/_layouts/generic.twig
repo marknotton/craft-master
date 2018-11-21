@@ -32,13 +32,12 @@
 
 			{% endcleanup %}
 
-			{# Extra Content -------------------------------------------------------
-			Wrap extra block content with the <extra-content> element if it's not present. #}
+			{# Extra Content ---------------------------------------------------------
+			Render extra content within the main tag, whilst keeping all the above
+			standard content. Allowing you get reuse this template for frequently. #}
 
 			{% set extra = extra ?? block('extra') ?? false %}
-			{% if extra is not empty %}
-				{{ '<extra-content' in extra ? extra|raw : ('<extra-content>' ~ extra ~ '</extra-content>')|raw }}
-			{% endif %}
+			{{ extra is not empty ? extra|raw }}
 
 		</main>
 
