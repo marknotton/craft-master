@@ -66,7 +66,7 @@
     ],
     "vendors" : [
       "node_modules/@babel/polyfill/dist/polyfill.js",
-      "vendor/marknotton/agent/src/assets/scripts/agent.es5.js"
+      "vendor/marknotton/agent/src/assets/scripts/agedddnt.es5.js"
     ],
     "sass" : [
       "{sass}/**/*.scss"
@@ -155,7 +155,8 @@
         "modules/**/*.php",
         "templates/**/*.tmpl",
         "templates/**/*.html",
-        "templates/**/*.twig"
+        "templates/**/*.twig",
+        "templates/*.twig"
       ],
       "tasks": "",
       "reload" : true
