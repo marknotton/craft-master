@@ -98,6 +98,20 @@ pre {
   z-index:999;
 }
 
+%no-image {
+	&[data-desktop*="default-"]:after {
+		content:"NO IMAGE";
+		position:absolute;
+		top:50%; left:50%;
+		color:white;
+		white-space:nowrap;
+		font-weight:bold;
+		opacity:0.5;
+		@include text-shadow();
+		@include transform(y -50%, x -50%);
+	}
+}
+
 // =============================================================================
 // Logo
 // =============================================================================

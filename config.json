@@ -1,9 +1,5 @@
 {
-  "project"      : "Craft Master",
-  "site"         : "craftmaster",
-  "organisation" : "Web Development",
-  "host"         : "www.craftmaster.loc",
-
+  "project"  : "Craft Master",
   "settings" : {
     "*" : {
       "sourceMaps"  : false,

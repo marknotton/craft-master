@@ -26,6 +26,8 @@
   '/'~template,
   '/'~segments|slice(0,-1)|join('/') ~ '/_' ~ segments|last,
   '/'~template~'/_entry',
+	(segments is not empty ? '/'~segments[0]~'/'~entry.type),
+	(segments is not empty ? '/'~segments[0]~'/_'~entry.type),
   (segments is not empty ? '/'~segments[0]~(entry is entry ? '/_entry' : '/_category')),
   ( entry.type ?? false ? '_layouts/' ~ entry.type ?? category.type),
   '_layouts/generic',

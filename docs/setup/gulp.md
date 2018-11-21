@@ -57,9 +57,6 @@ Here's an overview on what the config.json manages:
 | Configs           | Description      
 ------------------- | ----------------------------------------------------------
 | project           | The full project name. It's default use is to title event handlers and push notification popups.
-| host              | This should match your local host file or MAMP settings.
-| site              | This tends to be a kebabified string that can be used used as a directory or slug reference. It's completely optional.
-| organisation      | A single keyword that describes the organisation type. Currently being to used to generate relative fallback lorem images for templating.
 | settings          | A list of booleans that are pretty self explanatory. `sourceMaps` and `minify` effects both javascript and sass tasks.
 | paths             | Locations for where assets are to be routed.
 | themes            | Any preferences that help manage theming. Currently, these are used to define Sass variables, and brand the CMS.

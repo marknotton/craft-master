@@ -14,7 +14,7 @@ const gulp        = require('gulp'),                   // Gulp.
       configs     = require('gulp-config-grabber'),    // Parse data from the config.json file for the current env.
       gulpif      = require('gulp-if'),                // Add conditionals inline.
       gulpsass    = require('gulp-sass'),              // Sass precompiler.
-      log         = require('loggerer'),              // Output terminal messages.
+      log         = require('loggerer'),               // Output terminal messages.
       notifier    = require('gulp-notifier'),          // Manage notification messages and other aesthetics.
       plumber     = require('gulp-plumber'),           // Asynchronous concatenator.
       sequence    = require('gulp-sequence'),          // Run Gulp taks in a particular order
@@ -25,7 +25,7 @@ const gulp        = require('gulp'),                   // Gulp.
       symbols     = require('gulp-svg-to-symbols'),    // SVG Symbols creator.
       uglify      = require('gulp-uglify-es').default, // ES6 supported minifier/uglifier.
       versioniser = require("gulp-versioniser"),       // Manages versioning of filenames via .emv.
-			path     = require('path');
+			path        = require('path');
 
 // PostCSS
 const postcss          = require('gulp-postcss'),
@@ -38,10 +38,10 @@ const postcss          = require('gulp-postcss'),
 // =============================================================================
 
 // Environment
-const environment  = process.env.ENVIRONMENT || 'production';
+const environment  = (process.env.ENVIRONMENT || 'production')
 const config       = configs.create({'env': environment, 'dynamic':['paths', 'themes']})
 const project      = config.project
-const host         = typeof config.host == 'string' ? config.host : config.host[environment]
+const host         = process.env.SERVER_NAME
 
 // Settings --------------------------------------------------------------------
 
@@ -341,7 +341,7 @@ gulp.task('es5', ['ES5']);
 // Notification message settings
 // =============================================================================
 
-notifier.settings({
+notifier.defaults({
   project    : project,
   success    : icon,
   popups     : environment == 'dev',
@@ -361,7 +361,7 @@ notifier.settings({
 // =============================================================================
 
 gulp.task('config', () => {
-	console.log(JSON.stringify(config, null, 2));
+	// console.log(JSON.stringify(config, null, 2));
 })
 
 // =============================================================================
