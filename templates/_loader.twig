@@ -34,6 +34,11 @@
   '_layouts/main'
 ]%}
 
+{% set routes = craft.helpers.routeRules() %}
+{% if (entry ?? false) and entry.uri in routes|keys %}
+	{% set paths = ['/' ~ routes[entry.uri].template]|merge(paths) %}
+{% endif %}
+
 {# This variaion is designed for multisites ------------------------------------
 
 {# {% set paths = [

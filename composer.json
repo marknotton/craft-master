@@ -29,7 +29,8 @@
     "marknotton/helpers": "dev-experiments",
     "marknotton/template-maker": "dev-experiments",
     "deployer/deployer": "^6.2",
-    "deployer/recipes": "^6.1"
+    "deployer/recipes": "^6.1",
+		"verbb/cloner": "1.0.0"
   },
   "autoload": {
     "psr-4": {
