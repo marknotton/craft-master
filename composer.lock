@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "46809085dbcfb5a320e2c7e822f5e40e",
+    "content-hash": "150959d82e08fc706772c2916e9e1ab6",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -475,16 +475,16 @@
         },
         {
             "name": "craftcms/cms",
-            "version": "3.1.x-dev",
+            "version": "3.1.0-beta.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/craftcms/cms.git",
-                "reference": "e4a7078250ac68fb315c1992da8a2b519d7b354a"
+                "reference": "61582b08c5d6361b0da76edf00473802fba2f766"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craftcms/cms/zipball/e4a7078250ac68fb315c1992da8a2b519d7b354a",
-                "reference": "e4a7078250ac68fb315c1992da8a2b519d7b354a",
+                "url": "https://api.github.com/repos/craftcms/cms/zipball/61582b08c5d6361b0da76edf00473802fba2f766",
+                "reference": "61582b08c5d6361b0da76edf00473802fba2f766",
                 "shasum": ""
             },
             "require": {
@@ -521,6 +521,9 @@
                 "yiisoft/yii2-swiftmailer": "^2.1.0",
                 "zendframework/zend-feed": "^2.8.0"
             },
+            "conflict": {
+                "league/oauth2-client": "2.4.0"
+            },
             "provide": {
                 "bower-asset/bootstrap": "3.3.* | 3.2.* | 3.1.*",
                 "bower-asset/inputmask": "~3.2.2 | ~3.3.5",
@@ -556,7 +559,7 @@
                 "craftcms",
                 "yii2"
             ],
-            "time": "2018-11-08T22:45:35+00:00"
+            "time": "2018-11-27T20:03:42+00:00"
         },
         {
             "name": "craftcms/oauth2-craftid",
@@ -1455,16 +1458,16 @@
         },
         {
             "name": "jaybizzle/crawler-detect",
-            "version": "v1.2.73",
+            "version": "v1.2.74",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JayBizzle/Crawler-Detect.git",
-                "reference": "3783b88b686dfd8f0c752f829caaf1bcace581ef"
+                "reference": "e5fbc685383a4b8f49183b3a646b193491cc14c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JayBizzle/Crawler-Detect/zipball/3783b88b686dfd8f0c752f829caaf1bcace581ef",
-                "reference": "3783b88b686dfd8f0c752f829caaf1bcace581ef",
+                "url": "https://api.github.com/repos/JayBizzle/Crawler-Detect/zipball/e5fbc685383a4b8f49183b3a646b193491cc14c5",
+                "reference": "e5fbc685383a4b8f49183b3a646b193491cc14c5",
                 "shasum": ""
             },
             "require": {
@@ -1500,7 +1503,7 @@
                 "crawlerdetect",
                 "php crawler detect"
             ],
-            "time": "2018-10-31T13:15:59+00:00"
+            "time": "2018-11-21T20:56:45+00:00"
         },
         {
             "name": "jenssegers/agent",
@@ -1636,16 +1639,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.48",
+            "version": "1.0.49",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "a6ded5b2f6055e2db97b4b859fdfca2b952b78aa"
+                "reference": "a63cc83d8a931b271be45148fa39ba7156782ffd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a6ded5b2f6055e2db97b4b859fdfca2b952b78aa",
-                "reference": "a6ded5b2f6055e2db97b4b859fdfca2b952b78aa",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a63cc83d8a931b271be45148fa39ba7156782ffd",
+                "reference": "a63cc83d8a931b271be45148fa39ba7156782ffd",
                 "shasum": ""
             },
             "require": {
@@ -1716,25 +1719,25 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2018-10-15T13:53:10+00:00"
+            "time": "2018-11-23T23:41:29+00:00"
         },
         {
             "name": "league/oauth2-client",
-            "version": "2.3.0",
+            "version": "2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/oauth2-client.git",
-                "reference": "aa2e3df188f0bfd87f7880cc880e906e99923580"
+                "reference": "cc114abc622a53af969e8664722e84ca36257530"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/oauth2-client/zipball/aa2e3df188f0bfd87f7880cc880e906e99923580",
-                "reference": "aa2e3df188f0bfd87f7880cc880e906e99923580",
+                "url": "https://api.github.com/repos/thephpleague/oauth2-client/zipball/cc114abc622a53af969e8664722e84ca36257530",
+                "reference": "cc114abc622a53af969e8664722e84ca36257530",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "^6.0",
-                "paragonie/random_compat": "^1|^2",
+                "paragonie/random_compat": "^1|^2|^9.99",
                 "php": "^5.6|^7.0"
             },
             "require-dev": {
@@ -1783,7 +1786,7 @@
                 "oauth2",
                 "single sign on"
             ],
-            "time": "2018-01-13T05:27:58+00:00"
+            "time": "2018-11-22T18:33:57+00:00"
         },
         {
             "name": "marknotton/agent",
@@ -1883,16 +1886,16 @@
         },
         {
             "name": "marknotton/helpers",
-            "version": "dev-expirments",
+            "version": "dev-experiments",
             "source": {
                 "type": "git",
                 "url": "https://github.com/marknotton/craft-module-helpers.git",
-                "reference": "0482775f2618cf42b87cfc2470c3a2ca68a28309"
+                "reference": "f58faa4539bf77314a3ab911dce07a1d75491acd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/marknotton/craft-module-helpers/zipball/0482775f2618cf42b87cfc2470c3a2ca68a28309",
-                "reference": "0482775f2618cf42b87cfc2470c3a2ca68a28309",
+                "url": "https://api.github.com/repos/marknotton/craft-module-helpers/zipball/f58faa4539bf77314a3ab911dce07a1d75491acd",
+                "reference": "f58faa4539bf77314a3ab911dce07a1d75491acd",
                 "shasum": ""
             },
             "type": "craft-module",
@@ -1922,7 +1925,7 @@
                 "craft-module",
                 "craftcms"
             ],
-            "time": "2018-11-09T10:43:47+00:00"
+            "time": "2018-11-27T09:56:27+00:00"
         },
         {
             "name": "mikehaertl/php-shellcommand",
@@ -2359,33 +2362,29 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v2.0.17",
+            "version": "v9.99.99",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "29af24f25bab834fcbb38ad2a69fa93b867e070d"
+                "reference": "84b4dfb120c6f9b4ff7b3685f9b8f1aa365a0c95"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/29af24f25bab834fcbb38ad2a69fa93b867e070d",
-                "reference": "29af24f25bab834fcbb38ad2a69fa93b867e070d",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/84b4dfb120c6f9b4ff7b3685f9b8f1aa365a0c95",
+                "reference": "84b4dfb120c6f9b4ff7b3685f9b8f1aa365a0c95",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.2.0"
+                "php": "^7"
             },
             "require-dev": {
-                "phpunit/phpunit": "4.*|5.*"
+                "phpunit/phpunit": "4.*|5.*",
+                "vimeo/psalm": "^1"
             },
             "suggest": {
                 "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
             },
             "type": "library",
-            "autoload": {
-                "files": [
-                    "lib/random.php"
-                ]
-            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
@@ -2404,7 +2403,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2018-07-04T16:31:37+00:00"
+            "time": "2018-07-02T15:55:56+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -2615,16 +2614,16 @@
         },
         {
             "name": "psr/log",
-            "version": "1.0.2",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
+                "reference": "6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
-                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd",
+                "reference": "6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd",
                 "shasum": ""
             },
             "require": {
@@ -2658,7 +2657,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2016-10-10T12:19:37+00:00"
+            "time": "2018-11-20T15:27:04+00:00"
         },
         {
             "name": "seld/cli-prompt",
@@ -3471,6 +3470,56 @@
             "time": "2018-07-13T07:18:09+00:00"
         },
         {
+            "name": "verbb/cloner",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/verbb/cloner.git",
+                "reference": "5185f89cb47f31c1a75d377be810c850c9d409bc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/verbb/cloner/zipball/5185f89cb47f31c1a75d377be810c850c9d409bc",
+                "reference": "5185f89cb47f31c1a75d377be810c850c9d409bc",
+                "shasum": ""
+            },
+            "require": {
+                "craftcms/cms": "^3.0.0"
+            },
+            "type": "craft-plugin",
+            "extra": {
+                "name": "Cloner",
+                "handle": "cloner",
+                "changelogUrl": "https://raw.githubusercontent.com/verbb/cloner/craft-3/CHANGELOG.md",
+                "class": "verbb\\cloner\\Cloner"
+            },
+            "autoload": {
+                "psr-4": {
+                    "verbb\\cloner\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Verbb",
+                    "homepage": "https://verbb.io"
+                }
+            ],
+            "description": "Easily clone sections, entry types, category/tag/user groups, volumes, asset transforms and more.",
+            "keywords": [
+                "Craft",
+                "clone",
+                "cloner",
+                "cms",
+                "craft-plugin",
+                "craftcms"
+            ],
+            "time": "2018-11-18T11:44:58+00:00"
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "v2.5.1",
             "source": {
@@ -4119,17 +4168,10 @@
         }
     ],
     "packages-dev": [],
-    "aliases": [
-        {
-            "alias": "3.1.0-alpha.1",
-            "alias_normalized": "3.1.0.0-alpha1",
-            "version": "3.1.9999999.9999999-dev",
-            "package": "craftcms/cms"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "craftcms/cms": 20,
+        "craftcms/cms": 10,
         "marknotton/doggistyle": 20,
         "marknotton/helpers": 20
     },
