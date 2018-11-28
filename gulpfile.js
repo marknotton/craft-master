@@ -6,26 +6,25 @@
 // Requirements
 // =============================================================================
 
-const gulp        = require('gulp'),                   // Gulp.
-      babel       = require('gulp-babel'),             // ES6 to ES5 transpiler.
-      browserSync = require('browser-sync').create(),  // Browser watcher.
-      chalk       = require('chalk'),                  // Style Terminal logs (already included via gulp-util).
-      concat      = require('gulp-concat'),            // Concatenate files.
-      configs     = require('gulp-config-grabber'),    // Parse data from the config.json file for the current env.
-      gulpif      = require('gulp-if'),                // Add conditionals inline.
-      gulpsass    = require('gulp-sass'),              // Sass precompiler.
-      log         = require('loggerer'),               // Output terminal messages.
-      notifier    = require('gulp-notifier'),          // Manage notification messages and other aesthetics.
-      plumber     = require('gulp-plumber'),           // Asynchronous concatenator.
-      sequence    = require('gulp-sequence'),          // Run Gulp taks in a particular order
-      rename      = require("gulp-rename"),            // Rename files before they are saved..
-      source      = require('gulp-source-exists'),     // Report if any src files don't exist
-      sourcemaps  = require('gulp-sourcemaps'),        // Source map generator for JS and CSS.
-      injectScss  = require('gulp-inject-scss'),       // Inject JS variables into SCSS
-      symbols     = require('gulp-svg-to-symbols'),    // SVG Symbols creator.
-      uglify      = require('gulp-uglify-es').default, // ES6 supported minifier/uglifier.
-      versioniser = require("gulp-versioniser"),       // Manages versioning of filenames via .emv.
-			path        = require('path');
+const gulp        = require('gulp'),                       // Gulp.
+      babel       = require('gulp-babel'),                 // ES6 to ES5 transpiler.
+      browserSync = require('browser-sync').create(),      // Browser watcher.
+      chalk       = require('chalk'),                      // Style Terminal logs (already included via gulp-util).
+      concat      = require('gulp-concat'),                // Concatenate files.
+      gulpif      = require('gulp-if'),                    // Add conditionals inline.
+      gulpsass    = require('gulp-sass'),                  // Sass precompiler.
+      plumber     = require('gulp-plumber'),               // Asynchronous concatenator.
+      sequence    = require('gulp-sequence'),              // Run Gulp taks in a particular order
+      rename      = require("gulp-rename"),                // Rename files before they are saved..
+      sourcemaps  = require('gulp-sourcemaps'),            // Source map generator for JS and CSS.
+      uglify      = require('gulp-uglify-es').default,     // ES6 supported minifier/uglifier.
+			configs     = require('@marknotton/configs'),        // Parse data from the config.json file for the current env.
+			injectScss  = require('@marknotton/inject-scss'),    // Inject JS variables into SCSS
+			log         = require('@marknotton/lumberjack'),     // CLI logging.
+			notifier    = require('@marknotton/notifier'),       // Manage notification messages and other aesthetics.
+			source      = require('@marknotton/source-exists'),  // Report if any src files don't exist
+			symbols     = require('@marknotton/svg-to-symbols'), // SVG Symbols creator.
+			versioniser = require('@marknotton/versioniser');    // Manages versioning of filenames via .emv.
 
 // PostCSS
 const postcss          = require('gulp-postcss'),
@@ -91,11 +90,8 @@ const sprites = root + webroot + config.paths.sprites
 
 // Miscellaneous ---------------------------------------------------------------
 
-// Tell the loggerer to cache logs by default.
-log.settings({cache:true});
-
-// Rendering it toggled around depending on watcher or manual logging
-let render = true;
+// Log rendering is toggled around depending on the current Gulp state.
+let render = true, watching = false;
 
 // Sass variables that will be passed before compiling.
 const sassVariables = config['sass-injections']['variables'] || []
@@ -123,6 +119,8 @@ gulp.task('serve', ['default'], () => {
 
   if ( environment == 'dev' ) {
 
+		watching = true;
+
     browserSync.init({
       watchTask      : true,
       open           : "external",
@@ -134,19 +132,19 @@ gulp.task('serve', ['default'], () => {
 			logFileChanges : false,
       injectChanges  : true,
 			callbacks: {
-				ready: () => { render = true; log.clear(); }
+				ready: () => { setTimeout(() => { log.render(); render = true}, 1000) }
 			}
     });
 
     for (const watcher of Object.values(config.watchers)) {
       if ( watcher.reload ) {
         gulp.watch(watcher.patterns, [watcher.tasks]).on('change', (event) => {
-					log(`Reloading Browser because you ${event.type} this file:`, path.relative(process.cwd(), event.path), false);
+					log(`Reloading your browser because you ${event.type} this file:`, event.path.replace(process.cwd(), ''), false);
 					return browserSync.reload()
 				});
       } else {
         gulp.watch(watcher.patterns, [watcher.tasks]).on('change', (event) => {
-					log(`Updating Browser because you ${event.type} this file:`, path.relative(process.cwd(), event.path), false);
+					log(`Updating your browser because you ${event.type} this file:`, event.path.replace(process.cwd(), ''), false);
 				});
       }
     }
@@ -180,8 +178,11 @@ gulp.task('scripts', ['ES5'], () => {
     filename = filename.replace('.js', '.min.js');
   }
 
+	if ( notifcations ) {
+		source(config.sources.scripts)
+	}
+
   return gulp.src(config.sources.scripts)
-    .pipe(gulpif(notifcations, source(config.sources.scripts, message => log(...message))))
     .pipe(plumber({errorHandler: notifier.error }))
     .pipe(gulpif(sourceMaps, sourcemaps.init()))
     .pipe(concat(filename))
@@ -216,8 +217,11 @@ gulp.task('vendors', () => {
     filename = filename.replace('.js', '.min.js')
   }
 
+	if ( notifcations ) {
+		source(config.sources.vendors)
+	}
+
   return gulp.src(config.sources.vendors)
-		.pipe(gulpif(notifcations, source(config.sources.vendors, message => log(...message))))
     .pipe(concat(filename))
     .pipe(gulpif(minify, uglify()))
     .pipe(gulp.dest(js))
@@ -236,6 +240,7 @@ gulp.task('core', ['vendors']);
 // =============================================================================
 
 gulp.task('sass', () => {
+
 
   const processors = [
     autoprefixer(),
@@ -286,7 +291,6 @@ gulp.task('symbols', () => {
     };
 
 		// The source should always exlust the output file, so as to avoid including itself in an infite loop.
-
     return gulp.src([...symbolFiles, ('!' + images.replace("//", "/") + filenames.svg.symbols)])
     .pipe(symbols(settings))
     .pipe(concat('symbols.svg'))
@@ -328,7 +332,7 @@ gulp.task('ES5', () => {
     .pipe(concat(filename))
     .pipe(gulpif(minify, uglify()))
     .pipe(gulp.dest(js))
-    .pipe(notifier.success('scripts', {suffix:'with ES5 transpilation'}))
+    .pipe(notifier.success('scripts', {suffix:(minify ? 'and' : 'with') + ' ES5 transpilation'}))
     .pipe(gulpif(versioning, rename(filenames.js.scripts.replace('.js', '.es5.js'))))
     .pipe(gulpif(versioning, gulp.dest(js)))
 
@@ -341,7 +345,7 @@ gulp.task('es5', ['ES5']);
 // Notification message settings
 // =============================================================================
 
-notifier.defaults({
+notifier.settings({
   project    : project,
   success    : icon,
   popups     : environment == 'dev',
@@ -349,10 +353,10 @@ notifier.defaults({
   delay      : true,
   exclusions : '.map',
   messages : {
-    scripts  : 'Javascript files ' + (versioning ? 'versionised' : 'compiled'),
-    vendors  : 'Vendor script files ' + (versioning ? 'versionised' : 'compiled'),
+    scripts  : 'Javascript files ' + (versioning ? 'versionised' : 'compiled') + (minify ? ' with compression' : ''),
+    vendors  : 'Vendor script files ' + (versioning ? 'versionised' : 'compiled') + (minify ? ' with compression' : ''),
     symbols  : 'Symbols files compiled',
-    sass     : 'SASS files ' + (combineCSS ? (versioning ? 'combined and versionised' : 'combined') : (versioning ? 'versionised' : 'compiled')),
+    sass     : 'SASS files ' + (combineCSS ? (versioning ? 'combined and versionised' : 'combined') : (versioning ? 'versionised' : 'compiled')) + (minify ? ' with compression' : ''),
   }
 });
 
@@ -361,7 +365,7 @@ notifier.defaults({
 // =============================================================================
 
 gulp.task('config', () => {
-	// console.log(JSON.stringify(config, null, 2));
+	console.log(JSON.stringify(config, null, 2));
 })
 
 // =============================================================================
@@ -373,7 +377,7 @@ gulp.task('default', () => {
   sequence(['vendors', 'scripts', 'symbols'], ['sass'])((err) => {
     if (!err) {
 			log('Done:', "All Gulp tasks completed");
-			log.render();
+			if ( !watching ) { log.render(); }
     } else {
       console.log(err)
     }

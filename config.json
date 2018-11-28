@@ -18,7 +18,7 @@
       "sourceMaps"  : true,
       "minify"	    : false,
       "ES5Support"  : false,
-      "versioning"  : true,
+      "versioning"  : false,
       "combineCSS"  : true
     }
   },
@@ -124,7 +124,7 @@
     {
       "patterns": [
         "src/global/sass/**/*.scss",
-        "{sass}/**/*.scss",
+        "{sass}/**/!(_symbols)*.scss",
         "vendor/marknotton/doggistyle/dist/_doggistyle.scss"
       ],
       "tasks": "sass",

@@ -37,6 +37,7 @@
 // =============================================================================
 
 body {
+	background-color:#21262B;
   site-wrapper {
     display:flex;
     flex-direction:column;
@@ -101,13 +102,14 @@ pre {
 %no-image {
 	&[data-desktop*="default-"]:after {
 		content:"NO IMAGE";
+		content:attr('data-message');
 		position:absolute;
 		top:50%; left:50%;
 		color:white;
 		white-space:nowrap;
 		font-weight:bold;
 		opacity:0.5;
-		@include text-shadow();
+		// @include text-shadow();
 		@include transform(y -50%, x -50%);
 	}
 }
