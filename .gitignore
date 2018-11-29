@@ -7,7 +7,7 @@
 cpresources
 node_modules
 sass-cache/*
-**/sass/_symbols.scss
+src/**/_symbols.scss
 
 # Modules ----------------------------------------------------------------------
 
