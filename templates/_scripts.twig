@@ -50,10 +50,13 @@
 {% endif %}
 
 {# ========================================================================== #}
-{# ES6 & ES5 Support Checks                                                   #}
+{# Custom Properties, ES6 and ES5 Support Checks                              #}
 {# ========================================================================== #}
 
 {% js at head %}
+
+	{# Checks wether CSS Customer Properties is supported by this browser #}
+	window.customPropertiesSupport = window.CSS && window.CSS.supports && window.CSS.supports('--a', 0);
 
   {# Check to see if ES6 is supported by the developer and by the browser #}
   window.ES6Support = {{ ES6Support ?? true ? 'function(){try{return new Function("(a = 0) => a"),!0}catch(n){return!1}}()' : 'false'}};
@@ -120,30 +123,27 @@
     {# Or you can simply return an array #}
     var scripts = {{ craft.helpers.getScripts(js)|raw }};
 
-    {% if ES5Support %}
+		{% if ES5Support %}
 
       // Tell the browser that dom loaded status is false;
       var loaded = false;
 
-      // Files that have no ES5 support and should not be suffixed with .es5
-      var es5Exclusions = ["{{ filenames.js.vendors ?? false }}"];
-
-      // If ES6 is not supported, use script files that contain 'es5.'
-      if (!ES6Support && ES5Support) {
+      // If ES6 is not supported and ES5 is supported, manipulate the script
+			// strings to filter out the main javascript file that has been transpiled for ES5
+			if (!ES6Support && ES5Support) {
         for(var i=0; i < scripts.length; i++) {
-          {% if minify %}
-            if ( es5Exclusions.some(function(v){ return scripts[i].indexOf(v) > -1 }) ) {
-              scripts[i] = scripts[i].replace(/\.min\.js/, '.min.js');
-            } else {
-              scripts[i] = scripts[i].replace(/\.min\.js/, '.es5.min.js');
-            }
-          {% else %}
-            if ( es5Exclusions.some(function(v){ return scripts[i].indexOf(v) > -1 }) ) {
-              scripts[i] = scripts[i];
-            } else {
-              scripts[i] = scripts[i].replace(/\.js/, '.es5.js');
-            }
-          {% endif %}
+
+					// This will truncate the file extension from the 'scripts' file name,
+					// compare it with the scripts files. If there is a match, use the ES5 version.
+					var isES5FileFound = scripts[i].indexOf("{{ filenames.js.scripts ?? false }}".split('.').slice(0, -1).join('.')) !== -1;
+
+					if ( isES5FileFound ) {
+						{% if minify %}
+							scripts[i] = scripts[i].replace(/\.min\.js/, '.es5.min.js');
+	          {% else %}
+							scripts[i] = scripts[i].replace(/\.js/, '.es5.js');
+	          {% endif %}
+					}
         }
       }
     {% endif %}

@@ -62,6 +62,7 @@
     ],
     "vendors" : [
       "node_modules/@babel/polyfill/dist/polyfill.js",
+			"node_modules/abortcontroller-polyfill/dist/polyfill-patch-fetch.js",
       "vendor/marknotton/agent/src/assets/scripts/agedddnt.es5.js"
     ],
     "sass" : [
