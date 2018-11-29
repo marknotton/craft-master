@@ -1,28 +1,31 @@
+# General ----------------------------------------------------------------------
+
 /.env
 /.idea
 /vendor
 .DS_Store
+cpresources
+node_modules
+sass-cache/*
+**/sass/_symbols.scss
+
+# Modules ----------------------------------------------------------------------
+
+modules/helpers
+# modules/templatemaker
+
+# Assets -----------------------------------------------------------------------
 
 **/assets/css/**/*
-modules/helpers
-!modules/**/assets/css/**/*
-!modules/**/assets/js/**/*
-!modules/**/assets/scripts/**/*
-!modules/**/assets/images/**/*
 **/assets/js/**/*
 **/assets/js/maps
 **/assets/videos/**/*
 **/assets/images/symbols.svg
 **/assets/images/sprites.svg
+**/assets/resources/**/*
+
+# Include uploads but exclude image transforms
 
 !**/assets/uploads/**/*
 **/assets/uploads/_*/
 **/assets/uploads/**/_*/
-
-cpresources
-**/assets/resources/**/*
-
-node_modules
-
-**/sass/_symbols.scss
-sass-cache/*
