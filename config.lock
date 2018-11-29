@@ -1,12 +1,9 @@
 {
   "project": "Craft Master",
-  "site": "craftmaster",
-  "organisation": "Web Development",
-  "host": "www.craftmaster.loc",
   "settings": {
     "sourceMaps": true,
     "minify": false,
-    "versioning": true,
+    "versioning": false,
     "ES5Support": false,
     "symbols": true,
     "combineCSS": true
@@ -46,6 +43,9 @@
       "src/scripts/*/**.js"
     ],
     "vendors": [
+      "modules/helpers/src/assets/scripts/helpers.js",
+      "modules/helpers/src/assets/scripts/classes/fetcher.js",
+      "modules/helpers/src/assets/scripts/classes/gallery.js",
       "node_modules/@babel/polyfill/dist/polyfill.js",
       "vendor/marknotton/agent/src/assets/scripts/agedddnt.es5.js"
     ],
@@ -119,7 +119,7 @@
     {
       "patterns": [
         "src/global/sass/**/*.scss",
-        "src/sass/**/*.scss",
+        "src/sass/**/!(_symbols)*.scss",
         "vendor/marknotton/doggistyle/dist/_doggistyle.scss"
       ],
       "tasks": "sass",
