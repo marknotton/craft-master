@@ -111,6 +111,9 @@ const icon = config.icon || 'icon.png'
 // Map directory name that will be exlcuded from versioning relative to css and js output paths
 const maps = 'maps'
 
+// Check if Deployer settings exist.
+const deployer = typeof config.deployer !== 'undefined' ? 'deployer' : false;
+
 // =============================================================================
 // Watchers
 // =============================================================================
@@ -171,7 +174,7 @@ gulp.task('scripts', ['ES5'], () => {
   let filename = filenames.js.scripts;
 
   if (versioning) {
-    filename = versioniser.update(js, filename, 'scripts', !ES5Support);
+    filename = versioniser.update(js, filename, deployer || 'scripts', !ES5Support && !deployer);
   }
 
   if (minify) {
@@ -210,7 +213,7 @@ gulp.task('vendors', () => {
   let filename = filenames.js.vendors;
 
   if ( versioning ) {
-    filename = versioniser.update(js, filename, 'vendors')
+    filename = versioniser.update(js, filename, deployer || 'vendors', !deployer)
   }
 
   if ( minify ) {
@@ -261,7 +264,7 @@ gulp.task('sass', () => {
   .pipe(gulpif(combineCSS, concat(filenames.css.combined)))
   .pipe(gulpif(sourceMaps, sourcemaps.write(maps)))
   .pipe(gulpif(versioning, gulp.dest(css)))
-  .pipe(gulpif(versioning, versioniser.updater({destination:css, variable:'css', exclusions:'.map'}) ))
+  .pipe(gulpif(versioning, versioniser.updater({destination:css, variable:deployer || 'css', exclusions:'.map', increment:!deployer}) ))
   .pipe(gulp.dest(css))
   .pipe(notifier.success('sass'))
   .pipe(browserSync.stream())
@@ -319,7 +322,7 @@ gulp.task('ES5', () => {
   let filename = filenames.js.scripts.replace('.js', '.es5.js');
 
   if (versioning) {
-    filename = versioniser.update(js, filename, 'scripts', true);
+    filename = versioniser.update(js, filename, deployer || 'scripts', true);
   }
 
   if (minify) {
@@ -365,7 +368,7 @@ notifier.settings({
 // =============================================================================
 
 gulp.task('config', () => {
-	console.log(JSON.stringify(config, null, 2));
+	// console.log(JSON.stringify(config, null, 2));
 })
 
 // =============================================================================
@@ -374,6 +377,13 @@ gulp.task('config', () => {
 
 gulp.task('default', () => {
 	render = false;
+
+	// If the deployer flag was passed, increment the env deployer version.
+	// This is done automatically during deployment.
+	if ( deployer && typeof versioniser.getVersion('deployer') === 'undefined' || process.argv.slice(2).includes('--deployer')) {
+		versioniser.updateVersion('deployer');
+	}
+
   sequence(['vendors', 'scripts', 'symbols'], ['sass'])((err) => {
     if (!err) {
 			log('Done:', "All Gulp tasks completed");

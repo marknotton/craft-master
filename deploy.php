@@ -73,7 +73,12 @@ task('deploy', [
 ]);
 
 after('deploy:update_code', 'npm:install');
-after('deploy:vendors', 'run:gulp');
+
+task('gulp', function () {
+	run('gulp --deployer');
+});
+
+after('deploy:vendors', 'gulp');
 
 // [Optional] If deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');

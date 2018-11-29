@@ -3,7 +3,7 @@
   "settings": {
     "sourceMaps": true,
     "minify": false,
-    "versioning": false,
+    "versioning": true,
     "ES5Support": false,
     "symbols": true,
     "combineCSS": true
@@ -43,10 +43,8 @@
       "src/scripts/*/**.js"
     ],
     "vendors": [
-      "modules/helpers/src/assets/scripts/helpers.js",
-      "modules/helpers/src/assets/scripts/classes/fetcher.js",
-      "modules/helpers/src/assets/scripts/classes/gallery.js",
       "node_modules/@babel/polyfill/dist/polyfill.js",
+      "node_modules/abortcontroller-polyfill/dist/polyfill-patch-fetch.js",
       "vendor/marknotton/agent/src/assets/scripts/agedddnt.es5.js"
     ],
     "sass": [
