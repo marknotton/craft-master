@@ -1,64 +1,27 @@
+{# ////////////////////////////////////////////////////////////////////////// #}
+{# Head                                                                   #}
+{# ////////////////////////////////////////////////////////////////////////// #}
+
+{# Important ---------------------------------------------------------------- #}
+
+<meta name="author" content="{{ siteName }}">
+<meta name="language" content="en">
+<meta charset="utf-8" />
+
+{# Apple -----------------------------------------------------------------------
+Using the Agent plugin, check if the current device is an Apple device  #}
+
 {% if agentEnabled ?? false %}
   {% set apple = agent.is('iPhone') or agent.is('iPad') or agent.is('iPod') %}
 {% endif %}
 
-{# Important #}
-<meta name="author" content="{{ siteName }}">
-<meta name="language" content="en">
-<meta charset="utf-8" />
-<link rel="home" href="{{ siteUrl }}" />
+{# Viewport ----------------------------------------------------------------- #}
 
-{# Viewport #}
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, {{ apple|default ? 'viewport-fit=cover, '}}height=device-height">
 
-{% if seoEnabled ?? false and entry ?? false and not entry.isFieldEmpty('seo') %}
+{% if seomaticEnabled ?? false %}
 
-  {%- if seo is not defined and entry is defined and entry.seo is defined and entry.seo is iterable %}
-    {% set seo = entry.seo %}
-  {% endif %}
-  {% if seo is not defined or seo is null or seo.title == "" %}
-    {% set seo = craft.seo.custom(siteName, '', false) %}
-  {% endif -%}
-
-  {% set social = craft.seo.social(seo) ?? false %}
-  {% set locale = craft.app.locale %}
-  {% set locales = craft.app.i18n.siteLocaleIds|without(locale) %}
-
-  {% set fallbackTitle = (entry is defined and entry.uri == '__home__' ? siteName : (title|t ~ ' | ' ~ siteName|t)) %}
-  {% set fallbackDescription = (entry ?? false) and entry.introduction is not empty ? (entry.introduction)|t|description : '' %}
-
-  <title>{{ seo.title != siteName ? seo.title|t : fallbackTitle }}</title>
-  <meta name="description" content="{{ seo.description is not empty ? seo.description : fallbackDescription }}" />
-
-  {% if social.facebook ?? false %}
-    {% set fb = social.facebook -%}
-    <meta property="fb:app_id" content="{# TODO: Facebook App ID #}">
-    <meta property="og:url" content="{{ craft.app.request.absoluteUrl }}" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="{{ fb.title }}" />
-    <meta property="og:image" content="{{ craft.seo.facebookImage(fb.image) }}" />
-    <meta property="og:description" content="{{ fb.description }}" />
-    <meta property="og:site_name" content="{{ seo.title }}" />
-    <meta property="og:locale" content="{{ locale }}" />
-    {% for locale in locales -%}
-      <meta property="og:locale:alternate" content="{{ locale }}" />
-    {% endfor %}
-  {% endif %}
-
-  {% if social.twitter ?? false %}
-    {% set tw = social.twitter -%}
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="{# TODO: Twitter Handle  #}" />
-    <meta name="twitter:url" content="{{ craft.app.request.absoluteUrl }}" />
-    <meta name="twitter:title" content="{{ tw.title }}" />
-    <meta name="twitter:description" content="{{ tw.description }}" />
-    <meta name="twitter:image" content="{{ craft.seo.twitterImage(tw.image) }}" />
-  {% endif %}
-
-  <link rel="home" href="{{ siteUrl }}" />
-  <link rel="canonical" href="{{ craft.app.request.absoluteUrl }}">
-
-{% elseif seomaticEnabled ?? false %}
+	{# SEOMatic --------------------------------------------------------------- #}
 
   {% do seomatic.meta.seoTitle(seomatic.meta.seoTitle == '{entry.title}' or seomatic.meta.seoTitle is empty ? title : seomatic.meta.seoTitle) %}
   {% if entry ?? false ? not entry.isFieldEmpty('introduction') : (category ?? false ? not category.isFieldEmpty('introduction') : null) %}
@@ -67,24 +30,26 @@
 
 {% else %}
 
-  {# Fallback Meta Data if SEOMatic is not installed or enabled #}
-  <title>{{ entry is defined and entry.uri == '__home__' ? siteName : (title|t ~ ' | ' ~ siteName|t) }}</title>
+	{# Fallback Meta Data if SEOMatic is not installed or enabled ------------- #}
 
-  {# Humans #}
+  <title>{{ entry is defined and entry.uri == '__home__' ? siteName : (title|t ~ ' | ' ~ siteName|t) }}</title>
+	<link rel="home" href="{{ siteUrl }}" />
   <link rel="author" href="/humans.txt" />
 
 {% endif %}
 
 {% if agentEnabled ?? false %}
 
-  {# Windows 8 mobile tiles #}
+  {# Windows 8 mobile tiles ------------------------------------------------- #}
+
   {% if agent.is('Windows') %}
     <meta name="msapplication-TileColor" content="{{theme ?? themes.primary ?? '#242424'}}"/>
     <meta name="application-name" content="{{ title|default(siteName) }}" />
     <meta name="msapplication-TileImage" content="{{images}}favicons/apple-touch-icon.png">
   {% endif %}
 
-  {# Internet Explorer #}
+  {# Internet Explorer ------------------------------------------------------ #}
+
   {% if agent.is('ie') %}
     <meta http-equiv="cleartype" content="on">
     <meta name="skype_toolbar" content="skype_toolbar_parser_compatible">
@@ -94,12 +59,14 @@
     <meta name="msapplication-TileImage" content="{{images}}favicons/apple-touch-icon.png">
   {% endif %}
 
-  {# Pinterest #}
+  {# Pinterest -------------------------------------------------------------- #}
+
   {% if agent.isDesktop() %}
     <meta name="pinterest" content="nopin" />
   {% endif %}
 
-  {# Apple #}
+  {# Apple ------------------------------------------------------------------ #}
+
   {% if apple or agent.is('OS X') %}
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-title" content="{{ title|default(siteName) }}">
@@ -111,23 +78,27 @@
     <link rel="apple-touch-startup-image" href="{{images}}favicons/apple-touch-icon.png">
   {% endif %}
 
-  {# MacOSX #}
-  {% if agent.is('OS X') %}
+  {# macOS ------------------------------------------------------------------ #}
+
+	{% if agent.is('OS X') %}
     <link rel="mask-icon" href="{{images}}sprites/icon.svg" color="{{theme ?? themes.primary ?? '#242424'}}">
   {% endif %}
 
-  {# No Javascript Check #}
-  {% if not agent.isRobot() and page != 'error-no-javascript' %}
+  {# No Javascript Check ---------------------------------------------------- #}
+
+	{% if not agent.isRobot() and page != 'error-no-javascript' %}
     <noscript><meta http-equiv="refresh" content="0; url=/no-javascript" /></noscript>
   {% endif %}
 
 {% endif %}
 
-{# Android #}
+{# Android ------------------------------------------------------------------ #}
+
 <meta name="theme-color" content="{{theme ?? themes.primary ?? '#242424'}}">
 <meta name="mobile-web-app-capable" content="yes">
 
-{# Favicons #}
+{# Favicons ----------------------------------------------------------------- #}
+
 {% cache globally using key 'favicons' %}
   <link rel="shortcut icon" href="{{images}}favicons/favicon.ico" type="image/x-icon" />
   {% for size in [16, 32, 48, 64] %}

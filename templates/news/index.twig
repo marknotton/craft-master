@@ -1,6 +1,6 @@
 {% extends "_layouts/generic" %}
 
-{% block extra %}
+{% block after %}
 
 	{% set limit = 4 %}
 	{% set articles = craft.entries.section('news').all %}

@@ -1,4 +1,9 @@
 <?php
+
+////////////////////////////////////////////////////////////////////////////////
+// Deployer
+////////////////////////////////////////////////////////////////////////////////
+
 namespace Deployer;
 
 require 'recipe/common.php';
@@ -6,40 +11,38 @@ require 'recipe/npm.php';
 
 $config = json_decode(file_get_contents(__DIR__.'/config.lock'), true)['deployer'];
 
-// Project name
+// =============================================================================
+// Settings
+// =============================================================================
+
+// Trailing slashes ------------------------------------------------------------
+// Remove trailing slashes from strings in the shared_dirs & writable_dirs array.
+
+$shared_dirs = array_map(function($string) {
+  return rtrim($string, '/');
+}, $config['shared-dirs']);
+
+$writable_dirs = array_map(function($string) {
+  return rtrim($string, '/');
+}, $config['writable-dirs']);
+
+// Setters ---------------------------------------------------------------------
+
 foreach ($config['hosts'] as $host => $setting) {
   set($host.'_path', $setting['path']);
 }
 
 set('default_stage', 'staging');
-
-// Project repository
 set('repository', $config['repository']);
-
-// [Optional] Allocate tty for git clone. Default value is false.
 set('git_tty', true);
 set('branch', 'staging');
-
-// Shared files/dirs between deploys
 set('shared_files', $config['shared-files']);
-
-// Remove trailing slashes from all strings in the shared_dirs array.
-$shared_dirs = array_map(function($string) {
-  return rtrim($string, '/');
-}, $config['shared-dirs']);
-
 set('shared_dirs', $shared_dirs);
-
-// Remove trailing slashes from all strings in the writable_dirs array.
-$writable_dirs = array_map(function($string) {
-  return rtrim($string, '/');
-}, $config['writable-dirs']);
-
-// Writable dirs by web server
 set('writable_dirs', $writable_dirs);
 set('allow_anonymous_stats', false);
 
-// Hosts
+// Hosts -----------------------------------------------------------------------
+
 foreach ($config['hosts'] as $host => $setting) {
   host($host)
   ->set('branch', $setting['branch'])
@@ -50,11 +53,12 @@ foreach ($config['hosts'] as $host => $setting) {
   ->set('deploy_path', '~/{{'.$host.'_path}}');
 }
 
-task('run:gulp', function(){
-  run('cd {{deploy_path}}/release && gulp');
-});
-
+// =============================================================================
 // Tasks
+// =============================================================================
+
+// Main Deployment Task --------------------------------------------------------
+
 desc('Deploy your project');
 task('deploy', [
     'deploy:info',
@@ -72,13 +76,15 @@ task('deploy', [
     'success'
 ]);
 
-after('deploy:update_code', 'npm:install');
+// Gulp ------------------------------------------------------------------------
 
-task('gulp', function () {
-	run('gulp --deployer');
+desc('Run Gulp tasks');
+task('run:gulp', function(){
+	run('cd {{deploy_path}}/release && gulp --deployer');
 });
 
-after('deploy:vendors', 'gulp');
+// After Task Listeners --------------------------------------------------------
 
-// [Optional] If deploy fails automatically unlock.
+after('deploy:update_code', 'npm:install');
+after('deploy:vendors', 'run:gulp');
 after('deploy:failed', 'deploy:unlock');

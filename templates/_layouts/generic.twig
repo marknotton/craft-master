@@ -2,7 +2,7 @@
 {# Generic Layout                                                             #}
 {# ////////////////////////////////////////////////////////////////////////// #}
 
-{% extends '_layouts/main' %}
+{% extends '_layouts/master' %}
 
 {# Content Block ============================================================ #}
 
@@ -18,6 +18,12 @@
 
 		<main>
 
+			{# Before Content ---------------------------------------------------------
+			Render extra content before the default entry content. #}
+
+			{% set before = before ?? block('before') ?? false %}
+			{{ before is not empty ? before|raw }}
+
 			{# 'cleanup' tags remove empty elements and duplicate line breaks #}
 
 			{% cleanup %}
@@ -32,12 +38,11 @@
 
 			{% endcleanup %}
 
-			{# Extra Content ---------------------------------------------------------
-			Render extra content within the main tag, whilst keeping all the above
-			standard content. Allowing you get reuse this template for frequently. #}
+			{# After Content ---------------------------------------------------------
+			Render extra content after the default entry content. #}
 
-			{% set extra = extra ?? block('extra') ?? false %}
-			{{ extra is not empty ? extra|raw }}
+			{% set after = after ?? block('after') ?? false %}
+			{{ after is not empty ? after|raw }}
 
 		</main>
 
