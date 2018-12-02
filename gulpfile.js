@@ -381,8 +381,13 @@ gulp.task('default', () => {
 	// If the deployer flag was passed, increment the env deployer version.
 	// This is done automatically during deployment.
 	if ( deployer && typeof versioniser.getVersion('deployer') === 'undefined' || process.argv.slice(2).includes('--deployer')) {
-		versioniser.updateVersion('deployer');
+		if ( typeof process.argv.slice(2)[1] == 'number') {
+			versioniser.updateVersion('deployer', process.argv.slice(2)[1]);
+		} else {
+			versioniser.updateVersion('deployer');
+		}
 	}
+	console.log(process.argv.slice(2), process.argv.slice(2)[1])
 
   sequence(['vendors', 'scripts', 'symbols'], ['sass'])((err) => {
     if (!err) {

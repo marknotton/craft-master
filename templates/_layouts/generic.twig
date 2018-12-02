@@ -8,18 +8,18 @@
 
 {% block content %}
 
-	{# Resolve categories and tags to the entry variable to avoid errors. #}
+	{# Resolve entries, categories and tags to a universal element #}
 
-	{% set entry = entry ?? category ?? tag ?? null %}
+	{% set element = element ?? entry ?? category ?? tag ?? null %}
 
 	{# Cache the template using readable key name #}
 
-	{% cache globally using key 'content-' ~ (entry.slug ?? (segments is empty ? 'home' : segments|last)) %}
+	{% cache globally using key 'content-' ~ (element.slug ?? (segments is empty ? 'home' : segments|last)) %}
 
 		<main>
 
 			{# Before Content ---------------------------------------------------------
-			Render extra content before the default entry content. #}
+			Render extra content before the default element content. #}
 
 			{% set before = before ?? block('before') ?? false %}
 			{{ before is not empty ? before|raw }}
@@ -28,9 +28,9 @@
 
 			{% cleanup %}
 
-				{% if entry ?? false %}
+				{% if element ?? false %}
 
-					{{ not entry.isFieldEmpty('body') ? entry.body }}
+					{{ not element.isFieldEmpty('body') ? element.body }}
 
 				{% endif %}
 
@@ -39,7 +39,7 @@
 			{% endcleanup %}
 
 			{# After Content ---------------------------------------------------------
-			Render extra content after the default entry content. #}
+			Render extra content after the default element content. #}
 
 			{% set after = after ?? block('after') ?? false %}
 			{{ after is not empty ? after|raw }}

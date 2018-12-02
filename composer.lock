@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "150959d82e08fc706772c2916e9e1ab6",
+    "content-hash": "87557a19a745d3a367b4e3a571628037",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -475,16 +475,16 @@
         },
         {
             "name": "craftcms/cms",
-            "version": "3.1.0-beta.1",
+            "version": "3.1.0-beta.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/craftcms/cms.git",
-                "reference": "61582b08c5d6361b0da76edf00473802fba2f766"
+                "reference": "5b420f3a5e8262f94e69c7b61155558c3af6d68f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craftcms/cms/zipball/61582b08c5d6361b0da76edf00473802fba2f766",
-                "reference": "61582b08c5d6361b0da76edf00473802fba2f766",
+                "url": "https://api.github.com/repos/craftcms/cms/zipball/5b420f3a5e8262f94e69c7b61155558c3af6d68f",
+                "reference": "5b420f3a5e8262f94e69c7b61155558c3af6d68f",
                 "shasum": ""
             },
             "require": {
@@ -559,7 +559,7 @@
                 "craftcms",
                 "yii2"
             ],
-            "time": "2018-11-27T20:03:42+00:00"
+            "time": "2018-11-30T18:12:32+00:00"
         },
         {
             "name": "craftcms/oauth2-craftid",
@@ -829,6 +829,57 @@
                 "utils"
             ],
             "time": "2017-06-12T01:10:27+00:00"
+        },
+        {
+            "name": "davechild/textstatistics",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DaveChild/Text-Statistics.git",
+                "reference": "dd16252a5c78fad6f8ea4fcd7e55d14fd07b1382"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DaveChild/Text-Statistics/zipball/dd16252a5c78fad6f8ea4fcd7e55d14fd07b1382",
+                "reference": "dd16252a5c78fad6f8ea4fcd7e55d14fd07b1382",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.2.*"
+            },
+            "suggest": {
+                "ext-bcmath": "More accurate floating point calculations.",
+                "ext-mbstring": "Handle multi-byte text properly."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "DaveChild\\TextStatistics": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Dave Child",
+                    "email": "dave@addedbytes.com",
+                    "homepage": "https://www.addedbytes.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP package to measure the readability of text according to various algorithms.",
+            "homepage": "https://github.com/DaveChild/Text-Statistics",
+            "time": "2018-06-19T09:25:42+00:00"
         },
         {
             "name": "deployer/deployer",
@@ -1890,12 +1941,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/marknotton/craft-module-helpers.git",
-                "reference": "f58faa4539bf77314a3ab911dce07a1d75491acd"
+                "reference": "7564c83e45bbc4f07046365110c4bcc97eac03f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/marknotton/craft-module-helpers/zipball/f58faa4539bf77314a3ab911dce07a1d75491acd",
-                "reference": "f58faa4539bf77314a3ab911dce07a1d75491acd",
+                "url": "https://api.github.com/repos/marknotton/craft-module-helpers/zipball/7564c83e45bbc4f07046365110c4bcc97eac03f2",
+                "reference": "7564c83e45bbc4f07046365110c4bcc97eac03f2",
                 "shasum": ""
             },
             "type": "craft-module",
@@ -1925,7 +1976,7 @@
                 "craft-module",
                 "craftcms"
             ],
-            "time": "2018-11-27T09:56:27+00:00"
+            "time": "2018-12-01T21:11:07+00:00"
         },
         {
             "name": "mikehaertl/php-shellcommand",
@@ -2319,6 +2370,79 @@
             "time": "2018-07-21T15:09:55+00:00"
         },
         {
+            "name": "nystudio107/craft-seomatic",
+            "version": "3.1.34",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nystudio107/craft-seomatic.git",
+                "reference": "b6f4176957e18bd6e9eb78e3f36b14677a57d955"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nystudio107/craft-seomatic/zipball/b6f4176957e18bd6e9eb78e3f36b14677a57d955",
+                "reference": "b6f4176957e18bd6e9eb78e3f36b14677a57d955",
+                "shasum": ""
+            },
+            "require": {
+                "craftcms/cms": "^3.0.20",
+                "davechild/textstatistics": "1.0.2",
+                "php-science/textrank": "^1.0.3",
+                "sunra/php-simple-html-dom-parser": "^1.5.2"
+            },
+            "type": "craft-plugin",
+            "extra": {
+                "name": "SEOmatic",
+                "handle": "seomatic",
+                "hasCpSettings": true,
+                "hasCpSection": true,
+                "changelogUrl": "https://raw.githubusercontent.com/nystudio107/craft-seomatic/v3/CHANGELOG.md",
+                "class": "nystudio107\\seomatic\\Seomatic",
+                "components": {
+                    "frontendTemplates": "nystudio107\\seomatic\\services\\FrontendTemplates",
+                    "helper": "nystudio107\\seomatic\\services\\Helper",
+                    "jsonLd": "nystudio107\\seomatic\\services\\JsonLd",
+                    "link": "nystudio107\\seomatic\\services\\Link",
+                    "metaBundles": "nystudio107\\seomatic\\services\\MetaBundles",
+                    "metaContainers": "nystudio107\\seomatic\\services\\MetaContainers",
+                    "script": "nystudio107\\seomatic\\services\\Script",
+                    "sitemaps": "nystudio107\\seomatic\\services\\Sitemaps",
+                    "tag": "nystudio107\\seomatic\\services\\Tag",
+                    "title": "nystudio107\\seomatic\\services\\Title"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "nystudio107\\seomatic\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "nystudio107",
+                    "homepage": "https://nystudio107.com"
+                }
+            ],
+            "description": "SEOmatic facilitates modern SEO best practices & implementation for Craft CMS 3. It is a turnkey SEO system that is comprehensive, powerful, and flexible.",
+            "keywords": [
+                "Craft",
+                "JSON-LD",
+                "Sitemap",
+                "cms",
+                "craft-plugin",
+                "craftcms",
+                "facebook",
+                "meta",
+                "seo",
+                "seomatic",
+                "tags",
+                "twitter"
+            ],
+            "time": "2018-11-28T18:10:10+00:00"
+        },
+        {
             "name": "oomphinc/composer-installers-extender",
             "version": "v1.1.2",
             "source": {
@@ -2404,6 +2528,59 @@
                 "random"
             ],
             "time": "2018-07-02T15:55:56+00:00"
+        },
+        {
+            "name": "php-science/textrank",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DavidBelicza/PHP-Science-TextRank.git",
+                "reference": "882adbd0f0d2d0b4229a43dee563785c84738ff9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DavidBelicza/PHP-Science-TextRank/zipball/882adbd0f0d2d0b4229a43dee563785c84738ff9",
+                "reference": "882adbd0f0d2d0b4229a43dee563785c84738ff9",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ctype": "*",
+                "ext-mbstring": "*",
+                "php": "7.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpScience\\TextRank\\": [
+                        "src/",
+                        "tests/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David Belicza",
+                    "email": "87.bdavid@gmail.com"
+                }
+            ],
+            "description": "TextRank (automatic text summarization) for PHP7 and HHVM.",
+            "keywords": [
+                "PHP7",
+                "automatic",
+                "hhvm",
+                "science",
+                "strict",
+                "summarization",
+                "textrank"
+            ],
+            "time": "2018-10-08T08:50:14+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -2799,6 +2976,54 @@
                 "phra"
             ],
             "time": "2015-10-13T18:44:15+00:00"
+        },
+        {
+            "name": "sunra/php-simple-html-dom-parser",
+            "version": "v1.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sunra/php-simple-html-dom-parser.git",
+                "reference": "75b9b1cb64502d8f8c04dc11b5906b969af247c6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sunra/php-simple-html-dom-parser/zipball/75b9b1cb64502d8f8c04dc11b5906b969af247c6",
+                "reference": "75b9b1cb64502d8f8c04dc11b5906b969af247c6",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Sunra\\PhpSimple\\HtmlDomParser": "Src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sunra",
+                    "email": "sunra@yandex.ru",
+                    "homepage": "https://github.com/sunra"
+                },
+                {
+                    "name": "S.C. Chen",
+                    "homepage": "http://sourceforge.net/projects/simplehtmldom/"
+                }
+            ],
+            "description": "Composer adaptation of: A HTML DOM parser written in PHP5+ let you manipulate HTML in a very easy way! Require PHP 5+. Supports invalid HTML. Find tags on an HTML page with selectors just like jQuery. Extract contents from HTML in a single line.",
+            "homepage": "https://github.com/sunra/php-simple-html-dom-parser",
+            "keywords": [
+                "dom",
+                "html",
+                "parser"
+            ],
+            "time": "2016-11-22T22:57:47+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

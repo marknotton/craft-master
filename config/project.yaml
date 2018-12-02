@@ -1,0 +1,91 @@
+dateModified: 1543769260
+email:
+  fromEmail: technical@yello.studio
+  fromName: 'Craft Master'
+  transportType: craft\mail\transportadapters\Sendmail
+fieldGroups:
+  0abc6530-fb84-4f3c-8f6a-e2a64a6e64a3:
+    name: Common
+plugins:
+  agent:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.1.4
+  minify:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  redactor:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.0.0
+  seomatic:
+    edition: standard
+    enabled: true
+    schemaVersion: 3.0.6
+sections:
+  c55ddd64-75c2-4369-b736-e458587dca98:
+    enableVersioning: true
+    entryTypes:
+      c0aeeebd-826e-46f8-abcd-7918768c5421:
+        handle: home
+        hasTitleField: false
+        name: Home
+        sortOrder: 1
+        titleFormat: '{section.name|raw}'
+        titleLabel: null
+    handle: home
+    name: Home
+    propagateEntries: true
+    siteSettings:
+      e04bc432-5d28-4450-8d34-92f17f081222:
+        enabledByDefault: true
+        hasUrls: true
+        template: _loader
+        uriFormat: __home__
+    type: single
+  f64c3818-2029-4e55-b4a4-cdea5d5ec29d:
+    enableVersioning: true
+    entryTypes:
+      a6fe92ed-592d-4f5f-add0-60506e4074fd:
+        handle: news
+        hasTitleField: true
+        name: News
+        sortOrder: 1
+        titleFormat: null
+        titleLabel: Title
+    handle: news
+    name: News
+    propagateEntries: true
+    siteSettings:
+      e04bc432-5d28-4450-8d34-92f17f081222:
+        enabledByDefault: true
+        hasUrls: true
+        template: _loader
+        uriFormat: 'news/{slug}'
+    type: channel
+siteGroups:
+  24060fe6-fc0a-47cc-982d-7a6a9d91489c:
+    name: 'Craft Master'
+sites:
+  e04bc432-5d28-4450-8d34-92f17f081222:
+    baseUrl: '@web'
+    handle: default
+    hasUrls: true
+    language: en
+    name: 'Craft Master'
+    primary: true
+    siteGroup: 24060fe6-fc0a-47cc-982d-7a6a9d91489c
+    sortOrder: 1
+system:
+  edition: solo
+  live: true
+  name: 'Craft Master'
+  schemaVersion: 3.1.9
+  timeZone: America/Los_Angeles
+user:
+  allowPublicRegistration: false
+  defaultGroup: null
+  photoSubpath: ''
+  photoVolumeUid: null
+  requireEmailVerification: true

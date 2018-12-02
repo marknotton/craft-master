@@ -8,54 +8,117 @@
    respective of the URI stucture, whilst also offering a number of fallbacks
    should the URI not meet the correct format.
 
-   Essentially making it very hard for a template not to be found and
+   Essentially making it very reliable for a template to always be found and
    allowing all pages to work with very little intervention via the CMS.
+
+	 This does NOT supersede 404 errors. If a page doesn't exist in the CMS a
+	 404 will be thrown as normal and without intervention.
 
 ============================================================================= #}
 
-{% set segments = segments ?? craft.app.request.segments %}
+{% set _paths = [] %}
 
-{%- set template -%}
-  {%- set entry = entry ?? category ?? tag ?? false -%}
-  {% if entry %}
-    {{- entry.uri == '__home__' ? 'index' : entry.uri -}}
-  {% endif %}
-{%- endset -%}
+{% set segments = segments ?? craft.app.request.segments ?? false %}
 
-{% set paths = [
-  '/'~template,
-  '/'~segments|slice(0,-1)|join('/') ~ '/_' ~ segments|last,
-  '/'~template~'/_entry',
-	(segments is not empty ? '/'~segments[0]~'/'~entry.type),
-	(segments is not empty ? '/'~segments[0]~'/_'~entry.type),
-  (segments is not empty ? '/'~segments[0]~(entry is entry ? '/_entry' : '/_category')),
-  ( entry.type ?? false ? '_layouts/' ~ entry.type ?? category.type),
-  '_layouts/generic',
-  '_layouts/main'
-]%}
+{% set element = entry ?? category ?? tag ?? false %}
 
-{% set routes = craft.helpers.routeRules() %}
-{% if (entry ?? false) and entry.uri in routes|keys %}
-	{% set paths = ['/' ~ routes[entry.uri].template]|merge(paths) %}
+{# Multisite Handler -----------------------------------------------------------
+If this a multisite, and the site handle isn't 'default', then add a variety
+of additional template paths into the mix. #}
+
+{% set isMultisite = false %}
+{% set multisiteHandle = (isMultisite ?? false) and currentSite.handle != 'default' ? currentSite.handle ~ '/' : '' %}
+
+{# If an element exists ----------------------------------------------------- #}
+
+{% if element %}
+
+	{% if element.uri == '__home__' %}
+		{% set _paths = _paths|merge([
+			multisiteHandle ~ 'home',
+			multisiteHandle ~ 'index'
+		]) %}
+	{% endif %}
+
+	{% if element.uri != '__home__' %}
+		{% set _paths = _paths|merge([
+			multisiteHandle ~ element.uri,
+			multisiteHandle ~ element.uri ~ '/' ~ '_entry'
+		]) %}
+	{% endif %}
+
+	{# If Segments exists ----------------------------------------------------- #}
+
+	{% if segments is not empty %}
+
+		{# If an entry type exists ---------------------------------------------- #}
+
+		{% if element.type ?? false %}
+			{% set _paths = _paths|merge([ multisiteHandle ~ segments|first ~ '/_' ~ segments|last ]) %}
+
+			{% if element.type != segments|first %}
+				{% set _paths = _paths|merge([
+					multisiteHandle ~ segments|first ~ '/' ~ element.type,
+					multisiteHandle ~ segments|first ~ '/_' ~ element.type,
+				]) %}
+			{% endif %}
+
+			{% if multisiteHandle is not empty %}
+				{% set _paths = _paths|merge([
+					multisiteHandle ~ '_layouts/' ~ element.type,
+					'global/_layouts/' ~ element.type
+				]) %}
+			{% else %}
+				{% set _paths = _paths|merge(['_layouts/' ~ element.type]) %}
+			{% endif %}
+
+
+		{% endif %}
+
+		{# If an element type exists -------------------------------------------- #}
+
+		{% set elementType = craft.helpers.getElementType(element) ?? false %}
+		{% if elementType %}
+			{% set _paths = _paths|merge([multisiteHandle ~ segments|first ~ '/_' ~ elementType]) %}
+		{% endif %}
+
+	{% endif %}
+
 {% endif %}
 
-{# This variaion is designed for multisites ------------------------------------
+{# Add Routes as a priority if they match the current URI ------------------- #}
 
-{# {% set paths = [
-  '/'~currentSite.handle~'/'~template,
-  '/'~currentSite.handle~'/'~template~'/_entry',
-  '/'~currentSite.handle~'/'~segments|slice(0,-1)|join('/') ~ '/_' ~ segments|last,
-  '/'~currentSite.handle~(segments is not empty ? '/'~segments[0]~'/_entry'),
-  '/'~currentSite.handle~'/_layouts/generic',
-  '/'~template,
-  '/'~template~'/_entry',
-  (segments is not empty ? '/'~segments[0]~'/_entry'),
-  'global/'~(segments is not empty ? segments[0]~'/_entry'),
-  'global/layouts/generic',
-  '/'~currentSite.handle~'/_layouts/main',
-  'global/layouts/main'
-]%} #}
+{% set routes = craft.helpers.routeRules() %}
+{% if element and element.uri in routes|keys or element and element.uri == '__home__' and '' in routes|keys %}
+	{% set _paths = [multisiteHandle ~ routes[element.uri == '__home__' ? '' : element.uri].template]|merge(_paths) %}
+{% endif %}
+
+{# Add last set if fallbacks ------------------------------------------------ #}
+
+{% if multisiteHandle is not empty %}
+	{% set _paths = _paths|merge([
+		multisiteHandle ~ '_layouts/generic',
+		multisiteHandle ~ '_layouts/master',
+		'global/_layouts/generic',
+		'global/_layouts/master'
+	]) %}
+{% else %}
+	{% set _paths = _paths|merge(['_layouts/generic', '_layouts/master']) %}
+{% endif %}
+
+{# Final Checks ----------------------------------------------------------------
+{# Finalise all the paths by ensuring they are all start with a forward slash #}
+
+{% set paths = [] %}
+
+{% for path in _paths %}
+	{% set paths = paths|merge(['/' ~ path|trim('/', 'left')]) %}
+{% endfor %}
+
+{# Output all paths and for testing ----------------------------------------- #}
 
 {# <pre>{{ dump(paths) }}</pre> #}
+
+{# Extend the paths array --------------------------------------------------- #}
 
 {% extends paths %}

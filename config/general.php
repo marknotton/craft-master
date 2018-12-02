@@ -28,7 +28,7 @@ return [
     'defaultTemplateExtensions'        => array('twig', 'html'),
     'devMode'                          => false,
     'cooldownDuration'                 => 0,
-    'useProjectConfigFile'             => false,
+    'useProjectConfigFile'             => true,
     'siteUrl'                          => null,
     'useCompressedJs'                  => true,
     'preventUserEnumeration'           => true,

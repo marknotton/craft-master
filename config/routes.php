@@ -7,5 +7,5 @@ return [
   'unsubscribed'    => ['template' => '_layouts/confirmation'],
   'browser'         => ['template' => '_errors/browser'],
   'no-javascript'   => ['template' => '_errors/no-javascript'],
-  'javascript'      => ['template' => '_errors/javascript'],
+  'javascript'      => ['template' => '_errors/javascript']
 ];
