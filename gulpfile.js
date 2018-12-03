@@ -366,7 +366,12 @@ notifier.settings({
 // =============================================================================
 
 gulp.task('config', () => {
-	// console.log(JSON.stringify(config, null, 2))
+
+	if (process.argv.slice(2).includes('--lock')) {
+		configs.create({'env': environment, 'dynamic':['paths', 'themes']});
+	} else {
+		console.log(JSON.stringify(config, null, 2))
+	}
 })
 
 // =============================================================================
