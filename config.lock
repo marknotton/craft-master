@@ -3,7 +3,7 @@
   "settings": {
     "sourceMaps": true,
     "minify": false,
-    "versioning": true,
+    "versioning": false,
     "ES5Support": false,
     "symbols": true,
     "combineCSS": true

@@ -55,19 +55,23 @@
 
 {% js at head %}
 
-	{# Checks wether CSS Customer Properties is supported by this browser #}
-	window.customPropertiesSupport = window.CSS && window.CSS.supports && window.CSS.supports('--a', 0);
+	window.support = {
 
-  {# Check to see if ES6 is supported by the developer and by the browser #}
-  window.ES6Support = {{ ES6Support ?? true ? 'function(){try{return new Function("(a = 0) => a"),!0}catch(n){return!1}}()' : 'false'}};
+		{# Checks wether CSS Customer Properties is supported by this browser #}
+		customProperties : window.CSS && window.CSS.supports && window.CSS.supports('--a', 0),
 
-  {# Check to see if ES5 is supported by the developer #}
-  window.ES5Support = {{ ES5Support ?? true ? 'true' : 'false'}};
+		{# Check to see if ES6 is supported by the developer and by the browser #}
+		es6 : {{ ES6Support ?? true ? 'function(){try{return new Function("(a = 0) => a"),!0}catch(n){return!1}}()' : 'false'}},
 
-  {# If ES6 is not supported by the browser, and ES5 is not supported by the developer. Then redirect the user #}
-  if ( !ES6Support && !ES5Support ) {
-    window.location.replace("/javascript");
-  }
+		{# Check to see if ES5 is supported by the developer #}
+		es5 : {{ ES5Support ?? true ? 'true' : 'false'}}
+
+	}
+
+	{# If ES6 is not supported by the browser, and ES5 is not supported by the developer. Then redirect the user #}
+	if ( !support.es6 && !support.es5 ) {
+		window.location.replace("/javascript");
+	}
 
 {% endjs %}
 
@@ -130,7 +134,7 @@
 
       // If ES6 is not supported and ES5 is supported, manipulate the script
 			// strings to filter out the main javascript file that has been transpiled for ES5
-			if (!ES6Support && ES5Support) {
+			if (!support.es6 && support.es5) {
         for(var i=0; i < scripts.length; i++) {
 
 					// This will truncate the file extension from the 'scripts' file name,

@@ -9,7 +9,6 @@
 const gulp        = require('gulp'),                       // Gulp.
       babel       = require('gulp-babel'),                 // ES6 to ES5 transpiler.
       browserSync = require('browser-sync').create(),      // Browser watcher.
-      chalk       = require('chalk'),                      // Style Terminal logs (already included via gulp-util).
       concat      = require('gulp-concat'),                // Concatenate files.
       gulpif      = require('gulp-if'),                    // Add conditionals inline.
       gulpsass    = require('gulp-sass'),                  // Sass precompiler.
@@ -40,7 +39,7 @@ const postcss          = require('gulp-postcss'),
 const environment  = (process.env.ENVIRONMENT || 'production')
 const config       = configs.create({'env': environment, 'dynamic':['paths', 'themes']})
 const project      = config.project
-const host         = process.env.SERVER_NAME
+const host         = process.env.SERVER_NAME || config.host
 
 // Settings --------------------------------------------------------------------
 
@@ -91,7 +90,7 @@ const sprites = root + webroot + config.paths.sprites
 // Miscellaneous ---------------------------------------------------------------
 
 // Log rendering is toggled around depending on the current Gulp state.
-let render = true, watching = false;
+let render = true, watching = false
 
 // Sass variables that will be passed before compiling.
 const sassVariables = config['sass-injections']['variables'] || []
@@ -112,7 +111,7 @@ const icon = config.icon || 'icon.png'
 const maps = 'maps'
 
 // Check if Deployer settings exist.
-const deployer = typeof config.deployer !== 'undefined' ? 'deployer' : false;
+const deployer = typeof config.deployer !== 'undefined' ? 'deployer' : false
 
 // =============================================================================
 // Watchers
@@ -122,7 +121,7 @@ gulp.task('serve', ['default'], () => {
 
   if ( environment == 'dev' ) {
 
-		watching = true;
+		watching = true
 
     browserSync.init({
       watchTask      : true,
@@ -130,40 +129,40 @@ gulp.task('serve', ['default'], () => {
       proxy          : host,
       host           : host,
       notify         : false,
-			logPrefix      : chalk.yellow(project),
+			logPrefix      : project,
       port           : config.port || 3000,
 			logFileChanges : false,
       injectChanges  : true,
 			callbacks: {
 				ready: () => { setTimeout(() => { log.render(); render = true}, 1000) }
 			}
-    });
+    })
 
     for (const watcher of Object.values(config.watchers)) {
       if ( watcher.reload ) {
         gulp.watch(watcher.patterns, [watcher.tasks]).on('change', (event) => {
-					log(`Reloading your browser because you ${event.type} this file:`, event.path.replace(process.cwd(), ''), false);
+					log(`Reloading your browser because you ${event.type} this file:`, event.path.replace(process.cwd(), ''), false)
 					return browserSync.reload()
-				});
+				})
       } else {
         gulp.watch(watcher.patterns, [watcher.tasks]).on('change', (event) => {
-					log(`Updating your browser because you ${event.type} this file:`, event.path.replace(process.cwd(), ''), false);
-				});
+					log(`Updating your browser because you ${event.type} this file:`, event.path.replace(process.cwd(), ''), false)
+				})
       }
     }
 
   } else {
 
-    log("You can only run Gulp Serve in a local development environment.", false, ['red']);
+    log("You can only run Gulp Serve in a local development environment.", false, ['red'])
 
-    return false;
+    return false
 
   }
 
-});
+})
 
 // An alias for the serve task.
-gulp.task('watch', ['serve']);
+gulp.task('watch', ['serve'])
 
 // =============================================================================
 // Project Scripts
@@ -171,14 +170,14 @@ gulp.task('watch', ['serve']);
 
 gulp.task('scripts', ['ES5'], () => {
 
-  let filename = filenames.js.scripts;
+  let filename = filenames.js.scripts
 
   if (versioning) {
-    filename = versioniser.update(js, filename, deployer || 'scripts', !ES5Support && !deployer);
+    filename = versioniser.update(js, filename, deployer || 'scripts', !ES5Support && !deployer)
   }
 
   if (minify) {
-    filename = filename.replace('.js', '.min.js');
+    filename = filename.replace('.js', '.min.js')
   }
 
 	if ( notifcations ) {
@@ -198,10 +197,10 @@ gulp.task('scripts', ['ES5'], () => {
     .pipe(browserSync.stream())
 		.on('end', () => !render || log.render())
 
-});
+})
 
 // An alias for the scripts task.
-gulp.task('js', ['scripts']);
+gulp.task('js', ['scripts'])
 
 // =============================================================================
 // Vendor Scripts
@@ -210,7 +209,7 @@ gulp.task('js', ['scripts']);
 
 gulp.task('vendors', () => {
 
-  let filename = filenames.js.vendors;
+  let filename = filenames.js.vendors
 
   if ( versioning ) {
     filename = versioniser.update(js, filename, deployer || 'vendors', !deployer)
@@ -233,10 +232,10 @@ gulp.task('vendors', () => {
     .pipe(gulpif(versioning, gulp.dest(js)))
 		.on('end', () => !render || log.render())
 
-});
+})
 
 // An alias for the vendor task.
-gulp.task('core', ['vendors']);
+gulp.task('core', ['vendors'])
 
 // =============================================================================
 // Sass
@@ -244,15 +243,14 @@ gulp.task('core', ['vendors']);
 
 gulp.task('sass', () => {
 
-
   const processors = [
     autoprefixer(),
     postcssAssets({loadPaths:[images]}),
     postcssInlineSvg({path:images}),
-  ];
+  ]
 
 	if ( config.settings.symbols ) {
-		sassImports.push(filenames.sass.symbols);
+		sassImports.push(filenames.sass.symbols)
 	}
 
   return gulp.src(config.sources.sass)
@@ -270,11 +268,11 @@ gulp.task('sass', () => {
   .pipe(browserSync.stream())
 	.on('end', () => !render || log.render())
 
-});
+})
 
 // Aliases for the sass task.
-gulp.task('css', ['sass']);
-gulp.task('scss', ['sass']);
+gulp.task('css', ['sass'])
+gulp.task('scss', ['sass'])
 
 // =============================================================================
 // SVG symbols
@@ -284,14 +282,14 @@ gulp.task('symbols', () => {
 
   if (config.settings.symbols) {
 
-    let symbolFiles = config.sources.symbols;
+    let symbolFiles = config.sources.symbols
 
     let settings = {
       sanitise : true,
       prefix   : filenames.svg.prefix || 'icon',
       exclude  : filenames.svg.exclusions || [],
       scss     : sass + filenames.sass.symbols
-    };
+    }
 
 		// The source should always exlust the output file, so as to avoid including itself in an infite loop.
     return gulp.src([...symbolFiles, ('!' + images.replace("//", "/") + filenames.svg.symbols)])
@@ -302,10 +300,10 @@ gulp.task('symbols', () => {
 		.on('end', () => !render || log.render())
   }
 
-});
+})
 
 // An alias for the symbols task.
-gulp.task('svg', ['symbols']);
+gulp.task('svg', ['symbols'])
 
 // =============================================================================
 // ECMAScript (ES5) Tasks
@@ -316,17 +314,17 @@ gulp.task('ES5', () => {
 
   if (!ES5Support) {
 		log('Skipped', `ES5 Scripts task will not run in "${environment}" environments. Check your settings in config.json to change this.`)
-    return false;
+    return false
   }
 
-  let filename = filenames.js.scripts.replace('.js', '.es5.js');
+  let filename = filenames.js.scripts.replace('.js', '.es5.js')
 
   if (versioning) {
-    filename = versioniser.update(js, filename, deployer || 'scripts', true);
+    filename = versioniser.update(js, filename, deployer || 'scripts', true)
   }
 
   if (minify) {
-    filename = filename.replace('.js', '.min.js');
+    filename = filename.replace('.js', '.min.js')
   }
 
   return gulp.src(config.sources.scripts)
@@ -339,10 +337,10 @@ gulp.task('ES5', () => {
     .pipe(gulpif(versioning, rename(filenames.js.scripts.replace('.js', '.es5.js'))))
     .pipe(gulpif(versioning, gulp.dest(js)))
 
-});
+})
 
 // An alias for the ES5 task.
-gulp.task('es5', ['ES5']);
+gulp.task('es5', ['ES5'])
 
 // =============================================================================
 // Notification message settings
@@ -361,14 +359,14 @@ notifier.settings({
     symbols  : 'Symbols files compiled',
     sass     : 'SASS files ' + (combineCSS ? (versioning ? 'combined and versionised' : 'combined') : (versioning ? 'versionised' : 'compiled')) + (minify ? ' with compression' : ''),
   }
-});
+})
 
 // =============================================================================
 // Config settings task
 // =============================================================================
 
 gulp.task('config', () => {
-	// console.log(JSON.stringify(config, null, 2));
+	// console.log(JSON.stringify(config, null, 2))
 })
 
 // =============================================================================
@@ -376,25 +374,26 @@ gulp.task('config', () => {
 // =============================================================================
 
 gulp.task('default', () => {
-	render = false;
+
+	render = false
 
 	// If the deployer flag was passed, increment the env deployer version.
 	// This is done automatically during deployment.
 	if ( deployer && typeof versioniser.getVersion('deployer') === 'undefined' || process.argv.slice(2).includes('--deployer')) {
 		if ( typeof process.argv.slice(2)[1] == 'number') {
-			versioniser.updateVersion('deployer', process.argv.slice(2)[1]);
+			versioniser.updateVersion('deployer', process.argv.slice(2)[1])
 		} else {
-			versioniser.updateVersion('deployer');
+			versioniser.updateVersion('deployer')
 		}
 	}
 	console.log(process.argv.slice(2), process.argv.slice(2)[1])
 
   sequence(['vendors', 'scripts', 'symbols'], ['sass'])((err) => {
     if (!err) {
-			log('Done:', "All Gulp tasks completed");
-			if ( !watching ) { log.render(); }
+			log('Done:', "All Gulp tasks completed")
+			if ( !watching ) { log.render() }
     } else {
       console.log(err)
     }
   })
-});
+})
