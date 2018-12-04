@@ -9,24 +9,11 @@
   # Rewrite example. This method avoids ugly parameters being added to the URL
   # RewriteRule ^some/old/page(/*)$ /new/page [R=301,L]
 
-  # Cloudinary
-  # Rewrite admin asset thumbs for cloudinary plugin
-  # RewriteCond %{REQUEST_URI} ^/admin/resources/assetthumbs(.*)
-  # RewriteRule ^admin/resources(.*) /cloudinary/resources?y=$1 [L,R=301]
-
   # Rewrite to HTTPS:
-  # Use this one for sites on Heart's shared hosting:
-  # RewriteCond %{ENV:HTTPS} !=on
-  # OR use this one for all other servers; including VPS's:
   RewriteCond %{HTTPS} off
   RewriteCond %{HTTP_HOST} !\.loc$
   RewriteCond %{HTTP_HOST} !^staging\.
   RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-  # Use a different robots files on staging sites. SEOMatic resolves this now.
-  # So only include this if you are not planning on using the SEOMatic plugin.
-  # RewriteCond %{HTTP_HOST} ^staging\.
-  # RewriteRule ^robots.txt robots_dev.txt [L]
 
   # Rewrite any non www request
   RewriteCond %{HTTP_HOST} !^www\.

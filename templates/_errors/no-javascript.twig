@@ -1,9 +1,5 @@
 {% extends "_layouts/error" %}
 
-{% if craft.app.request.referrer is empty %}
-	{% exit 404 %}
-{% endif %}
-
 {% set page = 'error-no-javascript' %}
 
 {% block content %}
