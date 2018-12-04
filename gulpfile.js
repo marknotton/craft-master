@@ -111,7 +111,8 @@ const icon = config.icon || 'icon.png'
 const maps = 'maps'
 
 // Check if Deployer settings exist.
-const deployer = typeof config.deployer !== 'undefined' ? 'deployer' : false
+// const deployer = typeof config.deployer !== 'undefined' ? 'deployer' : false
+const deployer = false
 
 // =============================================================================
 // Watchers
@@ -367,8 +368,9 @@ notifier.settings({
 
 gulp.task('config', () => {
 
+	// Passing a --lock flag will recreate the config.lock file
 	if (process.argv.slice(2).includes('--lock')) {
-		configs.create({'env': environment, 'dynamic':['paths', 'themes']});
+		configs.create();
 	} else {
 		console.log(JSON.stringify(config, null, 2))
 	}
@@ -384,14 +386,14 @@ gulp.task('default', () => {
 
 	// If the deployer flag was passed, increment the env deployer version.
 	// This is done automatically during deployment.
-	if ( deployer && typeof versioniser.getVersion('deployer') === 'undefined' || process.argv.slice(2).includes('--deployer')) {
-		if ( typeof process.argv.slice(2)[1] == 'number') {
-			versioniser.updateVersion('deployer', process.argv.slice(2)[1])
-		} else {
-			versioniser.updateVersion('deployer')
-		}
-	}
-	console.log(process.argv.slice(2), process.argv.slice(2)[1])
+	// if ( deployer && typeof versioniser.getVersion('deployer') === 'undefined' || process.argv.slice(2).includes('--deployer')) {
+	// 	if ( typeof process.argv.slice(2)[1] == 'number') {
+	// 		versioniser.updateVersion('deployer', process.argv.slice(2)[1])
+	// 	} else {
+	// 		versioniser.updateVersion('deployer')
+	// 	}
+	// }
+	// console.log(process.argv.slice(2), process.argv.slice(2)[1])
 
   sequence(['vendors', 'scripts', 'symbols'], ['sass'])((err) => {
     if (!err) {
