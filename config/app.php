@@ -16,13 +16,13 @@ return [
         'service' => [ 'class' => 'modules\general\services\Services' ],
       ],
     ],
-    'templatemaker' => [
+    'template-maker' => [
       'class' => \modules\templatemaker\TemplateMaker::class,
       'components' => [
         'service' => [ 'class' => 'modules\templatemaker\services\Services' ],
       ],
     ]
   ],
-  'bootstrap' => ['helpers'],
+  'bootstrap' => ['helpers', 'template-maker'],
   // 'bootstrap' => ['helpers', 'general'],
 ];

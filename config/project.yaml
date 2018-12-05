@@ -1,4 +1,4 @@
-dateModified: 1543769260
+dateModified: 1544045414
 email:
   fromEmail: technical@yello.studio
   fromName: 'Craft Master'
@@ -6,10 +6,72 @@ email:
 fieldGroups:
   0abc6530-fb84-4f3c-8f6a-e2a64a6e64a3:
     name: Common
+fields:
+  489dbf76-cad2-4c7b-972e-62adbd2fa8f8:
+    contentColumnType: text
+    fieldGroup: 0abc6530-fb84-4f3c-8f6a-e2a64a6e64a3
+    handle: introduction
+    instructions: ''
+    name: Introduction
+    searchable: true
+    settings:
+      charLimit: ''
+      code: ''
+      columnType: text
+      initialRows: '4'
+      multiline: '1'
+      placeholder: ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  9e85a864-12c0-43fb-aaa2-6391b0600dac:
+    contentColumnType: text
+    fieldGroup: 0abc6530-fb84-4f3c-8f6a-e2a64a6e64a3
+    handle: body
+    instructions: ''
+    name: Body
+    searchable: true
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      cleanupHtml: '1'
+      columnType: text
+      purifierConfig: ''
+      purifyHtml: '1'
+      redactorConfig: ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+  c2194f5b-2743-45bf-9317-289627fbffa9:
+    contentColumnType: string
+    fieldGroup: 0abc6530-fb84-4f3c-8f6a-e2a64a6e64a3
+    handle: featuredImage
+    instructions: ''
+    name: 'Featured Image'
+    searchable: true
+    settings:
+      allowedKinds:
+        - image
+      defaultUploadLocationSource: null
+      defaultUploadLocationSubpath: ''
+      limit: '1'
+      localizeRelations: false
+      restrictFiles: '1'
+      selectionLabel: ''
+      singleUploadLocationSource: null
+      singleUploadLocationSubpath: ''
+      source: null
+      sources: '*'
+      targetSiteId: null
+      useSingleFolder: ''
+      viewMode: large
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Assets
 plugins:
   agent:
     edition: standard
-    enabled: true
+    enabled: false
     schemaVersion: 1.1.4
   minify:
     edition: standard
@@ -34,6 +96,29 @@ sections:
         sortOrder: 1
         titleFormat: '{section.name|raw}'
         titleLabel: null
+      ede1aa45-174e-4d04-8e32-ca01fe4d0e93:
+        fieldLayouts:
+          c88ff595-5948-4d75-a107-1b51e70b8738:
+            tabs:
+              -
+                fields:
+                  489dbf76-cad2-4c7b-972e-62adbd2fa8f8:
+                    required: false
+                    sortOrder: 3
+                  9e85a864-12c0-43fb-aaa2-6391b0600dac:
+                    required: false
+                    sortOrder: 1
+                  c2194f5b-2743-45bf-9317-289627fbffa9:
+                    required: false
+                    sortOrder: 2
+                name: Common
+                sortOrder: 1
+        handle: home
+        hasTitleField: false
+        name: Home
+        sortOrder: 1
+        titleFormat: '{section.name|raw}'
+        titleLabel: ''
     handle: home
     name: Home
     propagateEntries: true

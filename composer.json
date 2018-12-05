@@ -36,6 +36,7 @@
     "psr-4": {
       "modules\\": "modules/",
       "modules\\helpers\\": "modules/helpers/src/",
+      "modules\\template-maker\\": "modules/template-maker/src/",
       "modules\\general\\": "modules/general/src/"
     }
   },
