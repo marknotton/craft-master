@@ -54,7 +54,7 @@ return [
     'useCompressedJs'                  => false,
     'disableTemplateMinifying'         => true,
     'testToEmailAddress'               => 'technical@yello.studio',
-    'siteUrl'                          => '//www.craftmaster.loc',
+    'siteUrl'                          => '//'.getenv('SERVER_NAME'),
   ],
 
   // ===========================================================================
