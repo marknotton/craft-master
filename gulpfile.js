@@ -139,15 +139,15 @@ gulp.task('serve', ['default'], () => {
 			}
     })
 
-    for (const watcher of Object.values(config.watchers)) {
+		for (const watcher of Object.values(config.watchers)) {
       if ( watcher.reload ) {
         gulp.watch(watcher.patterns, [watcher.tasks]).on('change', (event) => {
-					log(`Reloading your browser because you ${event.type} this file:`, event.path.replace(process.cwd(), ''), false)
+					log(`Reloading your browser because you`, event.type, `this file:`, event.path.replace(process.cwd(), ''), false, ['#87AEFF', 'white', '#87AEFF'])
 					return browserSync.reload()
 				})
       } else {
         gulp.watch(watcher.patterns, [watcher.tasks]).on('change', (event) => {
-					log(`Updating your browser because you ${event.type} this file:`, event.path.replace(process.cwd(), ''), false)
+					log(`Updating your browser because you`, event.type, `this file:`, event.path.replace(process.cwd(), ''), false, ['#87AEFF', 'white', '#87AEFF'])
 				})
       }
     }
