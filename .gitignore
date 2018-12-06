@@ -11,7 +11,8 @@ src/**/_symbols.scss
 
 # Modules ----------------------------------------------------------------------
 
-modules/helpers
+# modules/helpers
+# modules/template-maker
 # modules/templatemaker
 
 # Assets -----------------------------------------------------------------------
