@@ -27,6 +27,7 @@
     "marknotton/agent": "^1.1.3",
     "marknotton/doggistyle": "v0.3.0.x-dev",
     "marknotton/helpers": "dev-experiments",
+    "marknotton/template-maker": "dev-experiments",
     "deployer/deployer": "^6.2",
     "deployer/recipes": "^6.1",
 		"verbb/cloner": "1.0.0",

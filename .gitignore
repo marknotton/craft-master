@@ -9,11 +9,10 @@ node_modules
 sass-cache/*
 src/**/_symbols.scss
 
-# Modules ----------------------------------------------------------------------
+# Modules -----------------------------------------------------------------------
 
-# modules/helpers
-# modules/template-maker
-# modules/templatemaker
+modules/helpers
+modules/template-maker
 
 # Assets -----------------------------------------------------------------------
 
