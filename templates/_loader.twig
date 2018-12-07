@@ -20,7 +20,7 @@
 
 {% set segments = segments ?? craft.app.request.segments ?? false %}
 
-{% set element = entry ?? category ?? tag ?? false %}
+{% set element = product ?? entry ?? category ?? tag ?? false %}
 
 {# Multisite Handler -----------------------------------------------------------
 If this a multisite, and the site handle isn't 'default', then add a variety
@@ -41,10 +41,18 @@ of additional template paths into the mix. #}
 	{% endif %}
 
 	{% if element.uri != '__home__' %}
+
+		{% if product ?? false %}
+			{% set _paths = _paths|merge([
+				multisiteHandle ~ element.uri ~ '/' ~ '_product'
+			]) %}
+		{% endif %}
+
 		{% set _paths = _paths|merge([
 			multisiteHandle ~ element.uri,
 			multisiteHandle ~ element.uri ~ '/' ~ '_entry'
 		]) %}
+
 	{% endif %}
 
 	{# If Segments exists ----------------------------------------------------- #}
@@ -58,18 +66,18 @@ of additional template paths into the mix. #}
 
 			{% if element.type != segments|first %}
 				{% set _paths = _paths|merge([
-					multisiteHandle ~ segments|first ~ '/' ~ element.type,
-					multisiteHandle ~ segments|first ~ '/_' ~ element.type,
+					multisiteHandle ~ segments|first ~ '/' ~ element.type|kebab,
+					multisiteHandle ~ segments|first ~ '/_' ~ element.type|kebab,
 				]) %}
 			{% endif %}
 
 			{% if multisiteHandle is not empty %}
 				{% set _paths = _paths|merge([
-					multisiteHandle ~ '_layouts/' ~ element.type,
-					'global/_layouts/' ~ element.type
+					multisiteHandle ~ '_layouts/' ~ element.type|kebab,
+					'global/_layouts/' ~ element.type|kebab
 				]) %}
 			{% else %}
-				{% set _paths = _paths|merge(['_layouts/' ~ element.type]) %}
+				{% set _paths = _paths|merge(['_layouts/' ~ element.type|kebab]) %}
 			{% endif %}
 
 
@@ -79,7 +87,7 @@ of additional template paths into the mix. #}
 
 		{% set elementType = craft.helpers.getElementType(element) ?? false %}
 		{% if elementType %}
-			{% set _paths = _paths|merge([multisiteHandle ~ segments|first ~ '/_' ~ elementType]) %}
+			{% set _paths = _paths|merge([multisiteHandle ~ segments|first ~ '/_' ~ elementType|kebab]) %}
 		{% endif %}
 
 	{% endif %}
@@ -89,6 +97,15 @@ of additional template paths into the mix. #}
 {# Add Routes as a priority if they match the current URI ------------------- #}
 
 {% set routes = craft.helpers.routeRules() %}
+
+{# {% for route, template in routes %}
+	{% for r in route|split('/')  %}
+		{% if r == "*" %}
+			{{ loop.index }}
+		{% endif %}
+	{% endfor %}
+{% endfor %} #}
+
 {% if element and element.uri in routes|keys or element and element.uri == '__home__' and '' in routes|keys %}
 	{% set _paths = [multisiteHandle ~ routes[element.uri == '__home__' ? '' : element.uri].template]|merge(_paths) %}
 {% endif %}

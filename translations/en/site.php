@@ -16,7 +16,6 @@ return [
   "C001" => "Home",
   "C002" => "About",
   "C003" => "News",
-  "C003" => "Latest News",
   "C004" => "Blog",
   "C005" => "Events",
   "C006" => "Services",
@@ -56,6 +55,7 @@ return [
   "C040" => "Next",
   "C041" => "Previous",
   "C042" => "Call us",
+	"C043" => "Latest News",
 
   // Errors ====================================================================
 

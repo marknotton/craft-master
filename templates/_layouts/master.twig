@@ -42,7 +42,7 @@
       Using {% set header %} within a template will add to the existing the header element.
       Using {% set header = false %} within a template will disable the header from rendering at all. #}
 
-      {% set header = header ?? block('header') ?? false %}
+      {% set header = header ?? block('header') ?? true %}
 
       {% if header is not empty and header is string %}
         {{ '<header' in header ? header|raw : ('<header>' ~ header ~ '</header>')|raw }}

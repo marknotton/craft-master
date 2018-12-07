@@ -9,7 +9,7 @@ node_modules
 sass-cache/*
 src/**/_symbols.scss
 
-# Modules -----------------------------------------------------------------------
+# Modules ----------------------------------------------------------------------
 
 modules/helpers
 modules/template-maker
