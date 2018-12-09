@@ -3,7 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 social-media {
-  @include flex-container(center center);
+  @include flex-container2(center, center);
   a {
     display:block;
     @include size(24);

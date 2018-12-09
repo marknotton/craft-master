@@ -11,9 +11,9 @@ form#contact {
     input-field { margin-bottom:$gap; }
   }
   @include break($medium, '>') {
-    @include flex-direction(row);
+    flex-direction : row;
     input-field { @include flex-grid(2, $gap);
-      &[data-type="textarea"] { @include flex-grow(1); width:100% $imp; margin-right:0;  }
+      &[data-type="textarea"] { flex-grow:1; width:100% $imp; margin-right:0;  }
     }
   }
 }

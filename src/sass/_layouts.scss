@@ -7,19 +7,18 @@
 // =============================================================================
 
 main-and-aside {
-  $sidebar-width:if(variable-exists(sidebar-width), $sidebar-width, 300px);
-  --sidebar-width:#{$sidebar-width};
+
   position:relative;
   display:block;
 
   @include break($medium, '>') {
     display:flex;
     main {
-      width:calc(100% - #{var(--sidebar-width, $sidebar-width)});
+      width:calc(100% - #{var(sidebar-width)});
       order:2;
     }
     aside {
-      width:var(--sidebar-width, $sidebar-width);
+      width:var(sidebar-width);
       order:1;
     }
   }

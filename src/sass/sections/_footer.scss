@@ -11,7 +11,7 @@ site-wrapper > footer {
     &, a { color:#5C5D5E; }
     a { margin-left:5px;
       em { font-style:normal; @include transition(color); }
-      &:hover em { @include var(color);  }
+      &:hover em { color:var(primary);  }
     }
     @include break($small, '<') {
       a { display:block; margin-left:0; }

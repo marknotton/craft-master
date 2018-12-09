@@ -1,4 +1,4 @@
-dateModified: 1544045414
+dateModified: 1544371059
 email:
   fromEmail: technical@yello.studio
   fromName: 'Craft Master'
@@ -71,7 +71,7 @@ fields:
 plugins:
   agent:
     edition: standard
-    enabled: false
+    enabled: true
     schemaVersion: 1.1.4
   minify:
     edition: standard

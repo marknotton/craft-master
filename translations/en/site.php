@@ -86,6 +86,7 @@ return [
   "E025" => "Coming Soon",
   "E026" => "We're working to make this site even better. Please check back soon.",
   "E027" => "Error",
+  "E028" => "No Image",
 
   // Forms =====================================================================
 

@@ -8,4 +8,12 @@ site-wrapper > header {
   min-height:300px;
   @include container();
 
+	[image] {
+		@include viewport-width()
+	}
+
+	> *:not([image]) {
+	  position:relative;
+	}
+
 }

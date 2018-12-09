@@ -7,7 +7,7 @@ main {
   position:relative;
   padding-top:spacer();
   padding-bottom:spacer();
-  @include flex-grow(1);
+  flex-grow:1;
   @include container();
 
   > featured-image {
@@ -20,7 +20,7 @@ main {
     li { position:relative; display:block; padding-left:20px;
       &:not(:last-of-type) { margin-bottom:5 + $gap0; }
       a { text-decoration:none;}
-      &:before { @include var(color); position:absolute; top:1px; left:0; }
+      &:before { color: var(primary); position:absolute; top:1px; left:0; }
     }
   }
   > ul li:before { content:$circle; }
@@ -32,7 +32,7 @@ main {
     }
   }
 
-  h1, h2, h3, h4, h5, h6 {  @include var(color); }
+  h1, h2, h3, h4, h5, h6 {  color: var(primary) }
 
   p + * { margin-top:$gap; }
 
@@ -40,8 +40,8 @@ main {
     @include font-size($font-size $font-size*2);
   }
 
-  a { @include var(color, secondary);
-    &:hover { @include var(color, primary); }
+  a { color : var(secondary);
+    &:hover { color : var(primary); }
   }
 
   hr { border:none; background-color:$grey; margin-top:$gap2; margin-bottom:$gap2;  }

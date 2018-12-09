@@ -61,16 +61,14 @@ body {
     }
   }
   @include selection(secondary);
+
+	&.dev-environment {
+		@include show-breakpoints();
+	}
 }
 
-:root {
-  @include break($medium, '<') {
-    --gutter : add-unit($gutter/2);
-  }
-}
-
-h1 { font-weight:bold; margin-bottom:$gap; }
-h2, h3, h4, h5, h6 { margin-bottom:$gap0; }
+h1 { font-weight:bold; margin-bottom:$gap; color:$text-colour; }
+h2, h3, h4, h5, h6 { margin-bottom:$gap0; color:$text-colour; }
 
 h1, %h1 { @include responsive-fontsize($h1, $h2); }
 h2, %h2 { @include responsive-fontsize($h2, $h3); }
@@ -97,21 +95,6 @@ pre {
   padding:$gap;
   position:relative;
   z-index:999;
-}
-
-%no-image {
-	&[data-desktop*="default-"]:after {
-		content:"NO IMAGE";
-		content:attr('data-message');
-		position:absolute;
-		top:50%; left:50%;
-		color:white;
-		white-space:nowrap;
-		font-weight:bold;
-		opacity:0.5;
-		// @include text-shadow();
-		@include transform(y -50%, x -50%);
-	}
 }
 
 // =============================================================================
@@ -160,28 +143,52 @@ svg.logo {
   margin-top:$gap;
   @include flex-container(between center);
   button, a {
-    @include flex-grow(1);
+    flex-grow:1;
     &:not(:last-of-type) { margin-right:$gap; }
   }
 }
 
 // =============================================================================
-// Srcset Images
+// Images
 // =============================================================================
 
 %srcset-image {
   display:block;
   background-position:center 33%;
   background-size:cover;
+	background-repeat:no-repeat;
   img {
     display:block;
     position:absolute;
     object-fit:cover;
-    object-position: 50% 50%;
+    object-position:center 33.33%;
     width:100%; height:100%; max-width:100%; max-height:100%;
     top:0; left:0;
     @include browsers(ie, edge) { display:none; }
   }
+}
+
+%no-image {
+	&[data-desktop*="default-"]:after {
+		content:'No Image';
+		content:attr(data-error);
+		text-transform: uppercase;
+		position:absolute;
+		top:50%; left:50%;
+		color:white;
+		white-space:nowrap;
+		font-weight:bold;
+		opacity:0.5;
+		@include text-shadow();
+		@include transform(y -50%, x -50%);
+	}
+}
+
+figure[image] {
+	position: absolute;
+	left:0; top:0;
+	@include size(100%);
+	@extend %srcset-image, %no-image;
 }
 
 // =============================================================================
@@ -204,7 +211,7 @@ admin-links {
   @include flex-container(center center);
   a {
     display:block; font-size:smaller;
-    &:hover { @include var(color); }
+    &:hover { color:var(primary); }
     & + a { margin-left:$gap0; }
   }
 }
@@ -216,8 +223,8 @@ admin-links {
 body[id^='error'], body[id='holding-page'] {
   main {
     text-align:center;
+		flex-grow:1;
     @include flex-container(column center center);
-    @include flex-grow(1);
     @include container();
     svg.icon { position:absolute; opacity:0.1; }
     .back-button {
@@ -249,7 +256,7 @@ body.devmode {
   font-size:18px; font-weight:bold; line-height:23px;
   color:white;
   padding:$gap0 $gap2;
-  @include var(background-color, secondary);
+  background-color : var(secondary);
   color:colour-contrast(secondary);
 }
 

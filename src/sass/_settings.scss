@@ -7,6 +7,7 @@
 // =============================================================================
 
 $black      : #3F4041;
+$text-colour      : white;
 $yellow     : #EB9F24;
 $selection  : $yellow;
 
@@ -19,6 +20,7 @@ $gaps          : 16;
 $font-size     : 18;
 $spacer        : 5vh;
 $gutters       : $gaps*2;
+$sidebar-width : 300px;
 
 // =============================================================================
 // Breakpoints
@@ -57,7 +59,8 @@ $show-breakpoints : true;
 // Colours should always be in hex format where possible.
 $custom-properties : (
   primary   : if(variable-exists(primary), $primary, $black),
-  secondary : if(variable-exists(secondary), $secondary, $yellow)
+  secondary : if(variable-exists(secondary), $secondary, $yellow),
+	sidebar-width: $sidebar-width
 );
 
 // =============================================================================
@@ -67,22 +70,7 @@ $custom-properties : (
 $plyr-color-main: if(variable-exists(primary), $primary, $black);
 
 // =============================================================================
-// Post-import settings
+// Doggistyle
 // =============================================================================
-// Some settings need to be applied after all initial imports have been set.
-// This mixin will be called at the end of the 'doggystyle/imports.scss' file.
-// If defining any variables, make sure any variables include
-// a !global flag so they can be accessed outside of this mixin.
 
-@mixin update-settings() {
-  @include add-variables((gap:$gap, gutter:add-unit($gutters)));
-  @include set-variables();
-  @include add-breakpoint(
-    'max' $max,
-    'large' $large,
-    'medium' $medium,
-    'small-medium' $small-medium,
-    'small' $small,
-    'min' $min
-  );
-}
+@include doggistyle();

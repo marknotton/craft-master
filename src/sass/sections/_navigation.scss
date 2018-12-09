@@ -16,11 +16,11 @@ navigation-bar {
     svg.logo {
       @include symbol-size(logo, 200px);
       polygon {
-        @include var(fill, secondary)
+        fill : var(secondary);
         @include transform-origin(50 50);
         @include transition(rotate 0 1)
       }
-      path { @include var(fill, primary) }
+      path { fill: var(primary) }
     }
   }
 
@@ -33,7 +33,7 @@ navigation-bar {
         &:first-of-type { font-weight:bold; }
         a {
           &:hover {
-            @include var(color, secondary);
+            color: var(secondary);
           }
         }
       }
@@ -62,7 +62,7 @@ navigation-bar {
     svg {
       @include size(100%);
       line {
-        @include var(stroke, primary);
+        stroke: var(primary);
         stroke-width:$icon-menu-stroke;
         stroke-linecap:if($icon-menu-rounded,round,butt);
         @include transform-origin($icon-menu-viewport/2 $icon-menu-viewport/2);
@@ -78,17 +78,17 @@ navigation-bar {
       }
       &:hover {
         line {
-          @include var(stroke, secondary);
+          stroke: var(secondary);
         }
       }
     }
 
     @at-root navigation-bar.open button.menu svg {
       line {
-        @include var(stroke, secondary);
+        stroke: var(secondary);
         &:nth-of-type(1), &:nth-of-type(3) { @include transition-delay(0.4); }
         &:nth-of-type(1) { @include transform(rotate 45, y 25); }
-        &:nth-of-type(2) { @include scale(0); opacity:0; @include transition-delay(0.2); @include transition-timing-function($ease-in-out);}
+        &:nth-of-type(2) { @include scale(0); opacity:0; @include transition-delay(0.2); @include transition-ease($ease-in-out);}
         &:nth-of-type(3) { @include transform(rotate -45, y -25); }
       }
     }

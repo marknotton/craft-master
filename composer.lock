@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "aa1cd8275c864c3fee5b300b31d23d92",
@@ -1458,16 +1458,16 @@
         },
         {
             "name": "intervention/httpauth",
-            "version": "2.0.3",
+            "version": "2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Intervention/httpauth.git",
-                "reference": "69d4627c398c2d74b1c70aae7de7121e0b627c17"
+                "reference": "6652f1b91b98f87b8366b7283c6f78469f9911e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/httpauth/zipball/69d4627c398c2d74b1c70aae7de7121e0b627c17",
-                "reference": "69d4627c398c2d74b1c70aae7de7121e0b627c17",
+                "url": "https://api.github.com/repos/Intervention/httpauth/zipball/6652f1b91b98f87b8366b7283c6f78469f9911e5",
+                "reference": "6652f1b91b98f87b8366b7283c6f78469f9911e5",
                 "shasum": ""
             },
             "require": {
@@ -1507,7 +1507,7 @@
                 "http",
                 "laravel"
             ],
-            "time": "2017-06-28T17:37:25+00:00"
+            "time": "2018-12-06T18:40:29+00:00"
         },
         {
             "name": "jaybizzle/crawler-detect",
@@ -1986,12 +1986,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/marknotton/craft-module-template-maker.git",
-                "reference": "e1245d8f05754d870388818fcc68326750d88ec3"
+                "reference": "b5d76136f87126d0c487e4fc2150ece81e2fb7ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/marknotton/craft-module-template-maker/zipball/e1245d8f05754d870388818fcc68326750d88ec3",
-                "reference": "e1245d8f05754d870388818fcc68326750d88ec3",
+                "url": "https://api.github.com/repos/marknotton/craft-module-template-maker/zipball/b5d76136f87126d0c487e4fc2150ece81e2fb7ef",
+                "reference": "b5d76136f87126d0c487e4fc2150ece81e2fb7ef",
                 "shasum": ""
             },
             "type": "craft-module",
@@ -2021,7 +2021,7 @@
                 "craft-module",
                 "craftcms"
             ],
-            "time": "2018-12-06T07:40:23+00:00"
+            "time": "2018-12-06T12:11:25+00:00"
         },
         {
             "name": "mikehaertl/php-shellcommand",
@@ -2194,16 +2194,16 @@
         },
         {
             "name": "mrclay/jsmin-php",
-            "version": "2.3.2",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mrclay/jsmin-php.git",
-                "reference": "932c9633c35b390beb2cfdea69a41ea7dbc8d759"
+                "reference": "bb05febc9440852d39899255afd5569b7f21a72c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mrclay/jsmin-php/zipball/932c9633c35b390beb2cfdea69a41ea7dbc8d759",
-                "reference": "932c9633c35b390beb2cfdea69a41ea7dbc8d759",
+                "url": "https://api.github.com/repos/mrclay/jsmin-php/zipball/bb05febc9440852d39899255afd5569b7f21a72c",
+                "reference": "bb05febc9440852d39899255afd5569b7f21a72c",
                 "shasum": ""
             },
             "require": {
@@ -2242,7 +2242,7 @@
                 "jsmin",
                 "minify"
             ],
-            "time": "2015-03-30T15:04:42+00:00"
+            "time": "2018-12-06T15:03:38+00:00"
         },
         {
             "name": "mrclay/minify",
