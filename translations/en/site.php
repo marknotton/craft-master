@@ -59,7 +59,7 @@ return [
 
   // Errors ====================================================================
 
-  "E001" => "Go back",
+	"E001" => "Go Home",
   "E002" => "is not supported.",
   "E003" => "We've detected that you are using a browser that we don't support. For a better and more secure experience, you must upgrade your browser to continue.",
   "E004" => "Learn how to upgrade here",
@@ -86,7 +86,8 @@ return [
   "E025" => "Coming Soon",
   "E026" => "We're working to make this site even better. Please check back soon.",
   "E027" => "Error",
-  "E028" => "No Image",
+	"E028" => "No Image",
+	"E029" => "Go Back",
 
   // Forms =====================================================================
 
