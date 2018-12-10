@@ -31,7 +31,7 @@ Check out config/routes.php file for more details on how this layout gets used #
 	}
 } %}
 
-{% set title = messages[type].title|t ?? title|t %}
+{% set title = (messages[type].title ?? title)|t %}
 
 {% block content %}
 
