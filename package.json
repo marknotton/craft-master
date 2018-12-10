@@ -15,7 +15,6 @@
     "@marknotton/source-exists": "^1.1.0",
     "@marknotton/svg-to-symbols": "^1.1.0",
     "@marknotton/versioniser": "^1.1.0",
-    "abortcontroller-polyfill": "^1.2.1",
     "autoprefixer": "^9.4.2",
     "browser-sync": "^2.26.3",
     "gulp": "^3.9.1",

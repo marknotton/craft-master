@@ -3,6 +3,18 @@
 {# ////////////////////////////////////////////////////////////////////////// #}
 
 {# ========================================================================== #}
+{# Polyfills                                                                  #}
+{# ========================================================================== #}
+
+{% js at head %}
+
+	var pollyfills = [];
+
+	if ( typeof window.AbortController === 'undefined' ) { pollyfills.push("https://cdn.jsdelivr.net/npm/abortcontroller-polyfill@1.2.1/dist/umd-polyfill.min.js") }
+
+{% endjs %}
+
+{# ========================================================================== #}
 {# jQuery                                                                     #}
 {# ========================================================================== #}
 
@@ -79,6 +91,7 @@
 {# Script loader with render blocking                                         #}
 {# ========================================================================== #}
 
+
 {% js %}
 
   {# Function that loads scripts #}
@@ -90,7 +103,11 @@
     }
 
     // Fallback to scripts if nothing was passed
-    var files = files || scripts || undefined;
+    var files = files  || undefined;
+
+		if ( typeof files === 'undefined' ) {
+			var files = scripts;
+		}
 
     // Put a single string into it's own array.
     if ( typeof files == 'string' ) {
@@ -119,13 +136,17 @@
     }
   }
 
-  {# Javascript to render in the head #}
+	{# Javascript to render in the head #}
   {% if scripts is defined %}
 
     // Script files to load
     {# This will manage the file names as per the versioning options #}
     {# Or you can simply return an array #}
-    var scripts = {{ craft.helpers.getScripts(js)|raw }};
+	  var scripts = {{ craft.helpers.getScripts(js)|raw }};
+
+		if ( typeof pollyfills !== 'undefined' && pollyfills.length ) {
+			var scripts = pollyfills.concat(scripts);
+		}
 
 		{% if ES5Support %}
 

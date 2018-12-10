@@ -5,15 +5,25 @@
 site-wrapper > header {
 
   position:relative;
-  min-height:300px;
+	padding-top:spacer(4);
+	padding-bottom:spacer(4);
   @include container();
 
 	[image] {
 		@include viewport-width()
+		&:after { display:none; }
+	}
+
+	&:before {
+		@extend %sudo;
+		@include gradient(160, var(primary), var(secondary))
+		@include viewport-width()
 	}
 
 	> *:not([image]) {
-	  position:relative;
+		position:relative;
 	}
+
+	h1 { color:white;  }
 
 }

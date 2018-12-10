@@ -37,11 +37,9 @@
 // =============================================================================
 
 body {
-	background-color:#21262B;
   site-wrapper {
     display:flex;
     flex-direction:column;
-    overflow-x:hidden;
     min-height: 100vh;
     min-width:$min;
     width:100%;
@@ -60,15 +58,17 @@ body {
       site-wrapper { height:inherit; }
     }
   }
+	@include outside-break($min) {
+		overflow-x:hidden;
+	}
   @include selection(secondary);
-
 	&.dev-environment {
 		@include show-breakpoints();
 	}
 }
 
-h1 { font-weight:bold; margin-bottom:$gap; color:$text-colour; }
-h2, h3, h4, h5, h6 { margin-bottom:$gap0; color:$text-colour; }
+h1 { font-weight:bold; margin-bottom:$gap; color:$text-colour;}
+h2, h3, h4, h5, h6 { margin-bottom:$gap0; color:$text-colour;}
 
 h1, %h1 { @include responsive-fontsize($h1, $h2); }
 h2, %h2 { @include responsive-fontsize($h2, $h3); }
@@ -110,23 +110,47 @@ svg.logo {
 }
 
 // =============================================================================
+// Stylised List
+// =============================================================================
+
+%stylised-list {
+	> ol, > ul { margin-bottom:$gap;
+		li { position:relative; display:block; padding-left:20px;
+			&:not(:last-of-type) { margin-bottom:5 + $gap0; }
+			a { text-decoration:none;}
+			&:before { color: var(primary); position:absolute; top:1px; left:0; }
+		}
+	}
+	> ul li:before { content:$circle; }
+	> ol { counter-reset: counter;
+		> li:before {
+			content: counter(counter)'.';
+			counter-increment: counter;
+			font-weight:bold;
+		}
+	}
+}
+
+// =============================================================================
 // Buttons
 // =============================================================================
 
 %button {
-  display:table;
-  padding:$gap0/2 $gap;
+  padding:$gap0 $gap;
   text-align:center;
   text-transform: uppercase;
   border-style: solid;
   border-width: 1px;
+	display:flex;
+	align-items:center;
+	justify-content:center;
   @extend .bold;
-  @include border-radius(50);
+  @include border-radius;
   @include transition(background-color border-color color);
   &:focus { box-shadow: 0 0 3pt 2pt $blue; }
 }
 
-.button { @extend %button; @include button(white primary); }
+.button { @extend %button; @include button(secondary white); }
 
 .button-small {
   @extend %button;
@@ -141,7 +165,9 @@ svg.logo {
 
 .buttons {
   margin-top:$gap;
-  @include flex-container(between center);
+	display:flex;
+	align-items:center;
+	justify-content:center;
   button, a {
     flex-grow:1;
     &:not(:last-of-type) { margin-right:$gap; }
@@ -185,10 +211,30 @@ svg.logo {
 }
 
 figure[image] {
-	position: absolute;
-	left:0; top:0;
-	@include size(100%);
-	@extend %srcset-image, %no-image;
+	@extend %full, %srcset-image, %no-image;
+}
+
+// =============================================================================
+// Video Container
+// =============================================================================
+
+video-container {
+	padding-bottom:map-get($aspect-ratios, 16x10);
+	display:block;
+	position:relative;
+	width:100%; height:auto;
+	&[style*='background-image'] {
+		background-position:center center;
+		background-size: cover;
+		background-repeat:no-repeat;
+		background-color:black;
+	}
+	iframe, canvas {
+		position:absolute;
+		display:block;
+		top:0; left:0;
+		height:100% $imp; width:100% $imp;
+	}
 }
 
 // =============================================================================
@@ -211,7 +257,7 @@ admin-links {
   @include flex-container(center center);
   a {
     display:block; font-size:smaller;
-    &:hover { color:var(primary); }
+    &:hover { color: var(primary); }
     & + a { margin-left:$gap0; }
   }
 }
