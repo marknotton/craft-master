@@ -4,13 +4,13 @@
 
 {% extends '_layouts/master' %}
 
+{# Resolve entries, categories and tags to a universal element #}
+
+{% set element = element ?? product ?? entry ?? category ?? tag ?? null %}
+
 {# Content Block ============================================================ #}
 
 {% block content %}
-
-	{# Resolve entries, categories and tags to a universal element #}
-
-	{% set element = element ?? product ?? entry ?? category ?? tag ?? null %}
 
 	{# Cache the template using readable key name #}
 

@@ -3,17 +3,16 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 social-media {
-  @include flex-container2(center, center);
+  @include flex-container(center center);
   a {
     display:block;
     @include size(24);
-    @include transition(scale $ease-out-back);
-    &:hover { @include scale(1.2);}
+    &:hover svg { @include scale(1.2);}
     & + a { margin-left:$gap0; }
     span { display:none; }
     svg {
       @include size(100%);
-      @include transition(fill);
+      @include transition(fill, scale $ease-out-back);
       @each $media, $colour in $social-media-colours {
         &.#{'icon-' + $media} {
           fill:$colour;
