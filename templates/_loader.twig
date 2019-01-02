@@ -53,6 +53,15 @@ of additional template paths into the mix. #}
 			multisiteHandle ~ element.uri ~ '/' ~ '_entry'
 		]) %}
 
+		{% if element['section'] ?? false %}
+			{% set _paths = _paths|merge([
+				multisiteHandle ~ '_' ~ element.section.handle ~ '/' ~ segments|first,
+				multisiteHandle ~ '_' ~ element.section.handle ~ '/' ~ segments|last,
+				(segments is not empty ? multisiteHandle ~ '_' ~ element.section.handle ~ '/' ~ element.uri),
+				multisiteHandle ~ '_' ~ element.section.handle ~ '/' ~ 'entry'
+			]) %}
+		{% endif %}
+
 	{% endif %}
 
 	{# If Segments exists ----------------------------------------------------- #}
@@ -61,9 +70,8 @@ of additional template paths into the mix. #}
 
 		{# If an entry type exists ---------------------------------------------- #}
 
-		{% if element.type ?? false %}
+		{% if element['type'] ?? false %}
 			{% set _paths = _paths|merge([ multisiteHandle ~ segments|first ~ '/_' ~ segments|last ]) %}
-
 			{% if element.type != segments|first %}
 				{% set _paths = _paths|merge([
 					multisiteHandle ~ segments|first ~ '/' ~ element.type|kebab,
@@ -79,7 +87,6 @@ of additional template paths into the mix. #}
 			{% else %}
 				{% set _paths = _paths|merge(['_layouts/' ~ element.type|kebab]) %}
 			{% endif %}
-
 
 		{% endif %}
 
