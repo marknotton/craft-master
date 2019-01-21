@@ -135,44 +135,243 @@ svg.logo {
 // Buttons
 // =============================================================================
 
-%button {
-  padding:$gap0 $gap;
-  text-align:center;
-  text-transform: uppercase;
-  border-style: solid;
-  border-width: 1px;
-	display:flex;
+// NOTE: See _layouts/stylesheet.twig for guidance on how to use these button styles.
+
+.button {
+
+	--button-theme:#{var(secondary)};
+
+	&.inverse, &.white    { --button-theme : #{$white}; }
+	&.black               { --button-theme : #{$black}; }
+	&.red                 { --button-theme : #{$red}; }
+	&.blue, &.blue1       { --button-theme : #{$blue1}; }
+	&.blue2, &.blue-light { --button-theme : #{$blue3}; }
+	&.pink                { --button-theme : #{$pink}; }
+	&.purple              { --button-theme : #{$purple}; }
+	&.grey                { --button-theme : #{$grey}; }
+	&.yellow              { --button-theme : #{$yellow}; }
+	&.green               { --button-theme : #{$green}; }
+
+	position: relative;
+	display:inline-flex;
+	align-self: flex-start;
 	align-items:center;
-	justify-content:center;
-  @extend .bold;
-  @include border-radius;
-  @include transition(background-color border-color color);
-  &:focus { box-shadow: 0 0 3pt 2pt $blue; }
+	padding:$gap0+2 $gap + 5;
+	white-space:nowrap;
+	text-transform: uppercase;
+	font-size:16px; line-height:1;
+	border:1px solid transparent;
+	@extend .bold;
+	@include border-radius;
+
+	// Standard Button Colours
+	@include button(
+		$transitions : color background-color border-color,
+		$initial:(
+			'background' : var(button-theme),
+			'colour'     : white,
+			'stroke'     : white,
+			'fill'       : white,
+			'border'     : transparent,
+		),
+		$hover:(
+			'background' : white,
+			'colour'     : var(button-theme),
+			'stroke'     : var(button-theme),
+			'fill'       : var(button-theme),
+			'border'     : var(button-theme),
+			'important'  : true
+		),
+	);
+
+	// Inverted Button Colours
+	&.inverse {
+		&:not(.white) {
+			@include button(
+				$transitions : color background-color border-color,
+				$initial:(
+					'background' : transparent,
+					'colour'     : var(button-theme),
+					'stroke'     : var(button-theme),
+					'fill'       : var(button-theme),
+					'border'     : var(button-theme)
+				),
+				$hover:(
+					'background' : var(button-theme),
+					'colour'     : white,
+					'stroke'     : white,
+					'fill'       : white,
+					'border'     : transparent,
+					'important'  : true
+				),
+			);
+		}
+		&.white {
+			@include button(
+				$initial:(
+					'background' : transparent,
+					'colour'     : white,
+					'stroke'     : white,
+					'fill'       : white,
+					'border'     : white
+				),
+				$hover:(
+					'background' : white,
+					'colour'     : var(primary),
+					'stroke'     : var(primary),
+					'fill'       : var(primary),
+					'important'  : true
+				),
+			);
+		}
+	}
+	svg {
+		margin-left:$gap0;
+		&[class*="arrow-"]:not([class*="arrow-left"]) {	margin-left:$gap0 + 3; }
+		&[class*="arrow-left"] { margin-left:0; margin-right:$gap0 + 3;	}
+		@include transition(stroke fill);
+
+		@if variable-exists(symbols) {
+			@each $symbol, $settings in $symbols {
+				&.icon-#{$symbol} {
+					@if str-index($symbol, 'arrow-right') or str-index($symbol, 'arrow-left') {
+						@include symbol-size($symbol:$symbol, $height:10px);
+					}	@else if str-index($symbol, 'arrow-up') or str-index($symbol, 'arrow-down') {
+						@include symbol-size($symbol:$symbol, $width:10px);
+					} @else {
+						@include symbol-size($symbol:$symbol, $height:14px);
+					}
+				}
+			}
+		}
+	}
+	&:hover svg[class*="arrow-"] {
+		stroke:white;
+	}
 }
 
-.button { @extend %button; @include button(secondary white); }
+// Big Buttons -----------------------------------------------------------------
 
-.button-small {
-  @extend %button;
-  font-size:12px; line-height:16px;
-  padding-top:$gap0/2; padding-bottom:$gap0/2;
-}
-.button-large {
-  @extend %button;
-  font-size:30px;
-  padding:$gap $gap2;
+.button-big, .button.big {
+	@extend .button;
+	padding:$gap $gap2;
+	font-size:20px;
+	svg {
+		margin-left:$gap;
+		&[class*="arrow-"]:not([class*="arrow-left"]) {	margin-left:$gap; }
+		&[class*="arrow-left"] { margin-left:0; margin-right:$gap;	}
+
+		@if variable-exists(symbols) {
+			@each $symbol, $settings in $symbols {
+				&.icon-#{$symbol} {
+					@if str-index($symbol, 'arrow-right') or str-index($symbol, 'arrow-left') {
+						@include symbol-size($symbol:$symbol, $height:14px);
+					}	@else if str-index($symbol, 'arrow-up') or str-index($symbol, 'arrow-down') {
+						@include symbol-size($symbol:$symbol, $width:14px);
+					} @else {
+						@include symbol-size($symbol:$symbol, $height:20px);
+					}
+				}
+			}
+		}
+	}
+
 }
 
-.buttons {
-  margin-top:$gap;
-	display:flex;
-	align-items:center;
-	justify-content:center;
-  button, a {
-    flex-grow:1;
-    &:not(:last-of-type) { margin-right:$gap; }
-  }
+// Small Buttons ---------------------------------------------------------------
+
+.button-small, .button.small {
+	@extend .button;
+	padding:$gap0 $gap;
+	font-size:13px;
+	svg {
+		margin-left:$gap0;
+		&[class*="arrow-"]:not([class*="arrow-left"]) {	margin-left:$gap0; }
+		&[class*="arrow-left"] { margin-left:0; margin-right:$gap0;	}
+
+		@if variable-exists(symbols) {
+			@each $symbol, $settings in $symbols {
+				&.icon-#{$symbol} {
+					@if str-index($symbol, 'arrow-right') or str-index($symbol, 'arrow-left') {
+						@include symbol-size($symbol:$symbol, $height:8px);
+					}	@else if str-index($symbol, 'arrow-up') or str-index($symbol, 'arrow-down') {
+						@include symbol-size($symbol:$symbol, $width:8px);
+					} @else {
+						@include symbol-size($symbol:$symbol, $height:11px);
+					}
+				}
+			}
+		}
+	}
 }
+
+// Special Button
+// Small flash is ommited when hovering over these special buttons
+
+.button.special {
+	@extend .button;
+	@include button (
+		$transitions : false,
+		$initial:(
+			'background' : $pink,
+			'colour'     : white,
+			'fill'       : white,
+			'border'     : transparent
+		),
+		$hover:(
+			'background' : $yellow,
+			'colour'     : $blue,
+			'border'     : transparent,
+			'important'  : true
+		),
+	);
+	&:before {
+		@extend %sudo;
+		background-color:white;
+		opacity:0;
+		@include border-radius;
+	}
+	&:hover {
+		&:before {
+			opacity:0.5;
+			@include animate(0.3) {
+				100% { @include scale(1.5 2); opacity:0; }
+			}
+		}
+	}
+}
+
+div.buttons a {
+
+	&:nth-of-type(1) { @extend .button; }
+	&:nth-of-type(2) { @extend .button; }
+	&:nth-of-type(3) { @extend .button; }
+	&:nth-of-type(4) { @extend .button; }
+	&:nth-of-type(5) { @extend .button.big; }
+	&:nth-of-type(6) { @extend .button.big; }
+	&:nth-of-type(7) { @extend .button.big; }
+	&:nth-of-type(8) { @extend .button.big; }
+	&:nth-of-type(9) { @extend .button-small; }
+	&:nth-of-type(10) { @extend .button-small; }
+	&:nth-of-type(11) { @extend .button-small; }
+	&:nth-of-type(12) { @extend .button-small; }
+	&:nth-of-type(13) { @extend .button; }
+	&:nth-of-type(14) { @extend .button; }
+	&:nth-of-type(15) { @extend .button; }
+	&:nth-of-type(16) { @extend .button; }
+	&:nth-of-type(17) { @extend .button-big; --button-theme:#E95838; }
+	&:nth-of-type(18) { @extend .button-big; --button-theme:#E95838; }
+	&:nth-of-type(19) { @extend .button-big, .yellow; }
+	&:nth-of-type(20) { @extend .button-big; --button-theme:#E95838; }
+	&:nth-of-type(21) { @extend .button-big, .special; }
+	&:nth-of-type(22) { @extend .button-small, .green; }
+	&:nth-of-type(23) { @extend .button-small, .green; }
+	&:nth-of-type(24) { @extend .button-small, .green; }
+	&:nth-of-type(25) { @extend .button-small, .green; }
+	&:nth-of-type(26) { @extend .button-small, .green; }
+
+}
+
 
 // =============================================================================
 // Images

@@ -28,9 +28,157 @@
 
   <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
 
-  <a href="#" class="button">Hello World</a>
-  <a href="#" class="button-small invert">Hello World</a>
-  <a href="#" class="button-large">Hello World</a>
+	{# Inverted Buttons ======================================================= #}
+
+	<div style="background-color:#132542; margin:20px 0; padding:20px">
+
+		{# Arrow Buttons -------------------------------------------------------- #}
+
+		<h3 style="color:white; padding:10px">Arrow Buttons</h3>
+
+		<a href="#" style="margin:10px" class="button inverse white">{{ symbol('arrow-left') }}Previous</a>
+		<a href="#" style="margin:10px" class="button inverse white">Next{{ symbol('arrow-right') }}</a>
+		<a href="#" style="margin:10px" class="button inverse white">Arrow Up{{ symbol('arrow-up') }}</a>
+		<a href="#" style="margin:10px" class="button inverse white">Arrow Down{{ symbol('arrow-down') }}</a>
+		<br>
+
+		<a href="#" style="margin:10px" class="button inverse big white">{{ symbol('arrow-left') }}Previous</a>
+		<a href="#" style="margin:10px" class="button inverse big white">Next{{ symbol('arrow-right') }}</a>
+		<a href="#" style="margin:10px" class="button inverse big white">Arrow Up{{ symbol('arrow-up') }}</a>
+		<a href="#" style="margin:10px" class="button inverse big white">Arrow Down{{ symbol('arrow-down') }}</a>
+		<br>
+
+		<a href="#" style="margin:10px" class="button inverse small white">{{ symbol('arrow-left') }}Previous</a>
+		<a href="#" style="margin:10px" class="button inverse small white">Next{{ symbol('arrow-right') }}</a>
+		<a href="#" style="margin:10px" class="button inverse small white">Arrow Up{{ symbol('arrow-up') }}</a>
+		<a href="#" style="margin:10px" class="button inverse small white">Arrow Down{{ symbol('arrow-down') }}</a>
+		<br>
+
+		{# Assorted Buttons ----------------------------------------------------- #}
+
+		<h3 style="color:white; padding:10px">Assorted Buttons</h3>
+
+		<a href="#" style="margin:10px" class="button inverse pink">Login{{ symbol('user') }}</a>
+		<a href="#" style="margin:10px" class="button inverse purple">Download Now</a>
+		<a href="#" style="margin:10px" class="button inverse blue2">See Times{{ symbol('clock') }}</a>
+		<a href="#" style="margin:10px" class="button special">Enrol Me</a>
+		<br>
+
+		<a href="#" style="margin:10px" class="button inverse big yellow">Confirm{{ symbol('tick') }}</a>
+		<a href="#" style="margin:10px" class="button inverse big pink">Login{{ symbol('user') }}</a>
+		<a href="#" style="margin:10px" class="button inverse big purple">Download Now</a>
+		<a href="#" style="margin:10px" class="button inverse big blue2">See Times{{ symbol('clock') }}</a>
+		<a href="#" style="margin:10px" class="button big special">Enrol Me</a>
+		<br>
+
+		<a href="#" style="margin:10px" class="button inverse small yellow">Confirm{{ symbol('tick') }}</a>
+		<a href="#" style="margin:10px" class="button inverse small pink">Login{{ symbol('user') }}</a>
+		<a href="#" style="margin:10px" class="button inverse small purple">Download Now</a>
+		<a href="#" style="margin:10px" class="button inverse small blue2">See Times{{ symbol('clock') }}</a>
+		<a href="#" style="margin:10px" class="button small special">Enrol Me</a>
+
+	</div>
+
+	{# Buttons ============================================================== #}
+
+	<div style="background-color:#EDEDED; margin:20px 0; padding:20px">
+
+		{# Arrow Buttons -------------------------------------------------------- #}
+
+		<h3 style="padding:10px">Arrow Buttons</h3>
+
+		<a href="#" style="margin:10px" class="button">{{ symbol('arrow-left') }}Previous</a>
+		<a href="#" style="margin:10px" class="button">Next{{ symbol('arrow-right') }}</a>
+		<a href="#" style="margin:10px" class="button">Arrow Up{{ symbol('arrow-up') }}</a>
+		<a href="#" style="margin:10px" class="button">Arrow Down{{ symbol('arrow-down') }}</a>
+		<br>
+
+		<a href="#" style="margin:10px" class="button big">{{ symbol('arrow-left') }}Previous</a>
+		<a href="#" style="margin:10px" class="button big">Next{{ symbol('arrow-right') }}</a>
+		<a href="#" style="margin:10px" class="button big">Arrow Up{{ symbol('arrow-up') }}</a>
+		<a href="#" style="margin:10px" class="button big">Arrow Down{{ symbol('arrow-down') }}</a>
+		<br>
+
+		<a href="#" style="margin:10px" class="button small">{{ symbol('arrow-left') }}Previous</a>
+		<a href="#" style="margin:10px" class="button small">Next{{ symbol('arrow-right') }}</a>
+		<a href="#" style="margin:10px" class="button small">Arrow Up{{ symbol('arrow-up') }}</a>
+		<a href="#" style="margin:10px" class="button small">Arrow Down{{ symbol('arrow-down') }}</a>
+		<br>
+
+		{# Assorted Buttons ----------------------------------------------------- #}
+
+		<h3 style="padding:10px">Assorted Buttons</h3>
+
+		<a href="#" style="margin:10px" class="button pink">Login{{ symbol('user') }}</a>
+		<a href="#" style="margin:10px" class="button purple">Download Now</a>
+		<a href="#" style="margin:10px" class="button blue2">See Times{{ symbol('clock') }}</a>
+		<a href="#" style="margin:10px" class="button special">Enrol Me</a>
+		<br>
+
+		<a href="#" style="margin:10px" class="button big yellow">Confirm{{ symbol('tick') }}</a>
+		<a href="#" style="margin:10px" class="button big pink">Login{{ symbol('user') }}</a>
+		<a href="#" style="margin:10px" class="button big purple">Download Now</a>
+		<a href="#" style="margin:10px" class="button big blue2">See Times{{ symbol('clock') }}</a>
+		<a href="#" style="margin:10px" class="button big special">Enrol Me</a>
+		<br>
+
+		<a href="#" style="margin:10px" class="button small yellow">Confirm{{ symbol('tick') }}</a>
+		<a href="#" style="margin:10px" class="button small pink">Login{{ symbol('user') }}</a>
+		<a href="#" style="margin:10px" class="button small purple">Download Now</a>
+		<a href="#" style="margin:10px" class="button small blue2">See Times{{ symbol('clock') }}</a>
+		<a href="#" style="margin:10px" class="button small special">Enrol Me</a>
+
+	</div>
+
+	<div class="buttons" style="border:2px solid #EDEDED; margin:20px 0; padding:20px">
+
+		{# Arrow Buttons -------------------------------------------------------- #}
+
+		<h3 style="padding:10px">Arrow Buttons without explicit class names</h3>
+
+		<a href="#" style="margin:10px">{{ symbol('arrow-left') }}Previous</a>
+		<a href="#" style="margin:10px">Next{{ symbol('arrow-right') }}</a>
+		<a href="#" style="margin:10px">Arrow Up{{ symbol('arrow-up') }}</a>
+		<a href="#" style="margin:10px">Arrow Down{{ symbol('arrow-down') }}</a>
+		<br>
+
+		<a href="#" style="margin:10px">{{ symbol('arrow-left') }}Previous</a>
+		<a href="#" style="margin:10px">Next{{ symbol('arrow-right') }}</a>
+		<a href="#" style="margin:10px">Arrow Up{{ symbol('arrow-up') }}</a>
+		<a href="#" style="margin:10px">Arrow Down{{ symbol('arrow-down') }}</a>
+		<br>
+
+		<a href="#" style="margin:10px">{{ symbol('arrow-left') }}Previous</a>
+		<a href="#" style="margin:10px">Next{{ symbol('arrow-right') }}</a>
+		<a href="#" style="margin:10px">Arrow Up{{ symbol('arrow-up') }}</a>
+		<a href="#" style="margin:10px">Arrow Down{{ symbol('arrow-down') }}</a>
+		<br>
+
+		{# Assorted Buttons ----------------------------------------------------- #}
+
+		<h3 style="padding:10px">Assorted Buttons without explicit class names</h3>
+
+		<a href="#" style="margin:10px">Login{{ symbol('user') }}</a>
+		<a href="#" style="margin:10px">Download Now</a>
+		<a href="#" style="margin:10px">See Times{{ symbol('clock') }}</a>
+		<a href="#" style="margin:10px">Enrol Me</a>
+		<br>
+
+		<a href="#" style="margin:10px">Confirm{{ symbol('tick') }}</a>
+		<a href="#" style="margin:10px">Login{{ symbol('user') }}</a>
+		<a href="#" style="margin:10px">Download Now</a>
+		<a href="#" style="margin:10px">See Times{{ symbol('clock') }}</a>
+		<a href="#" style="margin:10px">Enrol Me</a>
+		<br>
+
+		<a href="#" style="margin:10px">Confirm{{ symbol('tick') }}</a>
+		<a href="#" style="margin:10px">Login{{ symbol('user') }}</a>
+		<a href="#" style="margin:10px">Download Now</a>
+		<a href="#" style="margin:10px">See Times{{ symbol('clock') }}</a>
+		<a href="#" style="margin:10px">Enrol Me</a>
+
+	</div>
+
 
   <ul>
     <li>Lorem ipsum dolor sit amet, consectetur adip <a href="#">dfgkdfjgldkfg</a></li>
