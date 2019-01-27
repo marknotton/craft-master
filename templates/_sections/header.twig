@@ -2,16 +2,16 @@
 {# Header                                                                     #}
 {# ////////////////////////////////////////////////////////////////////////// #}
 
-<header>
+<header class="generic">
 
   {% include '_components/image' %}
 
-	<div>
+	<div class="headings">
 		{{ title|h1 }}
-		{{ entry is defined and not entry.isFieldEmpty('subtitle') ? entry.subtitle|h2 : false }}
+		{{ element is defined and not element.isFieldEmpty('subtitle') and (subtitle ?? true) ? element.subtitle|h2('subtitle') : false }}
 	</div>
 
-  {{ entry is defined and not entry.isFieldEmpty('introduction') ? entry.introduction|h2 : false }}
+  {{ element is defined and not element.isFieldEmpty('shortDescription') and (description ?? true) ? element.shortDescription|h2 : false }}
 
   {{ (header ?? false) and header|type != 'boolean' ? header|raw : false }}
 

@@ -13,7 +13,7 @@ return [
 
   // Common ====================================================================
 
-  "C001" => "Home",
+	"C001" => "Home",
   "C002" => "About",
   "C003" => "News",
   "C004" => "Blog",
@@ -57,6 +57,7 @@ return [
   "C042" => "Call us",
 	"C043" => "Latest News",
 	"C044" => "Learn More",
+  "C045" => "Payment",
 
   // Errors ====================================================================
 
@@ -135,7 +136,7 @@ return [
 
   // Messages ==================================================================
 
-  'M001' => "Subscribed!",
+	'M001' => "Subscribed!",
   'M002' => "You have successfully signed up to our newsletter. We'll be in touch with the latest news in the near future.",
   'M003' => "You can unsubscribed at any time by either clicking the unsubscribe link in any email we've sent you in the past; or by clicking <a href='/unsubscribe'>here</a>",
   'M004' => "We're sorry to see you go.",
@@ -144,7 +145,8 @@ return [
   'M007' => "Thank you for contacting {{ siteName }}, we'll be in touch as soon as we can.",
   'M008' => "Password Reset.",
   'M009' => "Your {{ siteName }} password has successfully been reset. You can login <a href='/{{ craft.app.config.general.loginPath }}'>here</a>",
-  'M010' => "Please enter the email address you wish to unsubscribe bellow.",
+  'M010' => "Please enter the email address you wish to unsubscribe below.",
+  'M011' => "You don’t have any orders yet.",
 
   // Video Player ==============================================================
 
@@ -159,4 +161,25 @@ return [
   'V009' => "Enter fullscreen",
   'V010' => "Fitted Aspect Ratio",
   'V011' => "Stretched Aspect Ratio",
+
+	// Commerce Account ==========================================================
+
+  'A001' => "My Account",
+  'A002' => "My Orders",
+  'A003' => "My Courses",
+  'A004' => "Order Details",
+  'A005' => "Customer",
+  'A006' => "Total",
+  'A007' => "Amount Paid",
+  'A008' => "Date",
+  'A009' => "Download",
+  'A010' => "Item",
+  'A011' => "Unit Price",
+  'A012' => "Quantity",
+  'A013' => "Item Total",
+  'A014' => "Total",
+  'A015' => "Receipt",
+  'A016' => "Order",
+  'A017' => "Date Purchased",
+
 ];

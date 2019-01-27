@@ -2,9 +2,12 @@
 // Navigation
 ////////////////////////////////////////////////////////////////////////////////
 
-let navigation = $('navigation-bar');
+class Navigation {
 
-navigation.find('button.menu').on('click', (event) => {
-  event.preventDefault();
-  navigation.toggleClass('open')
-})
+	constructor() {
+
+		console.log('Navigation')
+
+	}
+
+}

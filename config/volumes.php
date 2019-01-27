@@ -15,6 +15,10 @@ return [
     'logos' => [
       'url' => $uploads . 'logos/',
       'path' => '@webroot' . $uploads . 'logos/',
+    ],
+    'pdfs' => [
+      'url' => $uploads . 'pdfs/',
+      'path' => '@webroot' . $uploads . 'pdfs/',
     ]
   ],
 

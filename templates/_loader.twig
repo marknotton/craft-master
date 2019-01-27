@@ -71,7 +71,10 @@ of additional template paths into the mix. #}
 		{# If an entry type exists ---------------------------------------------- #}
 
 		{% if element['type'] ?? false %}
-			{% set _paths = _paths|merge([ multisiteHandle ~ segments|first ~ '/_' ~ segments|last ]) %}
+			{% set _paths = _paths|merge([
+				multisiteHandle ~ segments|first ~ '/' ~ segments|last,
+				multisiteHandle ~ segments|first ~ '/_' ~ segments|last
+			]) %}
 			{% if element.type != segments|first %}
 				{% set _paths = _paths|merge([
 					multisiteHandle ~ segments|first ~ '/' ~ element.type|kebab,

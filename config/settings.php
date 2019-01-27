@@ -28,17 +28,14 @@ return [
     // Booleans ----------------------------------------------------------------
 
     'devmode'    => Helpers::$app->request->devmode(),
-    'homepage'   => Helpers::$app->request->homepage(),
     'admin'      => Helpers::$app->request->admin(),
-    'isDevice'   => Craft::$app->getRequest()->isMobileBrowser(true),
-    'animations' => true,
+    'desktop'    => !Craft::$app->getRequest()->isMobileBrowser(true),
 
     // Browser support criteria ------------------------------------------------
     // The following browsers are supported
 
     'browsers' => [
-      'ie 11',
-      'chrome > 55',
+			'chrome > 55',
       'firefox > 44',
       'safari >= 9',
       'edge >= 15',
@@ -54,28 +51,11 @@ return [
       // 'campaignsKey'     => 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
     ],
 
-    // Social Media ------------------------------------------------------------
-    // (SEOMatic or Globals should be used instead of this ideally)
-
-    'socialmedia' => [
-      [
-        'siteName' => 'Facebook',
-        'handle' => 'facebook',
-        'url' => 'https://www.facebook.com/thinkingmatterscom/'
-      ],
-      [
-        'siteName' => 'Twitter',
-        'handle' => 'twitter',
-        'url' => 'https://twitter.com/thinkschoolcom'
-      ]
-    ],
-
     // CSS ---------------------------------------------------------------------
-    // If combineCSS is enabled in config.json, this will be ignored.
 
-    'stylesheets' => [
-      'global.css'
-    ],
+		'stylesheets' => [
+			Helpers::$config['filenames']['css']['global']
+		],
 
     // Javascript --------------------------------------------------------------
 

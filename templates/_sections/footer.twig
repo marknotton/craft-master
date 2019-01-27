@@ -24,9 +24,9 @@
 
       {% if admin or devmode %}
         <admin-links>
-          <a class="admin-cp" href="/admin" title="Go to Control Panel" target="_blank">Control Panel</a>
+          <a class="admin-cp" href="/admin" target="_blank">{{ "C029"|t }}</a>
           {% if entry ?? false %}
-            <a class="admin-edit" href="{{ entry.cpEditUrl}}" title="Edit this page" target="_blank">Edit this page</a>
+            <a class="admin-edit" href="{{ entry.cpEditUrl}}"  target="_blank">{{ "C030"|t }}</a>
           {% endif %}
         </admin-links>
       {% endif %}

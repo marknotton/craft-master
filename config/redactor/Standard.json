@@ -7,7 +7,7 @@
   "formatting": ["h2", "h3", "h4", "p"],
   "formattingAdd": {
     "h2": {
-      "title": "Header (H2)",
+      "title": "Header (h2)",
       "api": "module.block.format",
       "args": {
         "tag" : "h2",

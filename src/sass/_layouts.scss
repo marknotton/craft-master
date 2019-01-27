@@ -7,8 +7,9 @@
 // =============================================================================
 
 :root {
-	@include inside-break($medium) {
+	@include break($medium, '<') {
 		--gutters : #{$gap};
+		--vertical-spacing : 2vh;
 	}
 }
 
@@ -21,10 +22,12 @@ main-and-aside {
   position:relative;
   display:block;
 
-  @include outside-break($medium) {
-    display:flex;
+  @include break($medium, '>') {
+		display:flex;
+		main, aside { position:relative; }
     main {
       width:calc(100% - #{var(sidebar-width)});
+			padding:0;
       order:2;
     }
     aside {

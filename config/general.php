@@ -34,13 +34,13 @@ return [
     'preventUserEnumeration'           => true,
     'resourceBasePath'                 => '@webroot/assets/resources',
     'resourceBaseUrl'                  => '@web/assets/resources',
+		'postCpLoginRedirect'              => "entries",
     // 'postLoginRedirect'                => '',
     // 'postLogoutRedirect'               => '',
     // 'loginPath'                        => 'login',
     // 'logoutPath'                       => 'logout',
     // 'setPasswordPath'                  => 'reset-password',
     // 'setPasswordSuccessPath'           => ''
-    'postCpLoginRedirect'              => "entries"
   ],
 
   // ===========================================================================

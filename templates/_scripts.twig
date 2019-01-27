@@ -85,12 +85,14 @@
 		window.location.replace("/javascript");
 	}
 
+	{# Global boolean defines wether the user agent is a Robot and the HistoryAPI option is enabled #}
+	var isHistoryAPIEnabled = {{ agentEnabled and not craft.agent.isRobot() and (historyAPI ?? false) ? 'true' : 'false' }};
+
 {% endjs %}
 
 {# ========================================================================== #}
 {# Script loader with render blocking                                         #}
 {# ========================================================================== #}
-
 
 {% js %}
 
@@ -103,10 +105,10 @@
     }
 
     // Fallback to scripts if nothing was passed
-    var files = files  || undefined;
+    var files = files || undefined;
 
 		if ( typeof files === 'undefined' ) {
-			var files = scripts;
+			var files = scripts || null;
 		}
 
     // Put a single string into it's own array.
@@ -135,63 +137,59 @@
       }
     }
   }
-
 	{# Javascript to render in the head #}
-  {% if scripts is defined %}
 
-    // Script files to load
-    {# This will manage the file names as per the versioning options #}
-    {# Or you can simply return an array #}
-	  var scripts = {{ craft.helpers.getScripts(js)|raw }};
+  // Script files to load
+  {# This will manage the file names as per the versioning options #}
+  {# Or you can simply return an array #}
+  var scripts = {{ craft.helpers.getScripts(js)|raw }};
 
-		if ( typeof pollyfills !== 'undefined' && pollyfills.length ) {
-			var scripts = pollyfills.concat(scripts);
-		}
+	if ( typeof pollyfills !== 'undefined' && pollyfills.length ) {
+		var scripts = pollyfills.concat(scripts);
+	}
 
-		{% if ES5Support %}
+	{% if ES5Support %}
 
-      // Tell the browser that dom loaded status is false;
-      var loaded = false;
+    // Tell the browser that dom loaded status is false;
+    var loaded = false;
 
-      // If ES6 is not supported and ES5 is supported, manipulate the script
-			// strings to filter out the main javascript file that has been transpiled for ES5
-			if (!support.es6 && support.es5) {
-        for(var i=0; i < scripts.length; i++) {
+    // If ES6 is not supported and ES5 is supported, manipulate the script
+		// strings to filter out the main javascript file that has been transpiled for ES5
+		if (!support.es6 && support.es5) {
+      for(var i=0; i < scripts.length; i++) {
 
-					// This will truncate the file extension from the 'scripts' file name,
-					// compare it with the scripts files. If there is a match, use the ES5 version.
-					var isES5FileFound = scripts[i].indexOf("{{ filenames.js.scripts ?? false }}".split('.').slice(0, -1).join('.')) !== -1;
+				// This will truncate the file extension from the 'scripts' file name,
+				// compare it with the scripts files. If there is a match, use the ES5 version.
+				var isES5FileFound = scripts[i].indexOf("{{ filenames.js.scripts ?? false }}".split('.').slice(0, -1).join('.')) !== -1;
 
-					if ( isES5FileFound ) {
-						{% if minify %}
-							scripts[i] = scripts[i].replace(/\.min\.js/, '.es5.min.js');
-	          {% else %}
-							scripts[i] = scripts[i].replace(/\.js/, '.es5.js');
-	          {% endif %}
-					}
-        }
+				if ( isES5FileFound ) {
+					{% if minify %}
+						scripts[i] = scripts[i].replace(/\.min\.js/, '.es5.min.js');
+          {% else %}
+						scripts[i] = scripts[i].replace(/\.js/, '.es5.js');
+          {% endif %}
+				}
       }
-    {% endif %}
+    }
+  {% endif %}
 
-    {# Render Blocking =========================================================
+  {# Render Blocking =========================================================
 
-    If you don't want to render block the scripts (not advised),
-    then set renderBlocking to false in config/settings.php Scripts will be
-    rendered exactly when this component was included. Otherwise scripts will
-    load at the bottom of the document and after Dom is ready
+  If you don't want to render block the scripts (not advised),
+  then set renderBlocking to false in config/settings.php Scripts will be
+  rendered exactly when this component was included. Otherwise scripts will
+  load at the bottom of the document and after Dom is ready
 
-    ========================================================================= #}
+  ========================================================================= #}
 
-    {% if renderBlocking ?? true %}
-      {# Call the loadscripts function after Dom is ready #}
-      if (window.addEventListener) { window.addEventListener("load", loadscripts, false) }
-      else if (window.attachEvent) { window.attachEvent("onload", loadscripts) }
-      else { window.onload = loadscripts }
-    {% else %}
-      {# Or just load scripts immediately #}
-      loadscripts();
-    {% endif %}
-
+  {% if renderBlocking ?? true %}
+    {# Call the loadscripts function after Dom is ready #}
+    if (window.addEventListener) { window.addEventListener("load", loadscripts, false) }
+    else if (window.attachEvent) { window.attachEvent("onload", loadscripts) }
+    else { window.onload = loadscripts }
+  {% else %}
+    {# Or just load scripts immediately #}
+    loadscripts();
   {% endif %}
 
 {% endjs %}

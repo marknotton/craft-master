@@ -25,6 +25,8 @@
 			{{ before is not empty ? before|raw }}
 
 			{# 'cleanup' tags remove empty elements and duplicate line breaks #}
+			{# Some tags are excluded because they are commonly meant to be empty: #}
+			{# iframe, canvas, use, textarea, figure, circle, ellipse, line, path, polygon, polyline, rect, stop, use, symbol, select #}
 
 			{% cleanup %}
 

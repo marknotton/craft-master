@@ -10,11 +10,11 @@
 
 <!DOCTYPE html>
 
-<html lang="{{ craft.app.language|default('en') }}">
+<html lang="{{ craft.app.language|default('en') }}" {{ craft.agent.data|default }}>
 
   <head>
 
-    {% include "_components/structure/head" %}
+    {% include "_sections/head" %}
 
     {{ craft.helpers.loadStylesheets() }}
 
@@ -26,7 +26,7 @@
 
       {% block content %}{% endblock %}
 
-      {% include "_components/structure/footer" %}
+      {% include "_sections/footer" %}
 
     </site-wrapper>
 

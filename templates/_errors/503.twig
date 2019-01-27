@@ -6,7 +6,7 @@
   <main>
     {{ svg('logo') }}
     {% if environment == "staging" %}
-      <h1>{{ include(template_from_string("E008"|t)) }}</h1>
+      <h1>{{ "E008"|t|render }}</h1>
       <p>{{ "E009"|t }}</p>
       <a class="back-button" href="{{ siteUrl|replace('staging.', 'www.') }}">{{ "E010"|t }}</a>
     {% else %}

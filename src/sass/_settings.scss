@@ -15,9 +15,9 @@ $selection  : $yellow;
 // Units
 // =============================================================================
 
-$border-radius : 5;
-$gaps          : 16;
-$font-size     : 18;
+$border-radius : 5px;
+$gaps          : 16px;
+$font-size     : 18px;
 $spacer        : 5vh;
 $gutters       : $gaps*2;
 $sidebar-width : 300px;
@@ -26,11 +26,11 @@ $sidebar-width : 300px;
 // Breakpoints
 // =============================================================================
 
-$min           : 320;
-$small         : 480;
-$medium        : 800;
-$large         : 970;
-$max           : 1200;
+$min           : 320px;
+$small         : 480px;
+$medium        : 800px;
+$large         : 970px;
+$max           : 1200px;
 
 // =============================================================================
 // Fonts
@@ -58,9 +58,9 @@ $show-breakpoints : true;
 // These will be assigned to the html root.
 // Colours should always be in hex format where possible.
 $custom-properties : (
-  primary   : if(variable-exists(primary), $primary, $black),
-  secondary : if(variable-exists(secondary), $secondary, $yellow),
-	sidebar-width: $sidebar-width
+  primary       : if(variable-exists(primary), $primary, $black),
+  secondary     : if(variable-exists(secondary), $secondary, $yellow),
+	sidebar-width : if(variable-exists(sidebar-width), $sidebar-width, 300px)
 );
 
 // =============================================================================
