@@ -50,6 +50,8 @@
 				if ( typeof value == 'object' ) {
 					if ( window.jQuery && value instanceof jQuery ) {
 						methods['element'](value)
+					} else if (value instanceof Array) {
+						methods['array'](value)
 					} else {
 						methods['object'](value)
 					}
@@ -58,7 +60,7 @@
 				}
 			}
 		});
-		
+
 	}
 
 	// ===========================================================================
@@ -69,8 +71,8 @@
 
 		if ( typeof settings !== 'object' ) {
 			console.warn(`${this.constructor.name} default settings must be a single object`)
-		} else if (Object.keys(settings).length !== 0) {
-			console.warn(`${this.constructor.name} default settings cannot be reset.`, this.default)
+		// } else if (Object.keys(settings).length !== 0) {
+			// console.warn(`${this.constructor.name} default settings cannot be reset.`, this.default)
 		} else {
 			// TODO: Deep merge
 			this.default = {...this.default, settings}
