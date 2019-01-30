@@ -48,10 +48,17 @@ class Listener extends Utilities {
 	}
 
 
+	get list() {
+		devices : 'desktop', 'tablet', 'mobile',
+		browser : 'chrome', 'internet-explorer', 'ie', 'firefox', 'safari', 'opera',
+		events : 'scroll', 'resize',
+		mutations : 'arrives', 'leaves',
 
+	}
 
 
 }
+
 
 
 $('a').when('animation-end', () => {...})
@@ -64,7 +71,9 @@ $('a').when('resize scroll', () => {...})
 $('a').when('inview', () => {...})
 $('a').when('!inview', () => {...})
 $('a').when('arrives', () => {...})
+$('a').when('arrives ie', () => {...})
 $('a').when('leaves', () => {...})
 $('a').when(breakpoint.medium, () => {...})
+$('a').when('ie', () => {...})
 
 listener.when('a', 'scroll', () => {...})
