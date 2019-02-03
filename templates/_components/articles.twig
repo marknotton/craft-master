@@ -1,0 +1,73 @@
+{# ////////////////////////////////////////////////////////////////////////// #}
+{# Articles                                                                   #}
+{# ////////////////////////////////////////////////////////////////////////// #}
+
+{# What is this for? ===========================================================
+
+	A reoccuring templating task is to list out a collection of entries throughout
+	the site.	Weather it be quick links, related articles, search results, etc...
+	this template	is a starting point that can be referenced over and over.
+
+============================================================================= #}
+
+{% with %}
+
+	{% set limit = limit ?? 8 %}
+	{% set list  = list ?? false %}
+
+	{# Used as part of the custom element suffix, and also a reference
+	for slight variations in each article #}
+	{% set type  = type ?? 'article' %}
+
+	{# If true, wrap the articles in a custom element wrapper #}
+	{% set only  = only ?? true %}
+
+	{% if list is not empty %}
+
+		{% if not only %}
+			<{{ type }}-list class="list" data-limit="{{ limit }}" data-total="{{ list|length }}" data-offset="0">
+		{% endif %}
+
+			{% for entry in list %}
+
+				{% if loop.index <= limit %}
+
+					<article class="article" animatable once data-id="{{ entry.id }}">
+
+						<a href="/{{ entry.uri }}">
+
+							{% include "_components/image" with { imageTransform : thumb, image : entry.featuredImage is not empty ? entry.featuredImage.one : true } %}
+
+							<div>
+
+								<h2>{{ entry.title }}</h2>
+
+								{% if type == 'news' %}
+									<time datatime="{{ entry.postDate|date('c') }}">
+										{{ entry.postDate|formatTimeString }}
+									</time>
+								{% endif %}
+
+								{{ entry.shortDescription|sentences(1)|striptags|p }}
+
+							</div>
+
+							<span class="button">{{ "C044"|t }}</span>
+
+						</a>
+
+					</article>
+
+				{% endif %}
+
+				{{ articles }}
+
+			{% endfor %}
+
+		{% if not only %}
+			</{{ type }}-list>
+		{% endif %}
+
+	{% endif %}
+
+{% endwith %}

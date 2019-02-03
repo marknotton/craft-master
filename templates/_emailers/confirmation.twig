@@ -1,0 +1,192 @@
+{# ////////////////////////////////////////////////////////////////////////// #}
+{# Confirmation Emailer                                                       #}
+{# This is the template used when confirming the user of their submission     #}
+{# ////////////////////////////////////////////////////////////////////////// #}
+
+{% extends '_layouts/emailer' %}
+
+{% set introduction = craft.entries.section('introduction').one %}
+{% set sections     = craft.entries.section('sections').all() %}
+
+{% set contacts %}
+	{% set contactDetails = sections|find('contact').contactDetails ?? false %}
+	{%- for block in contactDetails if contactDetails is not empty -%}
+		{%- if block.email is not empty -%}
+			{%- if not loop.first %} or {% endif -%}
+			<a href="mailto:{{ block.email }}">{{ block.nameOfPerson|split(' ')[0] }}</a>
+		{%- endif -%}
+	{%- endfor -%}
+{% endset %}
+
+{# -------------------------------------------------------------------------- #}
+{# Preheader                                                                  #}
+{# -------------------------------------------------------------------------- #}
+
+{% block preheader %}
+	{% if submission['message']['attending'] %}
+		We're so glad you're joining us on our big day
+	{% else %}
+		It's such a shame you won't be with us on the big day.
+	{% endif %}
+{% endblock %}
+
+{# -------------------------------------------------------------------------- #}
+{# Content                                                                    #}
+{# -------------------------------------------------------------------------- #}
+
+{% block content %}
+
+	{# Header ================================================================= #}
+
+	<tr>
+		<td style="background-color: #ffffff;">
+			<img src="{{ image ~ 'logo.jpg' }}" width="600" height="" alt="{{ siteName }}" border="0" style="width: 100%; max-width: 600px; height: auto; font-family: sans-serif; font-size: 15px; line-height: 15px; margin: auto;" class="g-img">
+		</td>
+	</tr>
+
+	{{ spacer }}
+
+	<tr>
+		<td style="background-color: #ffffff;">
+			<img src="http://s.mmgo.io/t/BNbb" width="600" height="" alt="{{ siteName }}" border="0" style="width: 100%; max-width: 400px; height: auto; font-family: sans-serif; font-size: 15px; line-height: 15px; margin: auto;" class="g-img">
+		</td>
+	</tr>
+
+	{# Body =================================================================== #}
+
+	<tr>
+		<td style="background-color: #ffffff;">
+			<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+				<tr>
+					<td style="padding: 20px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;">
+
+						<h1 style="margin: 0 0 10px 0; font-family: sans-serif; font-size: 25px; line-height: 30px; color: #333333; font-weight: normal;">
+							Hi {{ submission['fromName'] ?? 'there' }}, thanks for your RSVP!
+						</h1>
+
+						{% if submission['message']['attending'] %}
+
+							{# Attending -------------------------------------------------- #}
+
+							<p style="margin: 0 0 10px 0;">
+								We're so glad you're joining us on our big day. Remember, it's on {{ introduction.weddingDay|date('l jS F Y') }}.
+								You can continue to get all the details about the wedding on the <a href="{{ siteUrl }}">website</a>
+							</p>
+
+							<p style="margin: 0 0 10px 0;">
+								If anything should change please don't submit a new RSVP. Instead contact {{ contacts }} directly.
+							</p>
+
+						{% else %}
+
+							{# Not Attending ---------------------------------------------- #}
+
+							<p style="margin: 0 0 10px 0;">
+								It's such a shame you won't be with us on the big day. The RSVP deadline is <strong>{{ sections|find('rsvp').rsvpDeadline|date('l dS F Y') }}</strong>.
+							</p>
+
+							<p style="margin: 0 0 10px 0;">
+								If you change your mind, don't worry about submitting a new RSVP. Instead please contact {{ contacts }} directly.
+							</p>
+
+						{% endif %}
+
+					</td>
+				</tr>
+
+				{# Button ----------------------------------------------------------- #}
+
+				<tr>
+					<td style="padding: 0 20px;">
+						<table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: auto;">
+							<tr>
+								<td class="button-td button-td-primary" style="border-radius: 4px; background: #222222;">
+									<a class="button-a button-a-primary" href="{{ siteUrl }}" style="background: #222222; border: 1px solid #000000; font-family: sans-serif; font-size: 15px; line-height: 15px; text-decoration: none; padding: 13px 17px; color: #ffffff; display: block; border-radius: 4px;">
+										{{ siteUrl|replace({'/':'', 'www.':''}) }}
+									</a>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+
+				{# List ------------------------------------------------------------- #}
+
+				{% set orderOfTheDay = sections|find('order-of-the-day') %}
+				{% set orderBlocks = orderOfTheDay.orderOfTheDay %}
+
+				{% if orderBlocks is not empty %}
+					<tr>
+						<td style="padding: 20px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;">
+
+							<h2 style="margin: 0 0 10px 0; font-family: sans-serif; font-size: 18px; line-height: 22px; color: #333333; font-weight: bold;">
+								{{ orderOfTheDay.title }}
+							</h2>
+
+							<ul style="padding: 0; margin: 0 0 10px 0; list-style-type: disc;">
+								{% for block in orderBlocks %}
+									<li style="margin:0 0 10px 30px;"{{ loop.first ? ' class=list-item-first'}}{{ loop.last ? ' class=list-item-last'}}>
+										{{ block.time|date('h:ia')|wrap('strong') }} - {{ block.description }}
+									</li>
+								{% endfor %}
+
+							</ul>
+
+						</td>
+					</tr>
+				{% endif %}
+
+			</table>
+		</td>
+	</tr>
+
+	{# Columns x2 ============================================================= #}
+
+	<tr>
+		<td height="100%" valign="top" width="100%" style="padding: 0 10px 40px 10px; background-color: #ffffff;">
+			<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
+				<tr>
+					<td valign="top" width="50%">
+						<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 14px; text-align: left;">
+							<tr>
+								<td style="text-align: center; padding: 0 10px;">
+									<a href="{{ siteUrl }}#the-ceremony">
+										<img src="https://www.mcdonoughwedding.com/assets/uploads/_280x120_crop_center-center_60_none/church.jpg" width="280" height="" alt="{{ sections|find('the-ceremony').subheading }}" border="0" style="width: 100%; max-width: 280px; background: #dddddd; font-family: sans-serif; font-size: 15px; line-height: 15px; color: #555555;">
+										{# <img src="{{ siteUrl ~ sections|find('the-ceremony').featuredImage.one.getUrl(thumb) }}" width="280" height="" alt="{{ sections|find('the-ceremony').subheading }}" border="0" style="width: 100%; max-width: 280px; background: #dddddd; font-family: sans-serif; font-size: 15px; line-height: 15px; color: #555555;"> #}
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td style="text-align: left; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; padding: 10px 10px 0;">
+									<a href="{{ siteUrl }}#the-ceremony">
+										<p style="margin: 0;"><strong>{{ sections|find('the-ceremony').subheading }}</strong><br>Click here for all the details about the cemeony.</p>
+									</a>
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td valign="top" width="50%">
+						<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 14px; text-align: left;">
+							<tr>
+								<td style="text-align: center; padding: 0 10px;">
+									<a href="{{ siteUrl }}#travel-information">
+										<img src="https://www.mcdonoughwedding.com/assets/uploads/_280x120_crop_center-center_60_none/burren-road-trip.jpg" width="280" height="" alt="{{ sections|find('travel-information').subheading }}" border="0" style="width: 100%; max-width: 280px; background: #dddddd; font-family: sans-serif; font-size: 15px; line-height: 15px; color: #555555;">
+										{# <img src="{{ siteUrl ~ sections|find('travel-information').featuredImage.one.getUrl(thumb) }}" width="280" height="" alt="{{ sections|find('travel-information').subheading }}" border="0" style="width: 100%; max-width: 280px; background: #dddddd; font-family: sans-serif; font-size: 15px; line-height: 15px; color: #555555;"> #}
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td style="text-align: left; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; padding: 10px 10px 0;">
+									<a href="{{ siteUrl }}#travel-information">
+										<p style="margin: 0;"><strong>{{ sections|find('travel-information').subheading }}</strong><br>We've researched the best ways for you to get around.</p>
+									</a>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+
+{% endblock %}

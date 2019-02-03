@@ -23,6 +23,6 @@ return [
       ],
     ]
   ],
-  'bootstrap' => ['helpers', 'template-maker'],
-  // 'bootstrap' => ['helpers', 'general'],
+  'bootstrap' => ['helpers'],
+  // 'bootstrap' => ['helpers', 'general', 'template-maker'],
 ];

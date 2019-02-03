@@ -27,9 +27,9 @@ return [
 
     // Booleans ----------------------------------------------------------------
 
-    'devmode'    => Helpers::$app->request->devmode(),
-    'admin'      => Helpers::$app->request->admin(),
-    'desktop'    => !Craft::$app->getRequest()->isMobileBrowser(true),
+    'devmode' => Helpers::$app->request->devmode(),
+    'admin'   => Helpers::$app->request->admin(),
+    'desktop' => !Craft::$app->getRequest()->isMobileBrowser(true),
 
     // Browser support criteria ------------------------------------------------
     // The following browsers are supported

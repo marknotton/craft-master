@@ -8,7 +8,7 @@
 
 {% set element = element ?? product ?? entry ?? category ?? tag ?? null %}
 
-{# Content Block ============================================================ #}
+{# Main content ============================================================= #}
 
 {% block content %}
 
@@ -26,7 +26,7 @@
 
 			{# 'cleanup' tags remove empty elements and duplicate line breaks #}
 			{# Some tags are excluded because they are commonly meant to be empty: #}
-			{# iframe, canvas, use, textarea, figure, circle, ellipse, line, path, polygon, polyline, rect, stop, use, symbol, select #}
+			{# iframe, canvas, use, textarea, figure, all svg elements, stop, use, symbol, select #}
 
 			{% cleanup %}
 
@@ -54,4 +54,8 @@
 
 {# Aside Block ============================================================== #}
 
-{% block aside %}{% endblock %}
+{% block aside %}
+
+	{% include "_sections/sidebar" ignore missing %}
+
+{% endblock %}

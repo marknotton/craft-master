@@ -1,16 +1,13 @@
+{# ////////////////////////////////////////////////////////////////////////// #}
+{# News Overview                                                              #}
+{# ////////////////////////////////////////////////////////////////////////// #}
+
 {% extends "_layouts/generic" %}
 
 {% block after %}
 
-	{% set limit = 4 %}
-	{% set articles = craft.entries.section('news').all %}
+	{% include "_components/articles" with { type : 'news', limit : 9, list : craft.entries.section('news').all } %}
 
-	<news-articles data-limit="{{ limit }}" data-total="{{ articles|length }}" data-offset="0">
-
-		{% include 'news/_articles' with { limit : limit } %}
-
-	</news-articles>
-
-	<button class="load-more">{{ "C035"|t }}</button>
+	<button class="button">{{ "C035"|t }}</button>
 
 {% endblock %}

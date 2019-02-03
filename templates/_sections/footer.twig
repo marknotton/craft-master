@@ -8,19 +8,15 @@
 
     {% if 'error' not in page and not craft.helpers.holdingpage() %}
 
-      {% set links = craft.entries.section('help').all %}
+			{# List of links ------------------------------------------------------ #}
 
-      {% if links|length %}
-        <ul>
-          {% for entry in links %}
-            <li>
-              <a href="/{{ entry.uri }}">
-                {{ entry.title }}
-              </a>
-            </li>
-          {% endfor %}
-        </ul>
-      {% endif %}
+			{# {% nav entry in entries %} #}
+
+				{# ... #}
+
+			{# {% endnav %} #}
+
+			{# Links to the CMS for Admin users ----------------------------------- #}
 
       {% if admin or devmode %}
         <admin-links>
@@ -33,10 +29,14 @@
 
     {% endif %}
 
+		{# Small Print ---------------------------------------------------------- #}
+
     <small>
       {{ ("&copy; Copyright " ~ ' ' ~ siteName|default ~ ' ' ~ ("now")|date('Y'))|raw }}<br>
 			<a class="yello" href="https://www.yello.studio" title="Designed and developed by Yello Studio" target="_blank">Website developed by <em>Yello Studio</em></a>
     </small>
+
+		{# Social Media Links --------------------------------------------------- #}
 
     {% include "_components/social" ignore missing %}
 

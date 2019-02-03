@@ -8,16 +8,8 @@
 
 {% block content %}
 
-	{% cache globally using key 'unsubscribe' %}
+  <h2>{{ "C004"|t }}</h2>
 
-		<main>
-
-      <h2>{{ "C004"|t }}</h2>
-
-			{% include "_forms/unsubscribe" with { legend : 'M010'} %}
-
-		</main>
-
-	{% endcache %}
+	{% include "_forms/unsubscribe" with { legend : 'M010'} %}
 
 {% endblock %}

@@ -6,9 +6,13 @@
 
 {{ agentEnabled ? craft.agent.redirect(browsers) }}
 
+{% set fetched = request is defined and request is not empty and (request == 'fetch' or request == 'ajax') %}
+
 {% spaceless %}
 
 {% minify %}
+
+{% if not fetched %}
 
 <!DOCTYPE html>
 
@@ -26,7 +30,7 @@
 
   {# Document Body ========================================================== #}
 
-  <body id="{{ page }}" class="{{ craft.helpers.classes(classes|default) }}">
+  <body id="{{ page|replace('-introduction') }}" class="{{ craft.helpers.classes(classes|default) }}">
 
     <site-wrapper>
 
@@ -36,11 +40,11 @@
         {% include "_sections/navigation" %}
       {% endblock %}
 
-      {# Header ----------------------------------------------------------------
-      The 'header' block is reserved for the header content.
-      Using {% block header %} within a template will replace the header element entirely.
-      Using {% set header %} within a template will add to the existing the header element.
-      Using {% set header = false %} within a template will disable the header from rendering at all. #}
+{% endif %}
+
+			{# Header ----------------------------------------------------------------
+			The 'header' block is reserved for the header content.
+			See _sections/header.twig notes for more details on how this works #}
 
       {% set header = header ?? block('header') ?? true %}
 
@@ -59,21 +63,23 @@
 
       {# If both main and aside block types exist. Wrap them in their own custom element. #}
 
-      {{ main is not empty and aside is not empty ? '<main-and-aside>' }}
+      {{ main is not blank and aside is not blank ? '<main-and-aside>' }}
 
       {# Wrap the main block content with the <main> element if it's not present. #}
 
-      {% if main is not empty %}
+      {% if main is not blank %}
         {{ '<main' in main ? main|raw : ('<main>' ~ main ~ '</main>')|raw }}
       {% endif %}
 
       {# Wrap the aside block content with the <aside> element if it's not present. #}
 
-      {% if aside is not empty %}
+      {% if aside is not blank %}
         {{ '<aside' in aside ? aside|raw : ('<aside>' ~ aside ~ '</aside>')|raw }}
       {% endif %}
 
-      {{ main is not empty and aside is not empty ? '</main-and-aside>' }}
+      {{ main is not blank and aside is not blank ? '</main-and-aside>' }}
+
+{% if not fetched %}
 
       {# Footer ------------------------------------------------------------- #}
 
@@ -89,13 +95,15 @@
 
     {# SVG Symbols ---------------------------------------------------------- #}
 
-  	{% cache globally using key 'symbols' if symbols ?? false %}
-      {{ (symbols ?? false) ? svg('symbols') }}
+  	{% cache globally using key 'symbols' %}
+      {{ svg('symbols') }}
     {% endcache %}
 
   </body>
 
 </html>
+
+{% endif %}
 
 {% endminify %}
 

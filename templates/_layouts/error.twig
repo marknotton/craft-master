@@ -4,8 +4,8 @@
 
 {% spaceless %}
 
-{% set title = craft.helpers.title() %}
-{% set status = craft.app.getResponse.getStatusCode() %}
+{% set title   = craft.helpers.title() %}
+{% set status  = craft.app.getResponse.getStatusCode() %}
 {% set message = status != 200 ? craft.helpers.errors[status]['message'] %}
 
 <!DOCTYPE html>
@@ -16,11 +16,9 @@
 
     {% include "_sections/head" %}
 
-    {{ craft.helpers.loadStylesheets() }}
-
   </head>
 
-  <body id="{{ page ?? craft.helpers.page() }}" class="{{ craft.helpers.classes(classes ?? null) }}">
+  <body>
 
     <site-wrapper>
 

@@ -1,0 +1,30 @@
+{# ////////////////////////////////////////////////////////////////////////// #}
+{# Landing                                                                    #}
+{# ////////////////////////////////////////////////////////////////////////// #}
+
+{# What is this for? ===========================================================
+
+	It's a reocuring situation where you may have a Section or Channel with an
+	accompanuning Single acting as a sort of parent. These landing pages are
+	often an overview of all child pages listed out in an engaging way. These pages
+	play a bigger role for SEO purposes but are helpful for coheirant navigation too.
+
+============================================================================= #}
+
+{% extends '_layouts/generic' %}
+
+{% block after %}
+
+	{% if element.section.type == 'single' %}
+
+		{% set children = children ?? craft.entries.section(element.section.handle|replace('Intro')).all ?? false %}
+
+		{% nav entry in children if children is not blank %}
+
+			...
+
+		{% endif %}
+
+	{% endnav %}
+
+{% endblock %}

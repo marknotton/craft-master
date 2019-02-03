@@ -1,0 +1,253 @@
+{# ////////////////////////////////////////////////////////////////////////// #}
+{# Emailer Layout                                                             #}
+{# NOTE : https://tedgoas.github.io/Cerberus/                                 #}
+{# ////////////////////////////////////////////////////////////////////////// #}
+
+{% set submission = submission ?? {
+	  "fromName" : "Mark Notton",
+	  "fromEmail" : "mark@marknotton.uk",
+		"attending": "yes",
+		"transport": "no",
+	  "subject" : '',
+	  "message" : {
+	    "attending" : "yes"
+	  }
+} %}
+
+{# {% set image = siteUrl ~ (image ?? '/assets/images') ~ '/emailer/' %} #}
+{% set image = 'https://www.mcdonoughwedding.com' ~ (image ?? '/assets/images') ~ '/emailer/' %}
+{% set thumb  = {'mode' : 'crop', 'width' : 280, 'height' : 120, 'quality' : 60 } %}
+{% set backgroundImage = 'https://www.mcdonoughwedding.com/assets/images/wallpaper.jpg' %}
+
+{# Spacer =================================================================== #}
+
+{% set spacer %}
+<tr>
+	<td aria-hidden="true" height="40" style="font-size: 0px; line-height: 0px;">
+		&nbsp;
+	</td>
+</tr>
+{% endset %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="{{ craft.app.language|default('en') }}" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="x-apple-disable-message-reformatting">
+
+		<title>{{ (submission['subject'] ?? false) ? submission['subject']|t|render_text : "M011"|t|render_text }}</title>
+
+		{# Web Fonts ============================================================ #}
+
+		{# Desktop Outlook chokes on web font references and defaults to
+		   Times New Roman, so we force a safe fallback font. #}
+
+		<!--[if mso]>
+			<style>	* { font-family: sans-serif !important;	}	</style>
+		<![endif]-->
+
+		{# All other clients get the webfont reference; some will render the font
+		   and others will silently fail to the fallbacks. #}
+
+		<!--[if !mso]><!-->
+			{# <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'> #}
+		<!--<![endif]-->
+
+		{# CSS Injection ======================================================== #}
+
+		{% if craft.request.isAjax %}
+			<style type="text/css">
+				{{ craft.helpers.filecontent(css ~ filenames.css.emailer) }}
+			</style>
+		{% else %}
+			<link rel="stylesheet" href="{{ css ~ filenames.css.emailer }}" />
+		{% endif %}
+
+		{# Reset list spacing because Outlook ignores inline CSS. =============== #}
+
+		<!--[if mso]>
+			<style type="text/css">
+				ul,	ol { margin: 0 !important; }
+				li { margin-left: 30px !important; }
+				li.list-item-first { margin-top: 0 !important; }
+				li.list-item-last {	margin-bottom: 10px !important;	}
+			</style>
+		<![endif]-->
+
+		<!--[if gte mso 9]>
+			<xml>
+				<o:OfficeDocumentSettings>
+				<o:AllowPNG/>
+				<o:PixelsPerInch>96</o:PixelsPerInch>
+				</o:OfficeDocumentSettings>
+			</xml>
+		<![endif]-->
+
+	</head>
+
+	<body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #F2F2F2;">
+
+		<center style="width: 100%; background-color: #222222;">
+
+			{# Background Image =================================================== #}
+
+			{% if backgroundImage ?? false %}
+
+				<div style="background-color:#F2F2F2;">
+
+				  <!--[if gte mso 9]>
+				  <v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
+				    <v:fill type="tile" src="{{ backgroundImage }}" color="#F2F2F2"/>
+				  </v:background>
+				  <![endif]-->
+
+				  <table height="100%" width="100%" cellpadding="0" cellspacing="0" border="0">
+				    <tr>
+				      <td valign="top" align="left" background="{{ backgroundImage }}">
+
+			{% endif %}
+
+			{# Visually Hidden Preheader Text ===================================== #}
+
+			<div style="display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
+				{% block preheader %}
+					You're receiving this email due to a submission via {{ siteName }}.
+				{% endblock %}
+			</div>
+
+			{# Create white space after the desired preview text so email clients don’t
+			   pull other distracting text into the inbox preview. #}
+			<div style="display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
+				&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
+			</div>
+
+			{# Container ========================================================== #}
+
+			<div style="max-width: 600px; margin: 0 auto;" class="container">
+
+				<!--[if mso]>
+				<table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="600">
+				<tr>
+				<td>
+				<![endif]-->
+
+				<table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 0 auto;">
+
+					{# {{ spacer }} #}
+
+					{# Sub Header ------------------------------------------------------- #}
+
+					{# <tr>
+						<td style="padding: 20px 0; text-align: center">
+							<img src="https://via.placeholder.com/200x50" width="200" height="50" alt="alt_text" border="0" style="height: auto; background: #dddddd; font-family: sans-serif; font-size: 15px; line-height: 15px; color: #555555;">
+						</td>
+					</tr> #}
+
+					{# ---------------------------------------------------------------- #}
+					{# Main Content                                                     #}
+					{# ---------------------------------------------------------------- #}
+
+					<tr>
+						<td style="background-color: #ffffff; ">
+							<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+								<tr>
+									<td style="padding: 20px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;">
+
+										{% block content %}
+
+											<tr>
+												<td>
+													<ul>
+														{% for key, value in submission %}
+															{% if value is array or value is object %}
+																<li><strong>{{ key }}</strong>:
+																	<ul>
+																		{% for key, value in value %}
+																			<li><strong>{{ key }}</strong>: {{ value }}</li>
+																		{% endfor %}
+																	</ul>
+																</li>
+															{% else %}
+																<li><strong>{{ key }}</strong>: {{ value }}</li>
+															{% endif %}
+														{% endfor %}
+													</ul>
+												</td>
+											</tr>
+
+										{% endblock %}
+
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+
+				</table>
+
+				{# External Links --------------------------------------------------- #}
+
+				<table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 0 auto;">
+					<tr>
+						<td style="padding: 20px; font-family: sans-serif; font-size: 12px; line-height: 15px; text-align: center; color: #888888;">
+							<a style="color: #888888; text-decoration: underline;" href="{{ siteUrl }}">Official Website</a>
+							{# | #}
+							{# <unsubscribe style="color: #888888; text-decoration: underline;">{{ 'F018'|t }}</unsubscribe> #}
+						</td>
+					</tr>
+				</table>
+
+				<!--[if mso]>
+				</td>
+				</tr>
+				</table>
+				<![endif]-->
+
+			</div>
+
+			{# Small Print -------------------------------------------------------- #}
+
+			<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color:#ffffff;">
+				<tr>
+					<td valign="top">
+						<div align="center" style="max-width: 640px; margin: auto;" class="container">
+							<!--[if mso]>
+							<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="640" align="center">
+							<tr>
+							<td>
+							<![endif]-->
+							<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+								<tr>
+									<td style="padding: 20px; text-align: left; font-family: sans-serif; font-size: 11px; line-height: 20px; color: #D4D4D4;">
+										<p style="margin: 0; font-size: 11px; line-height: 18px; color: #D4D4D4;">{{ 'M012'|t|render_text }}</p>
+									</td>
+								</tr>
+							</table>
+							<!--[if mso]>
+							</td>
+							</tr>
+							</table>
+							<![endif]-->
+						</div>
+					</td>
+				</tr>
+			</table>
+
+			<!--[if mso | IE]>
+			</td>
+			</tr>
+			</table>
+			<![endif]-->
+
+			{% if backgroundImage ?? false %}
+				</td></tr></table></div>
+			{% endif %}
+
+		</center>
+
+	</body>
+</html>

@@ -5,13 +5,18 @@
 {% block content %}
   <main>
     {{ svg('logo') }}
-    {% if environment == "staging" %}
-      <h1>{{ "E008"|t|render }}</h1>
+
+		{% if environment == "staging" %}
+
+		  <h1>{{ "E008"|t|render }}</h1>
       <p>{{ "E009"|t }}</p>
-      <a class="back-button" href="{{ siteUrl|replace('staging.', 'www.') }}">{{ "E010"|t }}</a>
-    {% else %}
-      <h1>{{ "E025"|t }}</h1>
+      <a class="button" href="{{ siteUrl|replace('staging.', 'www.') }}">{{ symbol('arrow-left') }}{{ "E010"|t }}</a>
+
+	  {% else %}
+
+			<h1>{{ "E025"|t }}</h1>
       <p>{{ "E026"|t }}</p>
-    {% endif %}
+
+		{% endif %}
   </main>
 {% endblock %}

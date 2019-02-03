@@ -1,5 +1,5 @@
 {# ////////////////////////////////////////////////////////////////////////// #}
-{# Head                                                                   #}
+{# Head                                                                       #}
 {# ////////////////////////////////////////////////////////////////////////// #}
 
 {# Important ---------------------------------------------------------------- #}
@@ -23,7 +23,7 @@ Using the Agent plugin, check if the current device is an Apple device  #}
 
 	{# SEOMatic --------------------------------------------------------------- #}
 
-  {% do seomatic.meta.seoTitle(seomatic.meta.seoTitle == '{entry.title}' or seomatic.meta.seoTitle is empty ? title : seomatic.meta.seoTitle) %}
+  {% do seomatic.meta.seoTitle(seomatic.meta.seoTitle == '{entry.title}' or seomatic.meta.seoTitle is empty ? title|t : seomatic.meta.seoTitle|t) %}
   {% if entry ?? false ? not entry.isFieldEmpty('introduction') : (category ?? false ? not category.isFieldEmpty('introduction') : null) %}
     {% do seomatic.meta.seoDescription(seomatic.meta.seoDescription is not empty ? seomatic.meta.seoDescription : (entry.introduction ?? category.introduction ?? title)|description) %}
   {% endif %}

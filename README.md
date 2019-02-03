@@ -1,32 +1,33 @@
 # Craft Master
 
-## Introduction
+### Requirements
 
-### Minimum Requirements
-
-| Service   | Version
+| Tool/App  | Version
 | --------- | --
+| Craft CMS | 3.1.0
+| Gulp-CLI  | 2.0.1
+| Gulp      | 4.0.0
 | NPM       | 6.4.1
-| Node JS   | 10.0.0
+| Node JS   | 10.13.0
 | Composer  | 1.6.3
 | PHP       | 7.0
 | mySQL     | 5.6
-| Craft CMS | 3.0.22
 
 ### Set up
+
 Once you've pulled the latest commit down. You should only need to run one command to get all dependancies installed locally (this also runs `npm install` automatically):
 
 `composer install`
 
-You will need to occasionally run `composer update` and `npm update` if there are any changes to the *composer.json* or *package.json* files. If you experience any issues, you can try manually installing NPM packages using this command `npm install`
+You can also run `composer update` and/or `npm update` if you want to update the packages for this project. Some updates may introduce breaking changes, so be sure read developer notes and run tests everything afterwards.
 
-Once your local server environment is set up (using Mamp), you should only need to run a `gulp serve` to get going.
+Once your local server environment is set up (using MAMP normally), you should only need to run a `gulp serve` to get started.
 
-### Database Connection
+### .ENV & Database Connection
 
-A `.env` found in the project root contains database credentials. This file should never be committed to the repo. Which is why new installations of this project may not work out of the box. You can create a new one by referring to the `.env.example` as a template.
+You MUST create a `.env` in the project root. This file should never be committed to the repo. Which is why new installations of this project will not have one. You can create a new one by referring to the `.env.example` as a template. You will need update the details for your project include the 'SERVER_NAME' value to whatever you've called hostname in MAMP. This one is only required for local development.
 
-You may run into an issue where your Security Key is not defined in your `.env` file. Open up you're Command Line (Terminal) and locate your project directory. Then run this command: `./craft setup/security-key`. This will update your security key. For more information refer to the [official guide](https://docs.craftcms.com/v3/installation.html#step-3-set-a-security-key). 
+There may be cases where your Security Key is not defined in your `.env` file. Open up you're Command Line (Terminal) and locate your project directory. Then run this command: `./craft setup/security-key`. This will update your security key. For more information refer to the [official guide](https://docs.craftcms.com/v3/installation.html#step-3-set-a-security-key).
 
 ## Git
 Following best-practice, you should never work directly on the `master` branch. The master branch is reserved as a sort-of clone of exactly what's on the live production site. Instead, you must work from another branch (staging) and pull-request these into the `master` branch when your changes are done.
@@ -34,3 +35,20 @@ Following best-practice, you should never work directly on the `master` branch. 
 ### Credentials
 
 In an effort to keep all essential account credentials secure and in one relevant place, please refer and update the 'credentials.md' file in the root of this project.
+
+### Whats-what
+
+| File              | Purpose
+| ---------------- | ------------------------------------------------------------
+| .atomignore       | Hides files & folder in tree view and fuzzy finder for the Atom Editor commonly used for development
+| .babelrc          | Options for babel allowing the use of ES6 when run locally.
+| .gitignore        | Omit files or folders from being committed to repositories. Important for excluding sensitive data and large assets.
+| .env.example      | See notes above about .ENV. This file is purely for demonstration purposes and can be deleted
+| composer.json     | Handles all your composer settings, including dependancies like plugins and modules.
+| composer.lock     | Generated automatically when composer update is run. Retains dependency library information. This should always be committed.
+| craft/craft.bat   | Command line bootstrap for Windows and Linux.
+| deploy.php        | Methods for deploying to specific environments. It refers to config.json for credentials and settings.
+| gulpfile.babel.js | Handles precomposing of tasks to render scripts/css/svg's etc... The `.babel.` bit means you can uses ES6 based on your '.babelrc' settings.
+| icon.png          | A purely aesthetic icon for notification messages and to make Sourcetree project listings easier to identify.
+| package.json      | Used for Node settings and to install dependancies mainly for Gulp tasks.
+| package-lock.json | Basically the same thing as `composer.lock`, only for Node packages instead.

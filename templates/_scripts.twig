@@ -142,7 +142,7 @@
   // Script files to load
   {# This will manage the file names as per the versioning options #}
   {# Or you can simply return an array #}
-  var scripts = {{ craft.helpers.getScripts(js)|raw }};
+  var scripts = {{ scripts|json_encode|raw }};
 
 	if ( typeof pollyfills !== 'undefined' && pollyfills.length ) {
 		var scripts = pollyfills.concat(scripts);

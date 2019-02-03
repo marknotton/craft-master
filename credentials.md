@@ -1,58 +1,48 @@
-# Credentials 🔧
-
-## Craft CMS
-
-| -                                      | Production                             | Staging                                | Development          
-|:---------------------------------------|:---------------------------------------|:---------------------------------------|:---------------------------------------
-| Admin                                  | www.website.com/admin                  | staging.website.com/admin              | www.website.loc/admin
-| Username                               | yello                                  | yello                                  | yello                        
-| Password                               | 5xxxxxxK                               | 5xxxxxxK                               | 5xxxxxxK            
+# Project Credentials
 
 ## Environments
 
-| -                                      | Production                             | Staging                                | Development          
-|:---------------------------------------|:---------------------------------------|:---------------------------------------|:---------------------------------------
-| Domain                                 | www.website.com                        | staging.website.com                    | www.website.loc
-| IP Address                             | 192.168.0.0                            | 192.168.0.0                            | 192.168.0.93
-| Control Panel                          | [WHM](https://)                        | [WHM](https://)                        | -
-| Username                               | -                                      | -                                      | -                        
-| Password                               | ***                                    | ***                                    | -                            
+| -                                      | Production                          | Staging                                    
+|:---------------------------------------|:------------------------------------|:------------------------------------
+| Domain                                 | http://www.website.uk               | http://staging.website.uk           
+| IP Address                             | 201.xxx.xxx.xx                      | 201.xxx.xxx.xx                             
+| Username                               | ***                                 | ***
+| Password                               | 5xxxxxxx                            | 5xxxxxxx
 
 ## SSH / FTP
 
-| -                                      | Production                             | Staging                                | Development          
-|:---------------------------------------|:---------------------------------------|:---------------------------------------|:---------------------------------------
-| Host                                   | 206.xxx.xxx.xx                         | 206.xxx.xxx.xx                         | -                              
-| Username                               | -                                      | -                                      | -                                     
-| Password                               | ***                                    | ***                                    | -                            
-| Port                                   | 822                                    | 822                                    | -
-| Protocol                               | SFTP                                   | SFTP                                   | -
-| Command                                | `ssh root@192.168.0.xxx -p 822`        | `ssh root@192.168.0.xxx -p 822`        | -
+| -                                      | Production                          | Staging                                    
+|:---------------------------------------|:------------------------------------|:-------------------------------------
+| Host                                   | 201.xxx.xxx.xx                      | 201.xxx.xxx.xx                             
+| Username                               | production@website.uk               | staging@website.uk                  
+| Password                               | ***                                 | ***                               
+| Command                                | `ssh root@201.xxx.xxx.xx`           | `ssh root@201.xxx.xxx.xx`
+| Port                                   | 822                                 | 882   
+| Protocol                               | FTP                                 | FTP    
 
 ## Databases
 
-| -                                      | Production                             | Staging                                | Development          
-|:---------------------------------------|:---------------------------------------|:---------------------------------------|:---------------------------------------
-| Host                                   | 127.0.0.1                              | 127.0.0.1                              | 192.168.0.93  
-| Name                                   | -                                      | -                                      | -     
-| Username                               | -                                      | -                                      | root                
-| Password                               | ***                                    | ***                                    | ***           
-| Prefix                                 | *empty*                                | *empty*                                | *empty*          
-| Port                                   | *empty*                                | *empty*                                | *empty*
+| -                                      | Production                          | Staging                               
+|:---------------------------------------|:------------------------------------|:--------------------------------------
+| Host                                   | 127.0.0.1                           | 206.xxx.xxx.xx                        
+| Name                                   | website_production                  | website_staging                       
+| Username                               | website_production                  | website_staging                       
+| Password                               | ***                                 | ***                                   
+| Prefix                                 | *empty*                             | *empty*                               
+| Port                                   | *empty*                             | *empty*                               
 
 ## Deployer
 
-| -                                      | Production                             | Staging                                | Development          
-|:---------------------------------------|:---------------------------------------|:---------------------------------------|:---------------------------------------
-| Branch                                 | production                             | staging                                | -
-| Command                                | `dep deploy production`                | `dep deploy staging`                   | -
-| Password                               | ***                                    | ***                                    | -
+| -                                      | Production                          | Staging                                
+|:---------------------------------------|:------------------------------------|:--------------------------------------
+| Branch                                 | production                          | staging                                
+| Command                                | `dep deploy production`             | `dep deploy staging`                   
 
-## Hosting Company
+## Hosting
 
-| -                                      | Production                             | Staging                                | Development          
-|:---------------------------------------|:---------------------------------------|:---------------------------------------|:---------------------------------------
-| Company                                | Digital Ocean                          | Heart                                  | -           
-| Username                               | -                                      | -                                      | -       
-| Password                               | ***                                    | ***                                    | -        
-| Website                                | [Admin](https://)                      | [Admin](https://)                      | -
+| -                                      | Production                          | Staging                                
+|:---------------------------------------|:------------------------------------|:-------------------------------------
+| Provider                               | Digital Ocean                       | Digital Ocean                                
+| Username                               | root                                | root                  
+| Password                               | ***                                 | ***    
+| Website                                | http://www.website.uk/whm           | http://staging.website.uk/whm

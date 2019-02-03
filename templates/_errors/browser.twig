@@ -19,10 +19,8 @@
 		{% set browser = (agentEnabled ?? false) ? craft.agent.full.name ~ ' ' ~ craft.agent.full.version|round : "Browser" %}
 
     <h1>{{ browser }} {{ 'E002'|t }}</h1>
-
 	  <p>{{ 'E003'|t }}</p>
-
-		<a class="back-button" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">{{ 'E004'|t }}</a>
+		<a class="button" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">{{ 'E004'|t }}{{ symbol('arrow-right') }}</a>
 
   </main>
 

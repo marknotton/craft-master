@@ -1,0 +1,96 @@
+{# ////////////////////////////////////////////////////////////////////////// #}
+{# Notification Emailer                                                       #}
+{# This is the template used when notifying the client of a new submission    #}
+{# ////////////////////////////////////////////////////////////////////////// #}
+
+{% extends '_layouts/emailer' %}
+
+{# -------------------------------------------------------------------------- #}
+{# Preheader                                                                  #}
+{# -------------------------------------------------------------------------- #}
+
+{% block preheader %}
+	{% if submission['message']['attending'] %}
+		Good news! {{ submission['fromName'] }} is coming to your wedding!
+	{% else %}
+		Sorry. {{ submission['fromName'] }} said they can't come to your wedding.
+	{% endif %}
+{% endblock %}
+
+{# -------------------------------------------------------------------------- #}
+{# Content                                                                    #}
+{# -------------------------------------------------------------------------- #}
+
+{% block content %}
+
+	{# Header ================================================================= #}
+
+	<tr>
+		<td style="background-color: #ffffff;">
+			<img src="{{ image ~ 'logo.jpg' }}" width="600" height="" alt="{{ siteName }}" border="0" style="width: 100%; max-width: 600px; height: auto; font-family: sans-serif; font-size: 15px; line-height: 15px; margin: auto;" class="g-img">
+		</td>
+	</tr>
+
+	{{ spacer }}
+
+	{# Body =================================================================== #}
+
+	<tr>
+		<td style="background-color: #ffffff;">
+			<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+				<tr>
+					<td style="padding: 0 20px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;">
+
+						<h1 style="margin: 0; font-family: sans-serif; font-size: 25px; line-height: 30px; color: #333333; font-weight: normal;">
+							You've had a RSVP submission
+						</h1>
+
+
+
+					</td>
+				</tr>
+
+				{# List ------------------------------------------------------------- #}
+
+				<tr>
+					<td style="padding: 20px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;">
+
+						<h2 style="margin: 0 0 10px 0; font-family: sans-serif; font-size: 18px; line-height: 22px; color: #333333; font-weight: bold;">
+							{{ submission['fromName'] }}'s submission details.
+						</h2>
+
+						<ul style="padding: 0; margin: 0 0 10px 0; list-style-type: disc;">
+							{% for key, value in submission %}
+
+								{% if key == 'message' %}
+
+									{% for _key, _value in value %}
+
+										{% if _value != '' %}
+											<li style="margin:0 0 10px 30px;">
+												<strong>{{ _key|replace({'fromName' : 'Name', 'fromEmail' : 'Email' })|title }}</strong>: {{ _value }}
+											</li>
+										{% endif %}
+
+									{% endfor %}
+
+								{% elseif value != '' %}
+
+									<li style="margin:0 0 10px 30px;">
+										<strong>{{ key|replace({'fromName' : 'Name', 'fromEmail' : 'Email' })|title }}</strong>: {{ value }}
+									</li>
+
+								{% endif %}
+
+							{% endfor %}
+
+						</ul>
+
+					</td>
+				</tr>
+
+			</table>
+		</td>
+	</tr>
+
+{% endblock %}

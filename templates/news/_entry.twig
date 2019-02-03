@@ -1,15 +1,17 @@
+{# ////////////////////////////////////////////////////////////////////////// #}
+{# News Entry                                                                 #}
+{# ////////////////////////////////////////////////////////////////////////// #}
+
 {% extends "_layouts/generic" %}
 
 {% block after %}
 
-  <section id="quick-news-links">
+	<related-articles>
 
-    <h2>{{ "C003"|t }}</h2>
+	  <h2>{{ "C003"|t }}</h2>
 
-    <div>
-      {% include "news/_articles" with { limit : 3 } %}
-    </div>
+	  {% include "_components/articles" with { type : 'news', limit : 3, list : craft.entries.section('news').all } %}
 
-  </section>
+	</related-articles>
 
 {% endblock %}

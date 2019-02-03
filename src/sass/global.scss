@@ -1,490 +1,492 @@
-////////////////////////////////////////////////////////////////////////////////
-// Global Styling
-////////////////////////////////////////////////////////////////////////////////
+@debug 'sass';
 
-body {
-  site-wrapper {
-    display:flex;
-    flex-direction:column;
-    min-height: 100vh;
-    min-width:$min;
-    width:100%;
-		&:before {
-			content:"";
-			top:0; left:0;
-			width:100%; height:100%;
-      position:fixed;
-			background-color:col(black, 0.9);
-			z-index:10;
-			pointer-events:none;
-			opacity:0;
-			@include transition(opacity);
-		}
-  }
-	&.locked {
-		site-wrapper {
-			&:before { opacity:1; }
-		}
-    @include devices(mobile tablet) {
-      site-wrapper { height:inherit; }
-    }
-  }
-	@include outside-break($min) {
-		overflow-x:hidden;
-	}
-  @include selection(secondary);
-	&.dev-environment {
-		@include show-breakpoints();
-	}
-}
-
-h1 { font-weight:bold; margin-bottom:$gap; color:$text-colour;}
-h2, h3, h4, h5, h6 { margin-bottom:$gap0; color:$text-colour;}
-
-h1, %h1 { @include responsive-fontsize($h1, $h2); line-height:1; }
-h2, %h2 { @include responsive-fontsize($h2, $h3); line-height:1; }
-h3, %h3 { @include responsive-fontsize($h3, $h4); line-height:1; }
-h4, %h4 { @include responsive-fontsize($h4, $h5); line-height:1; }
-h5, %h5 { @include responsive-fontsize($h5, $h6); line-height:1; }
-h6, %h6 { @include responsive-fontsize($h6, $font-size); line-height:1; }
-
-q, blockquote {
-  quotes: "“" "”" "‘" "’";
-  &:before { content: open-quote; }
-  &:after { content: close-quote; }
-}
-
-a { @include transition(color); }
-
-pre {
-	background-color:white;
-  color:black;
-  text-transform:none;
-  text-decoration:none;
-  text-align:left;
-  display:block;
-  padding:$gap;
-  position:relative;
-  z-index:999;
-}
-
-// =============================================================================
-// Logo
-// =============================================================================
-
-svg.logo {
-
-}
-
-.icon {
-
-}
-
-// =============================================================================
-// Arrow Icons
-// =============================================================================
-
-svg[class*="arrow-"] {
-	stroke:var(secondary);
-	stroke-width:30px;
-	stroke-linecap:round;
-}
-
-// =============================================================================
-// Paralax
-// =============================================================================
-
-[paralax] {
-  &[image] {
-    background-position: center var(--paralax, 50%) $imp;
-    img {
-      object-position: center var(--paralax, 50%) $imp;
-    }
-  }
-}
-
-// =============================================================================
-// Stylised List
-// =============================================================================
-
-%stylised-list {
-	> ol, > ul { margin-bottom:$gap;
-		li { position:relative; display:block; padding-left:20px;
-			&:not(:last-of-type) { margin-bottom:5 + $gap0; }
-			a { text-decoration:none;}
-			&:before { color: var(primary); position:absolute; top:1px; left:0; }
-		}
-	}
-	> ul li:before { content:$circle; }
-	> ol { counter-reset: counter;
-		> li:before {
-			content: counter(counter)'.';
-			counter-increment: counter;
-			font-weight:bold;
-		}
-	}
-}
-
-// =============================================================================
-// Buttons
-// =============================================================================
-
-// NOTE: See _layouts/stylesheet.twig for guidance on how to use these button styles within HTML
-// Alternatively you can apply styles with the extend property in sass. No HTML classnames requred.
-
-// a { @extend .button; }
-// a { @extend .button.big; }
-// a { @extend .button-small; }
-// a { @extend .button-big; --button-theme:#E95838; }
-// a { @extend .button-big, .yellow; }
-// a { @extend .button-big, .special; }
-
-.button {
-
-	--button-theme:#{var(secondary)};
-
-	&.inverse { --button-theme : #{$white}; }
-	&.white   { --button-theme : #{$white}; }
-	&.black   { --button-theme : #{$black}; }
-	&.red     { --button-theme : #{$red}; }
-	&.blue    { --button-theme : #{$blue}; }
-	&.pink    { --button-theme : #{$pink}; }
-	&.purple  { --button-theme : #{$purple}; }
-	&.grey    { --button-theme : #{$grey}; }
-	&.yellow  { --button-theme : #{$yellow}; }
-	&.green   { --button-theme : #{$green}; }
-
-	position: relative;
-	display:inline-flex;
-	align-items:center;
-	padding:$gap0+2 $gap + 5;
-	white-space:nowrap;
-	text-transform: uppercase;
-	font-size:16px; line-height:1;
-	border:1px solid transparent;
-	@extend .bold;
-	@include border-radius;
-
-	// Standard Button Colours
-	@include button(
-		$transitions : color background-color border-color,
-		$initial:(
-			'background' : var(button-theme),
-			'colour'     : white,
-			'stroke'     : white,
-			'fill'       : white,
-			'border'     : transparent,
-		),
-		$hover:(
-			'background' : white,
-			'colour'     : var(button-theme),
-			'stroke'     : var(button-theme),
-			'fill'       : var(button-theme),
-			'border'     : var(button-theme),
-			'important'  : true
-		),
-	);
-
-	&.white {
-		@include button(
-			$initial:(
-				'background' : white,
-				'colour'     : var(secondary),
-				'stroke'     : var(secondary),
-				'fill'       : var(secondary),
-				'border'     : transparent
-			),
-			$hover:(
-				'background' : var(secondary),
-				'colour'     : white,
-				'stroke'     : white,
-				'fill'       : white,
-				'border'     : transparent,
-				'important'  : true
-			),
-		);
-	}
-
-	// Inverted Button Colours
-	&.inverse {
-		&:not(.white) {
-			@include button(
-				$transitions : color background-color border-color,
-				$initial:(
-					'background' : transparent,
-					'colour'     : var(button-theme),
-					'stroke'     : var(button-theme),
-					'fill'       : var(button-theme),
-					'border'     : var(button-theme)
-				),
-				$hover:(
-					'background' : var(button-theme),
-					'colour'     : white,
-					'stroke'     : white,
-					'fill'       : white,
-					'border'     : transparent,
-					'important'  : true
-				),
-			);
-		}
-		&.white {
-			@include button(
-				$initial:(
-					'background' : transparent,
-					'colour'     : white,
-					'stroke'     : white,
-					'fill'       : white,
-					'border'     : white
-				),
-				$hover:(
-					'background' : white,
-					'colour'     : var(primary),
-					'stroke'     : var(primary),
-					'fill'       : var(primary),
-					'important'  : true
-				),
-			);
-		}
-	}
-	svg {
-		margin-left:$gap0;
-		&[class*="arrow-"]:not([class*="arrow-left"]) {	margin-left:$gap0 + 3; }
-		&[class*="arrow-left"] { margin-left:0; margin-right:$gap0 + 3;	}
-		@include transition(stroke fill);
-
-		@if variable-exists(symbols) {
-			@each $symbol, $settings in $symbols {
-				&.icon-#{$symbol} {
-					@if str-index($symbol, 'arrow-right') or str-index($symbol, 'arrow-left') {
-						@include symbol-size($symbol:$symbol, $height:10px);
-					}	@else if str-index($symbol, 'arrow-up') or str-index($symbol, 'arrow-down') {
-						@include symbol-size($symbol:$symbol, $width:10px);
-					} @else {
-						@include symbol-size($symbol:$symbol, $height:14px);
-					}
-				}
-			}
-		}
-	}
-	&:hover svg[class*="arrow-"] {
-		stroke:white;
-	}
-}
-
-// Big Buttons -----------------------------------------------------------------
-
-.button-big, .button.big {
-	@extend .button;
-	padding:$gap $gap2;
-	font-size:20px;
-	svg {
-		margin-left:$gap;
-		&[class*="arrow-"]:not([class*="arrow-left"]) {	margin-left:$gap; }
-		&[class*="arrow-left"] { margin-left:0; margin-right:$gap;	}
-
-		@if variable-exists(symbols) {
-			@each $symbol, $settings in $symbols {
-				&.icon-#{$symbol} {
-					@if str-index($symbol, 'arrow-right') or str-index($symbol, 'arrow-left') {
-						@include symbol-size($symbol:$symbol, $height:14px);
-					}	@else if str-index($symbol, 'arrow-up') or str-index($symbol, 'arrow-down') {
-						@include symbol-size($symbol:$symbol, $width:14px);
-					} @else {
-						@include symbol-size($symbol:$symbol, $height:20px);
-					}
-				}
-			}
-		}
-	}
-
-}
-
-// Small Buttons ---------------------------------------------------------------
-
-.button-small, .button.small {
-	@extend .button;
-	padding:$gap0 $gap;
-	font-size:13px;
-	svg {
-		margin-left:$gap0;
-		&[class*="arrow-"]:not([class*="arrow-left"]) {	margin-left:$gap0; }
-		&[class*="arrow-left"] { margin-left:0; margin-right:$gap0;	}
-
-		@if variable-exists(symbols) {
-			@each $symbol, $settings in $symbols {
-				&.icon-#{$symbol} {
-					@if str-index($symbol, 'arrow-right') or str-index($symbol, 'arrow-left') {
-						@include symbol-size($symbol:$symbol, $height:8px);
-					}	@else if str-index($symbol, 'arrow-up') or str-index($symbol, 'arrow-down') {
-						@include symbol-size($symbol:$symbol, $width:8px);
-					} @else {
-						@include symbol-size($symbol:$symbol, $height:11px);
-					}
-				}
-			}
-		}
-	}
-}
-
-// =============================================================================
-// Images
-// =============================================================================
-
-%srcset-image {
-  display:block;
-  background-position:center 33%;
-  background-size:cover;
-	background-repeat:no-repeat;
-  img {
-    display:block;
-    position:absolute;
-    object-fit:cover;
-    object-position:center 33.33%;
-    width:100%; height:100%; max-width:100%; max-height:100%;
-    top:0; left:0;
-    @include browsers(ie, edge) { display:none; }
-  }
-}
-
-%no-image {
-	&[data-desktop*="default-"]:after {
-		content:'No Image';
-		content:attr(data-error);
-		text-transform: uppercase;
-		position:absolute;
-		top:50%; left:50%;
-		color:var(theme, primary);
-		background-color:white;
-		white-space:nowrap;
-		padding:5px 10px;
-		font-weight:bold;
-		@include transform(y -50%, x -50%);
-	}
-}
-
-figure[image] {
-	@extend %full, %srcset-image;
-}
-
-// =============================================================================
-// Video Container
-// =============================================================================
-
-video-container {
-	padding-bottom:map-get($aspect-ratios, 16x10);
-	display:block;
-	position:relative;
-	width:100%; height:auto;
-	&[style*='background-image'] {
-		background-position:center center;
-		background-size: cover;
-		background-repeat:no-repeat;
-		background-color:black;
-	}
-	iframe, canvas {
-		position:absolute;
-		display:block;
-		top:0; left:0;
-		height:100% $imp; width:100% $imp;
-	}
-}
-
-// =============================================================================
-// Notch Devices
-// =============================================================================
-
-@if ( $support-notches ) {
-  html[data-notch] {
-    &[data-notch="left"]  body {  }
-    &[data-notch="right"] body {  }
-    &[data-notch="top"]   body {  }
-  }
-}
-
-// =============================================================================
-// Admin links
-// =============================================================================
-
-admin-links {
-  display:flex;
-  a {
-    display:block; font-size:smaller;
-    &:hover { color: var(primary); }
-  }
-}
-
-// =============================================================================
-// Error pages
-// =============================================================================
-
-body[id^='error'], body[id='holding-page'] {
-
-	display: table;
-
-	site-wrapper {
-		min-height:auto;
-		display: table-cell;
-		vertical-align: middle;
-
-		main {
-	    text-align:center;
-	    @include flex-container(column center center);
-	    @include container();
-	    svg.icon { position:absolute; opacity:0.1; }
-	    .back-button {
-	      @extend %button;
-	    }
-	  }
-	  footer { background:none; }
-
-	}	
-
-}
-
-// =============================================================================
-// Special styling for developers
-// =============================================================================
-
-body.devmode {
-  img:not([alt]) {
-    border: 2px red dashed;
-  }
-}
-
-// =============================================================================
-// Notifications
-// =============================================================================
-
-%notification-bar {
-  content:var(--notification);
-  position:relative;
-  width:100%; display:block;
-  text-align:center;
-  font-size:18px; font-weight:bold; line-height:23px;
-  color:white;
-  padding:$gap0 $gap2;
-  background-color : var(secondary);
-  color:colour-contrast(secondary);
-}
-
-body {
-
-  &.staging-environment.logged-in {
-    --notification : "This is the staging site. Any changes to the CMS may not be transferabled to the live site.";
-    site-wrapper:before {
-      @extend %notification-bar;
-      background-color:$yellow;
-      color:colour-contrast($yellow);
-    }
-  }
-
-  &.dev-environment:not(.devmode) {
-    --notification : "You are in a developer environment, but Craft's devmode is switched off.";
-    site-wrapper:before {
-      @extend %notification-bar;
-      background-color:$red;
-      color:colour-contrast($red);
-    }
-  }
-
-}
+// ////////////////////////////////////////////////////////////////////////////////
+// // Global Styling
+// ////////////////////////////////////////////////////////////////////////////////
+//
+// body {
+//   site-wrapper {
+//     display:flex;
+//     flex-direction:column;
+//     min-height: 100vh;
+//     min-width:$min;
+//     width:100%;
+// 		&:before {
+// 			content:"";
+// 			top:0; left:0;
+// 			width:100%; height:100%;
+//       position:fixed;
+// 			background-color:col(black, 0.9);
+// 			z-index:10;
+// 			pointer-events:none;
+// 			opacity:0;
+// 			@include transition(opacity);
+// 		}
+//   }
+// 	&.locked {
+// 		site-wrapper {
+// 			&:before { opacity:1; }
+// 		}
+//     @include devices(mobile tablet) {
+//       site-wrapper { height:inherit; }
+//     }
+//   }
+// 	@include outside-break($min) {
+// 		overflow-x:hidden;
+// 	}
+//   @include selection(secondary);
+// 	&.dev-environment {
+// 		@include show-breakpoints();
+// 	}
+// }
+//
+// h1 { font-weight:bold; margin-bottom:$gap; color:$text-colour;}
+// h2, h3, h4, h5, h6 { margin-bottom:$gap0; color:$text-colour;}
+//
+// h1, %h1 { @include responsive-fontsize($h1, $h2); line-height:1; }
+// h2, %h2 { @include responsive-fontsize($h2, $h3); line-height:1; }
+// h3, %h3 { @include responsive-fontsize($h3, $h4); line-height:1; }
+// h4, %h4 { @include responsive-fontsize($h4, $h5); line-height:1; }
+// h5, %h5 { @include responsive-fontsize($h5, $h6); line-height:1; }
+// h6, %h6 { @include responsive-fontsize($h6, $font-size); line-height:1; }
+//
+// q, blockquote {
+//   quotes: "“" "”" "‘" "’";
+//   &:before { content: open-quote; }
+//   &:after { content: close-quote; }
+// }
+//
+// a { @include transition(color); }
+//
+// pre {
+// 	background-color:white;
+//   color:black;
+//   text-transform:none;
+//   text-decoration:none;
+//   text-align:left;
+//   display:block;
+//   padding:$gap;
+//   position:relative;
+//   z-index:999;
+// }
+//
+// // =============================================================================
+// // Logo
+// // =============================================================================
+//
+// svg.logo {
+//
+// }
+//
+// .icon {
+//
+// }
+//
+// // =============================================================================
+// // Arrow Icons
+// // =============================================================================
+//
+// svg[class*="arrow-"] {
+// 	stroke:var(secondary);
+// 	stroke-width:30px;
+// 	stroke-linecap:round;
+// }
+//
+// // =============================================================================
+// // Paralax
+// // =============================================================================
+//
+// [paralax] {
+//   &[image] {
+//     background-position: center var(--paralax, 50%) $imp;
+//     img {
+//       object-position: center var(--paralax, 50%) $imp;
+//     }
+//   }
+// }
+//
+// // =============================================================================
+// // Stylised List
+// // =============================================================================
+//
+// %stylised-list {
+// 	> ol, > ul { margin-bottom:$gap;
+// 		li { position:relative; display:block; padding-left:20px;
+// 			&:not(:last-of-type) { margin-bottom:5 + $gap0; }
+// 			a { text-decoration:none;}
+// 			&:before { color: var(primary); position:absolute; top:1px; left:0; }
+// 		}
+// 	}
+// 	> ul li:before { content:$circle; }
+// 	> ol { counter-reset: counter;
+// 		> li:before {
+// 			content: counter(counter)'.';
+// 			counter-increment: counter;
+// 			font-weight:bold;
+// 		}
+// 	}
+// }
+//
+// // =============================================================================
+// // Buttons
+// // =============================================================================
+//
+// // NOTE: See _layouts/stylesheet.twig for guidance on how to use these button styles within HTML
+// // Alternatively you can apply styles with the extend property in sass. No HTML classnames requred.
+//
+// // a { @extend .button; }
+// // a { @extend .button.big; }
+// // a { @extend .button-small; }
+// // a { @extend .button-big; --button-theme:#E95838; }
+// // a { @extend .button-big, .yellow; }
+// // a { @extend .button-big, .special; }
+//
+// .button {
+//
+// 	--button-theme:#{var(secondary)};
+//
+// 	&.inverse { --button-theme : #{$white}; }
+// 	&.white   { --button-theme : #{$white}; }
+// 	&.black   { --button-theme : #{$black}; }
+// 	&.red     { --button-theme : #{$red}; }
+// 	&.blue    { --button-theme : #{$blue}; }
+// 	&.pink    { --button-theme : #{$pink}; }
+// 	&.purple  { --button-theme : #{$purple}; }
+// 	&.grey    { --button-theme : #{$grey}; }
+// 	&.yellow  { --button-theme : #{$yellow}; }
+// 	&.green   { --button-theme : #{$green}; }
+//
+// 	position: relative;
+// 	display:inline-flex;
+// 	align-items:center;
+// 	padding:$gap0+2 $gap + 5;
+// 	white-space:nowrap;
+// 	text-transform: uppercase;
+// 	font-size:16px; line-height:1;
+// 	border:1px solid transparent;
+// 	@extend .bold;
+// 	@include border-radius;
+//
+// 	// Standard Button Colours
+// 	@include button(
+// 		$transitions : color background-color border-color,
+// 		$initial:(
+// 			'background' : var(button-theme),
+// 			'colour'     : white,
+// 			'stroke'     : white,
+// 			'fill'       : white,
+// 			'border'     : transparent,
+// 		),
+// 		$hover:(
+// 			'background' : white,
+// 			'colour'     : var(button-theme),
+// 			'stroke'     : var(button-theme),
+// 			'fill'       : var(button-theme),
+// 			'border'     : var(button-theme),
+// 			'important'  : true
+// 		),
+// 	);
+//
+// 	&.white {
+// 		@include button(
+// 			$initial:(
+// 				'background' : white,
+// 				'colour'     : var(secondary),
+// 				'stroke'     : var(secondary),
+// 				'fill'       : var(secondary),
+// 				'border'     : transparent
+// 			),
+// 			$hover:(
+// 				'background' : var(secondary),
+// 				'colour'     : white,
+// 				'stroke'     : white,
+// 				'fill'       : white,
+// 				'border'     : transparent,
+// 				'important'  : true
+// 			),
+// 		);
+// 	}
+//
+// 	// Inverted Button Colours
+// 	&.inverse {
+// 		&:not(.white) {
+// 			@include button(
+// 				$transitions : color background-color border-color,
+// 				$initial:(
+// 					'background' : transparent,
+// 					'colour'     : var(button-theme),
+// 					'stroke'     : var(button-theme),
+// 					'fill'       : var(button-theme),
+// 					'border'     : var(button-theme)
+// 				),
+// 				$hover:(
+// 					'background' : var(button-theme),
+// 					'colour'     : white,
+// 					'stroke'     : white,
+// 					'fill'       : white,
+// 					'border'     : transparent,
+// 					'important'  : true
+// 				),
+// 			);
+// 		}
+// 		&.white {
+// 			@include button(
+// 				$initial:(
+// 					'background' : transparent,
+// 					'colour'     : white,
+// 					'stroke'     : white,
+// 					'fill'       : white,
+// 					'border'     : white
+// 				),
+// 				$hover:(
+// 					'background' : white,
+// 					'colour'     : var(primary),
+// 					'stroke'     : var(primary),
+// 					'fill'       : var(primary),
+// 					'important'  : true
+// 				),
+// 			);
+// 		}
+// 	}
+// 	svg {
+// 		margin-left:$gap0;
+// 		&[class*="arrow-"]:not([class*="arrow-left"]) {	margin-left:$gap0 + 3; }
+// 		&[class*="arrow-left"] { margin-left:0; margin-right:$gap0 + 3;	}
+// 		@include transition(stroke fill);
+//
+// 		@if variable-exists(symbols) {
+// 			@each $symbol, $settings in $symbols {
+// 				&.icon-#{$symbol} {
+// 					@if str-index($symbol, 'arrow-right') or str-index($symbol, 'arrow-left') {
+// 						@include symbol-size($symbol:$symbol, $height:10px);
+// 					}	@else if str-index($symbol, 'arrow-up') or str-index($symbol, 'arrow-down') {
+// 						@include symbol-size($symbol:$symbol, $width:10px);
+// 					} @else {
+// 						@include symbol-size($symbol:$symbol, $height:14px);
+// 					}
+// 				}
+// 			}
+// 		}
+// 	}
+// 	&:hover svg[class*="arrow-"] {
+// 		stroke:white;
+// 	}
+// }
+//
+// // Big Buttons -----------------------------------------------------------------
+//
+// .button-big, .button.big {
+// 	@extend .button;
+// 	padding:$gap $gap2;
+// 	font-size:20px;
+// 	svg {
+// 		margin-left:$gap;
+// 		&[class*="arrow-"]:not([class*="arrow-left"]) {	margin-left:$gap; }
+// 		&[class*="arrow-left"] { margin-left:0; margin-right:$gap;	}
+//
+// 		@if variable-exists(symbols) {
+// 			@each $symbol, $settings in $symbols {
+// 				&.icon-#{$symbol} {
+// 					@if str-index($symbol, 'arrow-right') or str-index($symbol, 'arrow-left') {
+// 						@include symbol-size($symbol:$symbol, $height:14px);
+// 					}	@else if str-index($symbol, 'arrow-up') or str-index($symbol, 'arrow-down') {
+// 						@include symbol-size($symbol:$symbol, $width:14px);
+// 					} @else {
+// 						@include symbol-size($symbol:$symbol, $height:20px);
+// 					}
+// 				}
+// 			}
+// 		}
+// 	}
+//
+// }
+//
+// // Small Buttons ---------------------------------------------------------------
+//
+// .button-small, .button.small {
+// 	@extend .button;
+// 	padding:$gap0 $gap;
+// 	font-size:13px;
+// 	svg {
+// 		margin-left:$gap0;
+// 		&[class*="arrow-"]:not([class*="arrow-left"]) {	margin-left:$gap0; }
+// 		&[class*="arrow-left"] { margin-left:0; margin-right:$gap0;	}
+//
+// 		@if variable-exists(symbols) {
+// 			@each $symbol, $settings in $symbols {
+// 				&.icon-#{$symbol} {
+// 					@if str-index($symbol, 'arrow-right') or str-index($symbol, 'arrow-left') {
+// 						@include symbol-size($symbol:$symbol, $height:8px);
+// 					}	@else if str-index($symbol, 'arrow-up') or str-index($symbol, 'arrow-down') {
+// 						@include symbol-size($symbol:$symbol, $width:8px);
+// 					} @else {
+// 						@include symbol-size($symbol:$symbol, $height:11px);
+// 					}
+// 				}
+// 			}
+// 		}
+// 	}
+// }
+//
+// // =============================================================================
+// // Images
+// // =============================================================================
+//
+// %srcset-image {
+//   display:block;
+//   background-position:center 33%;
+//   background-size:cover;
+// 	background-repeat:no-repeat;
+//   img {
+//     display:block;
+//     position:absolute;
+//     object-fit:cover;
+//     object-position:center 33.33%;
+//     width:100%; height:100%; max-width:100%; max-height:100%;
+//     top:0; left:0;
+//     @include browsers(ie, edge) { display:none; }
+//   }
+// }
+//
+// %no-image {
+// 	&[data-desktop*="default-"]:after {
+// 		content:'No Image';
+// 		content:attr(data-error);
+// 		text-transform: uppercase;
+// 		position:absolute;
+// 		top:50%; left:50%;
+// 		color:var(theme, primary);
+// 		background-color:white;
+// 		white-space:nowrap;
+// 		padding:5px 10px;
+// 		font-weight:bold;
+// 		@include transform(y -50%, x -50%);
+// 	}
+// }
+//
+// figure[image] {
+// 	@extend %full, %srcset-image;
+// }
+//
+// // =============================================================================
+// // Video Container
+// // =============================================================================
+//
+// video-container {
+// 	padding-bottom:map-get($aspect-ratios, 16x10);
+// 	display:block;
+// 	position:relative;
+// 	width:100%; height:auto;
+// 	&[style*='background-image'] {
+// 		background-position:center center;
+// 		background-size: cover;
+// 		background-repeat:no-repeat;
+// 		background-color:black;
+// 	}
+// 	iframe, canvas {
+// 		position:absolute;
+// 		display:block;
+// 		top:0; left:0;
+// 		height:100% $imp; width:100% $imp;
+// 	}
+// }
+//
+// // =============================================================================
+// // Notch Devices
+// // =============================================================================
+//
+// @if ( $support-notches ) {
+//   html[data-notch] {
+//     &[data-notch="left"]  body {  }
+//     &[data-notch="right"] body {  }
+//     &[data-notch="top"]   body {  }
+//   }
+// }
+//
+// // =============================================================================
+// // Admin links
+// // =============================================================================
+//
+// admin-links {
+//   display:flex;
+//   a {
+//     display:block; font-size:smaller;
+//     &:hover { color: var(primary); }
+//   }
+// }
+//
+// // =============================================================================
+// // Error pages
+// // =============================================================================
+//
+// body[id^='error'], body[id='holding-page'] {
+//
+// 	display: table;
+//
+// 	site-wrapper {
+// 		min-height:auto;
+// 		display: table-cell;
+// 		vertical-align: middle;
+//
+// 		main {
+// 	    text-align:center;
+// 	    @include flex-container(column center center);
+// 	    @include container();
+// 	    svg.icon { position:absolute; opacity:0.1; }
+// 	    .back-button {
+// 	      @extend %button;
+// 	    }
+// 	  }
+// 	  footer { background:none; }
+//
+// 	}
+//
+// }
+//
+// // =============================================================================
+// // Special styling for developers
+// // =============================================================================
+//
+// body.devmode {
+//   img:not([alt]) {
+//     border: 2px red dashed;
+//   }
+// }
+//
+// // =============================================================================
+// // Notifications
+// // =============================================================================
+//
+// %notification-bar {
+//   content:var(--notification);
+//   position:relative;
+//   width:100%; display:block;
+//   text-align:center;
+//   font-size:18px; font-weight:bold; line-height:23px;
+//   color:white;
+//   padding:$gap0 $gap2;
+//   background-color : var(secondary);
+//   color:colour-contrast(secondary);
+// }
+//
+// body {
+//
+//   &.staging-environment.logged-in {
+//     --notification : "This is the staging site. Any changes to the CMS may not be transferabled to the live site.";
+//     site-wrapper:before {
+//       @extend %notification-bar;
+//       background-color:$yellow;
+//       color:colour-contrast($yellow);
+//     }
+//   }
+//
+//   &.dev-environment:not(.devmode) {
+//     --notification : "You are in a developer environment, but Craft's devmode is switched off.";
+//     site-wrapper:before {
+//       @extend %notification-bar;
+//       background-color:$red;
+//       color:colour-contrast($red);
+//     }
+//   }
+//
+// }

@@ -1,0 +1,14 @@
+{
+	"presets": [
+	  ["@babel/preset-env", {
+	    "targets": [
+	      "chrome > 55",
+	      "firefox > 44",
+	      "safari >= 9",
+	      "edge >= 15",
+	      "opera > 50"
+	    ]
+	  }]
+	],
+  "retainLines": true
+}

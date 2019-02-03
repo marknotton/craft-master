@@ -2,16 +2,26 @@
 {# Header                                                                     #}
 {# ////////////////////////////////////////////////////////////////////////// #}
 
+{# How is this used? ===========================================================
+
+	Using {% block header %} within a template will replace this header element entirely.
+	Using {% set header %} within a template will add to the existing the header element.
+	Using {% set header = false %} within a template will disable the header from rendering at all.
+
+============================================================================= #}
+
 <header class="generic">
 
   {% include '_components/image' %}
 
 	<div class="headings">
-		{{ title|h1 }}
-		{{ element is defined and not element.isFieldEmpty('subtitle') and (subtitle ?? true) ? element.subtitle|h2('subtitle') : false }}
+		{{ title|t|h1 }}
+		{{ element is defined and not element.isFieldEmpty('subtitle') and (subtitle ?? true) ? element.subtitle|t|h2('subtitle') : false }}
 	</div>
 
-  {{ element is defined and not element.isFieldEmpty('shortDescription') and (description ?? true) ? element.shortDescription|h2 : false }}
+  {{ element is defined and not element.isFieldEmpty('shortDescription') and (description ?? true) ? element.shortDescription|t|h2 : false }}
+
+	{# Additional Header Content ---------------------------------------------- #}
 
   {{ (header ?? false) and header|type != 'boolean' ? header|raw : false }}
 
