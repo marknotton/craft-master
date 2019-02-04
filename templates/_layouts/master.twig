@@ -6,6 +6,12 @@
 
 {{ agentEnabled ? craft.agent.redirect(browsers) }}
 
+{# Unify any element type to a single common name throughout all templates == #}
+
+{% set element = element ?? product ?? entry ?? category ?? tag ?? false %}
+
+{# Determines wether this content was rendered via a post request =========== #}
+
 {% set fetched = request is defined and request is not empty and (request == 'fetch' or request == 'ajax') %}
 
 {% spaceless %}

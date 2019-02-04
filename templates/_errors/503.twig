@@ -8,9 +8,9 @@
 
 		{% if environment == "staging" %}
 
-		  <h1>{{ "E008"|t|render }}</h1>
+		  <h1>{{ "E008"|t|render_text }}</h1>
       <p>{{ "E009"|t }}</p>
-      <a class="button" href="{{ siteUrl|replace('staging.', 'www.') }}">{{ symbol('arrow-left') }}{{ "E010"|t }}</a>
+      <a class="button" href="{{ siteUrl|replace('staging.', 'www.') }}">{{ "E010"|t }}{{ symbol('arrow-right') }}</a>
 
 	  {% else %}
 

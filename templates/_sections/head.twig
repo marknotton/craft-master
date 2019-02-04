@@ -1,5 +1,5 @@
 {# ////////////////////////////////////////////////////////////////////////// #}
-{# Head                                                                       #}
+{# Head                                                                   #}
 {# ////////////////////////////////////////////////////////////////////////// #}
 
 {# Important ---------------------------------------------------------------- #}
@@ -19,20 +19,48 @@ Using the Agent plugin, check if the current device is an Apple device  #}
 
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, {{ apple|default ? 'viewport-fit=cover, '}}height=device-height">
 
-{% if seomaticEnabled ?? false %}
+{# SEOMatic ----------------------------------------------------------------- #}
+{# Only render SEOMatic meta if a element type exists and is installed #}
 
-	{# SEOMatic --------------------------------------------------------------- #}
+{% if seomaticEnabled ?? false and element ?? false %}
 
-  {% do seomatic.meta.seoTitle(seomatic.meta.seoTitle == '{entry.title}' or seomatic.meta.seoTitle is empty ? title|t : seomatic.meta.seoTitle|t) %}
-  {% if entry ?? false ? not entry.isFieldEmpty('introduction') : (category ?? false ? not category.isFieldEmpty('introduction') : null) %}
-    {% do seomatic.meta.seoDescription(seomatic.meta.seoDescription is not empty ? seomatic.meta.seoDescription : (entry.introduction ?? category.introduction ?? title)|description) %}
-  {% endif %}
+	{# Homepage title should now be contain the page title, only the site name  #}
+	{% if element.uri == '__home__' %}
+		{% do seomatic.meta.seoTitle(siteName|t) %}
+		{% do seomatic.meta.siteNamePosition('none') %}
+	{% endif %}
+
+	{# Unless stated otherwise in the CMS, meta descroptions will fallback to a
+	number of fields whilst checking if the content exists. #}
+
+	{% set seoMaticDescription %}
+		{% spaceless %}
+			{% if seomatic.meta.seoDescription is empty %}
+				{% if not element.isFieldEmpty('introduction') %}
+					{{- element.introduction|striptags|description -}}
+				{% elseif not element.isFieldEmpty('shortDescription') %}
+					{{- element.shortDescription|striptags|description -}}
+				{% elseif not element.isFieldEmpty('body') %}
+					{{- element.body|striptags|description -}}
+				{% endif %}
+			{% else %}
+				{{- seomatic.meta.seoDescription|description -}}
+			{% endif %}
+		{% endspaceless %}
+	{% endset %}
+
+	{% do seomatic.meta.seoDescription(seoMaticDescription|t) %}
 
 {% else %}
 
-	{# Fallback Meta Data if SEOMatic is not installed or enabled ------------- #}
+	{# Fallback Meta Data if SEOMatic is not installed or enabled. If it is
+	installed, but no element was found, it's assumed this page is not in the CMS #}
 
-  <title>{{ entry is defined and entry.uri == '__home__' ? siteName : (title|t ~ ' | ' ~ siteName|t) }}</title>
+	{% if seomaticEnabled ?? false %}
+		{% do seomatic.config.renderEnabled(false) %}
+	{% endif %}
+
+  <title>{{ (element ?? false) and element.uri == '__home__' ? siteName : (title|t ~ ' | ' ~ siteName|t) }}</title>
 	<link rel="home" href="{{ siteUrl }}" />
   <link rel="author" href="/humans.txt" />
 

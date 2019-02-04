@@ -1,0 +1,34 @@
+////////////////////////////////////////////////////////////////////////////////
+// Errors
+////////////////////////////////////////////////////////////////////////////////
+
+@import '/global';
+
+site-wrapper {
+	min-height:auto;
+	display: table-cell;
+  vertical-align: middle;
+	&:after {
+		position:fixed; top:0; z-index:9999;
+	}
+}
+
+main {
+  text-align:center;
+	background-color:white;
+  svg.logo { @include symbol-size(logo, 200px); width:100%; margin-bottom:$gap; fill:var(primary);  }
+	h1 { color:var(secondary); }
+}
+
+footer {
+	opacity:0.3;
+	background:none;
+	color:$text;
+	flex-direction: column;
+	text-align:center;
+	justify-content:center;
+	a.yello { display:none; }
+	small, a, address{ color:$text; }
+	address { margin:0; padding:0; align-self:center; text-align:center; margin-top:$gap4; }
+	social-media { display:none; }
+}

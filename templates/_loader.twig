@@ -20,7 +20,9 @@
 
 {% set segments = segments ?? craft.app.request.segments ?? false %}
 
-{% set element = product ?? entry ?? category ?? tag ?? false %}
+{# Unify any element type to a single common name throughout all templates -- #}
+
+{% set element = element ?? product ?? entry ?? category ?? tag ?? false %}
 
 {# Multisite Handler -----------------------------------------------------------
 If this a multisite, and the site handle isn't 'default', then add a variety

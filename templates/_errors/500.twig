@@ -7,6 +7,6 @@
     {{ svg('logo') }}
     <h1>{{ "E023"|t }}</h1>
     <p>{{ "E024"|t }}</p>
-		<a href="{{ craft.app.request.getFullPath in craft.app.request.referrer ? '/' : craft.app.request.referrer|default('/') }}" class="button">{{ symbol('arrow-left') }}{{ 'E001'|t }}</a>
+		<a href="{{ craft.app.request.getFullPath in craft.app.request.referrer ? '/' : craft.app.request.referrer|default('/') }}" class="button">{{ 'E001'|t }}{{ symbol('arrow-right') }}</a>
   </main>
 {% endblock %}
