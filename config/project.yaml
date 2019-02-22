@@ -1,35 +1,97 @@
-dateModified: 1549233142
+dateModified: 1550583860
 email:
-  fromEmail: technical@yello.studio
+  fromEmail: mark@yello.studio
   fromName: 'Craft Master'
   transportType: craft\mail\transportadapters\Sendmail
 fieldGroups:
-  0abc6530-fb84-4f3c-8f6a-e2a64a6e64a3:
-    name: Common
+  2db153c1-1fce-4c1e-816d-2b350b390e43:
+    name: 'Test Fields'
+  ec5980fc-8f07-440b-8ae9-43942b4383a5:
+    name: Main
 fields:
-  489dbf76-cad2-4c7b-972e-62adbd2fa8f8:
-    contentColumnType: text
-    fieldGroup: 0abc6530-fb84-4f3c-8f6a-e2a64a6e64a3
-    handle: introduction
+  0ca42687-7633-486a-8133-8910332ac92e:
+    contentColumnType: string
+    fieldGroup: 2db153c1-1fce-4c1e-816d-2b350b390e43
+    handle: radioButtonsTest
     instructions: ''
-    name: Introduction
+    name: 'Radio Buttons Test'
+    searchable: true
+    settings:
+      options:
+        -
+          default: ''
+          label: Test1
+          value: test1
+        -
+          default: ''
+          label: Test2
+          value: test2
+        -
+          default: ''
+          label: Test3
+          value: test3
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\RadioButtons
+  0f1f26e0-f68c-42ad-8dcc-916fcd774d07:
+    contentColumnType: string
+    fieldGroup: 2db153c1-1fce-4c1e-816d-2b350b390e43
+    handle: dropdownTest
+    instructions: ''
+    name: 'Dropdown Test'
+    searchable: true
+    settings:
+      options:
+        -
+          default: ''
+          label: Test1
+          value: test1
+        -
+          default: ''
+          label: Test2
+          value: test2
+        -
+          default: ''
+          label: Test3
+          value: test3
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+  10a04218-dbaa-4fc5-854d-dc3d2c8f1ab7:
+    contentColumnType: string(7)
+    fieldGroup: 2db153c1-1fce-4c1e-816d-2b350b390e43
+    handle: colourTest
+    instructions: ''
+    name: 'Colour Test'
+    searchable: true
+    settings:
+      defaultColor: ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Color
+  1610069d-b16b-43c1-bea5-4a1d7ab3d220:
+    contentColumnType: text
+    fieldGroup: ec5980fc-8f07-440b-8ae9-43942b4383a5
+    handle: telephone
+    instructions: ''
+    name: Telephone
     searchable: true
     settings:
       charLimit: ''
       code: ''
       columnType: text
       initialRows: '4'
-      multiline: '1'
+      multiline: ''
       placeholder: ''
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\PlainText
-  9e85a864-12c0-43fb-aaa2-6391b0600dac:
+  22df9dcf-9a95-4550-8a49-37c1e3cc162e:
     contentColumnType: text
-    fieldGroup: 0abc6530-fb84-4f3c-8f6a-e2a64a6e64a3
-    handle: body
+    fieldGroup: 2db153c1-1fce-4c1e-816d-2b350b390e43
+    handle: redactorTest
     instructions: ''
-    name: Body
+    name: 'Redactor Test'
     searchable: true
     settings:
       availableTransforms: '*'
@@ -42,23 +104,239 @@ fields:
     translationKeyFormat: null
     translationMethod: none
     type: craft\redactor\Field
-  c2194f5b-2743-45bf-9317-289627fbffa9:
+  2a3a0a28-3028-4469-b769-91ed9c9d442f:
     contentColumnType: string
-    fieldGroup: 0abc6530-fb84-4f3c-8f6a-e2a64a6e64a3
+    fieldGroup: 2db153c1-1fce-4c1e-816d-2b350b390e43
+    handle: multiSelectTest
+    instructions: ''
+    name: 'Multi-Select Test'
+    searchable: true
+    settings:
+      options:
+        -
+          default: ''
+          label: Test1
+          value: test1
+        -
+          default: ''
+          label: Test2
+          value: test2
+        -
+          default: ''
+          label: Test3
+          value: test3
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\MultiSelect
+  30d947df-c32f-47af-a498-4cb594badc5f:
+    contentColumnType: string
+    fieldGroup: 2db153c1-1fce-4c1e-816d-2b350b390e43
+    handle: entriesTest
+    instructions: ''
+    name: 'Entries Test'
+    searchable: true
+    settings:
+      limit: ''
+      localizeRelations: false
+      selectionLabel: ''
+      source: null
+      sources: '*'
+      targetSiteId: null
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Entries
+  39cb9ec9-a3d4-4e70-bbaa-6b55018bc8e9:
+    contentColumnType: text
+    fieldGroup: 2db153c1-1fce-4c1e-816d-2b350b390e43
+    handle: tableMakerTest
+    instructions: ''
+    name: 'Table Maker Test'
+    searchable: true
+    settings:
+      columnsAddRowLabel: ''
+      columnsInstructions: ''
+      columnsLabel: 'Column Label'
+      rowsAddRowLabel: ''
+      rowsInstructions: ''
+      rowsLabel: 'Row Table'
+    translationKeyFormat: null
+    translationMethod: none
+    type: supercool\tablemaker\fields\TableMakerField
+  47f69289-083e-45ae-b6c7-423bf74288a9:
+    contentColumnType: string
+    fieldGroup: 2db153c1-1fce-4c1e-816d-2b350b390e43
+    handle: categoriesTest
+    instructions: ''
+    name: 'Categories Test'
+    searchable: true
+    settings:
+      branchLimit: ''
+      limit: null
+      localizeRelations: false
+      selectionLabel: ''
+      source: null
+      sources: '*'
+      targetSiteId: null
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Categories
+  4b625ba2-4e1e-47cc-8038-96588591256f:
+    contentColumnType: text
+    fieldGroup: 2db153c1-1fce-4c1e-816d-2b350b390e43
+    handle: videoTest
+    instructions: ''
+    name: 'Video Test'
+    searchable: true
+    settings:
+      dailymotion: dailymotion
+      formats:
+        dailymotion:
+          name: Dailymotion
+          regex: '/^.+dailymotion.com\/(?:video|hub)\/([^_]+)[^#]*(#video=([^_&]+))?/'
+        vimeo:
+          name: Vimeo
+          regex: '/\/\/(?:www\.)?vimeo.com\/([0-9a-z\-_]+)/i'
+        youtube:
+          name: YouTube
+          regex: '/\/\/(?:www\.)?youtu(?:\.be|be\.com)\/(?:watch\?v=|embed\/)?([a-z0-9_\-]+)/i'
+      urlRegex: '/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/'
+      vimeo: ''
+      youtube: youtube
+    translationKeyFormat: null
+    translationMethod: none
+    type: modules\helpers\fields\Video
+  50821c29-a81a-4445-852b-b72e0e1fcffc:
+    contentColumnType: string
+    fieldGroup: ec5980fc-8f07-440b-8ae9-43942b4383a5
+    handle: contentBlocks
+    instructions: ''
+    name: 'Content Blocks'
+    searchable: true
+    settings:
+      contentTable: '{{%matrixcontent_contentblocks}}'
+      localizeBlocks: false
+      maxBlocks: ''
+      minBlocks: ''
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Matrix
+  50d42e19-a126-4c41-b43a-61b9efc6319d:
+    contentColumnType: string
+    fieldGroup: 2db153c1-1fce-4c1e-816d-2b350b390e43
+    handle: checkboxesTest
+    instructions: ''
+    name: 'Checkboxes Test'
+    searchable: true
+    settings:
+      options:
+        -
+          default: ''
+          label: Test1
+          value: test1
+        -
+          default: ''
+          label: Test2
+          value: test2
+        -
+          default: ''
+          label: Test3
+          value: test3
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Checkboxes
+  561d5a78-f8c3-4396-baa5-0a4414642525:
+    contentColumnType: text
+    fieldGroup: 2db153c1-1fce-4c1e-816d-2b350b390e43
+    handle: tableTest
+    instructions: ''
+    name: 'Table Test'
+    searchable: true
+    settings:
+      addRowLabel: 'Add a row'
+      columnType: text
+      columns:
+        col1:
+          handle: test1
+          heading: Test1
+          type: singleline
+          width: ''
+        col2:
+          handle: test2
+          heading: Test2
+          type: singleline
+          width: ''
+        col3:
+          handle: test3
+          heading: Test3
+          type: singleline
+          width: ''
+      defaults:
+        row1:
+          col1: Foo
+          col2: Bar
+          col3: Zoo
+        row2:
+          col1: Bam
+          col2: Top
+          col3: Low
+      maxRows: ''
+      minRows: ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Table
+  5f3e37bc-7848-4bfb-aed1-57f42fae06c7:
+    contentColumnType: string
+    fieldGroup: 2db153c1-1fce-4c1e-816d-2b350b390e43
+    handle: tagsTest
+    instructions: ''
+    name: 'Tags Test'
+    searchable: true
+    settings:
+      limit: null
+      localizeRelations: false
+      selectionLabel: ''
+      source: null
+      sources: '*'
+      targetSiteId: null
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Tags
+  65fc606e-f939-41ec-afff-eb77ea4a6592:
+    contentColumnType: integer(10)
+    fieldGroup: 2db153c1-1fce-4c1e-816d-2b350b390e43
+    handle: numberTest
+    instructions: ''
+    name: 'Number Test'
+    searchable: true
+    settings:
+      decimals: 0
+      defaultValue: null
+      max: null
+      min: '0'
+      size: null
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Number
+  665e1704-8c2b-4ecd-a773-47d06123d01d:
+    contentColumnType: string
+    fieldGroup: ec5980fc-8f07-440b-8ae9-43942b4383a5
     handle: featuredImage
     instructions: ''
     name: 'Featured Image'
-    searchable: true
+    searchable: '1'
     settings:
       allowedKinds:
         - image
-      defaultUploadLocationSource: null
+      defaultUploadLocationSource: 'volume:f928ffb7-03b4-485d-9725-4bdae95cb068'
       defaultUploadLocationSubpath: ''
       limit: '1'
       localizeRelations: false
       restrictFiles: '1'
-      selectionLabel: ''
-      singleUploadLocationSource: null
+      selectionLabel: 'Add a featured image'
+      singleUploadLocationSource: 'volume:f928ffb7-03b4-485d-9725-4bdae95cb068'
       singleUploadLocationSubpath: ''
       source: null
       sources: '*'
@@ -68,109 +346,962 @@ fields:
     translationKeyFormat: null
     translationMethod: site
     type: craft\fields\Assets
+  6aa4ceb0-0c9b-404d-b677-fd62f4293ecc:
+    contentColumnType: string
+    fieldGroup: 2db153c1-1fce-4c1e-816d-2b350b390e43
+    handle: superTableTest
+    instructions: ''
+    name: 'Super Table Test'
+    searchable: true
+    settings:
+      columns:
+        new1:
+          width: ''
+        new2:
+          width: ''
+        new3:
+          width: ''
+      contentTable: null
+      fieldLayout: row
+      localizeBlocks: false
+      maxRows: ''
+      minRows: ''
+      selectionLabel: ''
+      staticField: ''
+    translationKeyFormat: null
+    translationMethod: site
+    type: verbb\supertable\fields\SuperTableField
+  7f7d984f-24d9-4f7e-89b2-b872d9890cd6:
+    contentColumnType: string
+    fieldGroup: 2db153c1-1fce-4c1e-816d-2b350b390e43
+    handle: emailTest
+    instructions: ''
+    name: 'Email Test'
+    searchable: true
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Email
+  8fd53ba4-9852-4b34-b7b0-147be57bf738:
+    contentColumnType: boolean
+    fieldGroup: 2db153c1-1fce-4c1e-816d-2b350b390e43
+    handle: lightswitchTest
+    instructions: ''
+    name: 'Lightswitch Test'
+    searchable: true
+    settings:
+      default: ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Lightswitch
+  960d2861-3081-4a49-8d4f-74c97d9c79f2:
+    contentColumnType: text
+    fieldGroup: ec5980fc-8f07-440b-8ae9-43942b4383a5
+    handle: body
+    instructions: ''
+    name: Body
+    searchable: '1'
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      cleanupHtml: '1'
+      columnType: text
+      purifierConfig: ''
+      purifyHtml: '1'
+      redactorConfig: Standard.json
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+  b9ea9613-3606-4843-83e6-b4f13d4ac3db:
+    contentColumnType: datetime
+    fieldGroup: 2db153c1-1fce-4c1e-816d-2b350b390e43
+    handle: dateAndTimeTest
+    instructions: ''
+    name: 'Date and Time Test'
+    searchable: true
+    settings:
+      minuteIncrement: '30'
+      showDate: true
+      showTime: false
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Date
+  bdf2ffeb-1a34-4124-b34f-e603beb7e14f:
+    contentColumnType: string
+    fieldGroup: 2db153c1-1fce-4c1e-816d-2b350b390e43
+    handle: urlTest
+    instructions: ''
+    name: 'URL Test'
+    searchable: true
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Url
+  c4ea2396-2904-4282-9de8-57f4e589f841:
+    contentColumnType: string
+    fieldGroup: 2db153c1-1fce-4c1e-816d-2b350b390e43
+    handle: matrixTest
+    instructions: ''
+    name: 'Matrix Test'
+    searchable: true
+    settings:
+      contentTable: '{{%matrixcontent_matrixtest}}'
+      localizeBlocks: false
+      maxBlocks: ''
+      minBlocks: ''
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Matrix
+  c6ff7485-581e-46f2-8856-4c84a8aa8c9a:
+    contentColumnType: text
+    fieldGroup: 2db153c1-1fce-4c1e-816d-2b350b390e43
+    handle: plainTextTest
+    instructions: ''
+    name: 'Plain Text Test'
+    searchable: true
+    settings:
+      charLimit: ''
+      code: ''
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  d00240e7-4349-4988-9acb-93f31047aa9d:
+    contentColumnType: string
+    fieldGroup: 2db153c1-1fce-4c1e-816d-2b350b390e43
+    handle: usersTest
+    instructions: ''
+    name: 'Users Test'
+    searchable: true
+    settings:
+      limit: ''
+      localizeRelations: false
+      selectionLabel: ''
+      source: null
+      sources: '*'
+      targetSiteId: null
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Users
+  de089ade-6517-4669-810f-c052af6417c7:
+    contentColumnType: text
+    fieldGroup: ec5980fc-8f07-440b-8ae9-43942b4383a5
+    handle: introduction
+    instructions: ''
+    name: Introduction
+    searchable: true
+    settings:
+      charLimit: ''
+      code: ''
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+matrixBlockTypes:
+  c9eedb66-498c-4e6e-a404-359a83d475cc:
+    field: c4ea2396-2904-4282-9de8-57f4e589f841
+    fieldLayouts:
+      5fb981b9-b93e-4856-bcf1-81164ec96fed:
+        tabs:
+          -
+            fields:
+              03376f6d-4ab0-4577-a87e-1091c46082ab:
+                required: false
+                sortOrder: 2
+              75cab3bc-000b-44a6-9603-d44a52641f59:
+                required: false
+                sortOrder: 1
+            name: Content
+            sortOrder: 1
+    fields:
+      03376f6d-4ab0-4577-a87e-1091c46082ab:
+        contentColumnType: string
+        fieldGroup: null
+        handle: featuredImage
+        instructions: ''
+        name: 'Featured Image'
+        searchable: true
+        settings:
+          allowedKinds: null
+          defaultUploadLocationSource: 'volume:f928ffb7-03b4-485d-9725-4bdae95cb068'
+          defaultUploadLocationSubpath: ''
+          limit: ''
+          localizeRelations: false
+          restrictFiles: ''
+          selectionLabel: ''
+          singleUploadLocationSource: 'volume:f928ffb7-03b4-485d-9725-4bdae95cb068'
+          singleUploadLocationSubpath: ''
+          source: null
+          sources: '*'
+          targetSiteId: null
+          useSingleFolder: ''
+          viewMode: list
+        translationKeyFormat: null
+        translationMethod: site
+        type: craft\fields\Assets
+      75cab3bc-000b-44a6-9603-d44a52641f59:
+        contentColumnType: text
+        fieldGroup: null
+        handle: headingHeading
+        instructions: ''
+        name: 'Heading Heading'
+        searchable: true
+        settings:
+          charLimit: ''
+          code: ''
+          columnType: text
+          initialRows: '4'
+          multiline: ''
+          placeholder: ''
+        translationKeyFormat: null
+        translationMethod: none
+        type: craft\fields\PlainText
+    handle: headingTest
+    name: Heading
+    sortOrder: 1
+  edd0fa5a-c63c-41d7-bf21-32cb3ee133ab:
+    field: c4ea2396-2904-4282-9de8-57f4e589f841
+    fieldLayouts:
+      c7468b95-5607-42ff-a478-ab59c86805c1:
+        tabs:
+          -
+            fields:
+              99c68e3e-af2d-4385-bd5a-2b3bdabaf21e:
+                required: false
+                sortOrder: 1
+            name: Content
+            sortOrder: 1
+    fields:
+      99c68e3e-af2d-4385-bd5a-2b3bdabaf21e:
+        contentColumnType: text
+        fieldGroup: null
+        handle: content123
+        instructions: ''
+        name: 'Content 123'
+        searchable: true
+        settings:
+          charLimit: ''
+          code: ''
+          columnType: text
+          initialRows: '4'
+          multiline: ''
+          placeholder: ''
+        translationKeyFormat: null
+        translationMethod: none
+        type: craft\fields\PlainText
+    handle: contentTest
+    name: Content
+    sortOrder: 2
+  f4d9ad70-702a-4bb8-86b9-e91532bf35e4:
+    field: c4ea2396-2904-4282-9de8-57f4e589f841
+    fieldLayouts:
+      4758286e-9666-494b-9a71-0fbb4811c308:
+        tabs:
+          -
+            fields:
+              b7b4e7f5-30d5-45a3-822c-46ecd2f90129:
+                required: false
+                sortOrder: 1
+            name: Content
+            sortOrder: 1
+    fields:
+      b7b4e7f5-30d5-45a3-822c-46ecd2f90129:
+        contentColumnType: text
+        fieldGroup: null
+        handle: linky
+        instructions: ''
+        name: Linky
+        searchable: true
+        settings:
+          charLimit: ''
+          code: ''
+          columnType: text
+          initialRows: '4'
+          multiline: ''
+          placeholder: ''
+        translationKeyFormat: null
+        translationMethod: none
+        type: craft\fields\PlainText
+    handle: linkTest
+    name: Link
+    sortOrder: 3
+  f603264b-7c7b-4c80-960c-4c6fa14e978f:
+    field: 50821c29-a81a-4445-852b-b72e0e1fcffc
+    fieldLayouts:
+      3338064d-7b9a-413c-b264-78580ec22f6c:
+        tabs:
+          -
+            fields:
+              4614180c-21fd-4e31-ba4a-c36256d2c6fb:
+                required: false
+                sortOrder: 1
+            name: Content
+            sortOrder: 1
+    fields:
+      4614180c-21fd-4e31-ba4a-c36256d2c6fb:
+        contentColumnType: text
+        fieldGroup: null
+        handle: test
+        instructions: ''
+        name: Test
+        searchable: true
+        settings:
+          charLimit: ''
+          code: ''
+          columnType: text
+          initialRows: '4'
+          multiline: ''
+          placeholder: ''
+        translationKeyFormat: null
+        translationMethod: none
+        type: craft\fields\PlainText
+    handle: body
+    name: Body
+    sortOrder: 1
 plugins:
   agent:
-    edition: standard
-    enabled: true
+    enabled: '1'
+    licenseKey: null
     schemaVersion: 1.1.4
+    settings: null
   minify:
-    edition: standard
-    enabled: true
+    enabled: '1'
+    licenseKey: null
     schemaVersion: 1.0.0
-  neo:
-    edition: standard
-    enabled: true
-    schemaVersion: 2.0.0
+    settings: null
   redactor:
-    edition: standard
-    enabled: true
+    enabled: '1'
+    licenseKey: null
     schemaVersion: 2.2.1
-  seomatic:
-    edition: standard
+    settings: null
+  super-table:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 2.0.4
+    settings: null
+  tablemaker:
     enabled: true
-    schemaVersion: 3.0.6
 sections:
-  c55ddd64-75c2-4369-b736-e458587dca98:
-    enableVersioning: true
+  27c4eee0-2abd-4fef-beb3-0c9ec2a5fbe3:
+    enableVersioning: '1'
     entryTypes:
-      c0aeeebd-826e-46f8-abcd-7918768c5421:
-        handle: home
-        hasTitleField: false
-        name: Home
-        sortOrder: 1
-        titleFormat: '{section.name|raw}'
-        titleLabel: null
-      ede1aa45-174e-4d04-8e32-ca01fe4d0e93:
+      98955f1d-79ad-4197-a6e7-04e966573083:
         fieldLayouts:
-          c88ff595-5948-4d75-a107-1b51e70b8738:
+          4520eda2-2acd-4034-b331-51c3d86b9f02:
             tabs:
               -
                 fields:
-                  489dbf76-cad2-4c7b-972e-62adbd2fa8f8:
-                    required: false
-                    sortOrder: 3
-                  9e85a864-12c0-43fb-aaa2-6391b0600dac:
-                    required: false
-                    sortOrder: 1
-                  c2194f5b-2743-45bf-9317-289627fbffa9:
+                  665e1704-8c2b-4ecd-a773-47d06123d01d:
+                    required: '0'
+                    sortOrder: '1'
+                  960d2861-3081-4a49-8d4f-74c97d9c79f2:
+                    required: '0'
+                    sortOrder: '2'
+                name: Main
+                sortOrder: '1'
+        handle: help
+        hasTitleField: '1'
+        name: Help
+        sortOrder: '1'
+        titleFormat: null
+        titleLabel: Title
+    handle: help
+    name: Help
+    propagateEntries: '1'
+    siteSettings:
+      f3fb35ce-c831-4e8d-a003-163350df4c64:
+        enabledByDefault: '1'
+        hasUrls: '1'
+        template: _loader
+        uriFormat: 'help/{slug}'
+    type: channel
+  2e17cfcc-41e7-46da-a45b-e8bc36fc924c:
+    enableVersioning: '1'
+    entryTypes:
+      f26b9ecd-31af-46ff-bd42-46f48fc66edd:
+        handle: helpIntro
+        hasTitleField: '0'
+        name: 'Help Introduction'
+        sortOrder: 1
+        titleFormat: '{section.name|raw}'
+        titleLabel: null
+    handle: helpIntro
+    name: 'Help Introduction'
+    propagateEntries: '1'
+    siteSettings:
+      f3fb35ce-c831-4e8d-a003-163350df4c64:
+        enabledByDefault: '1'
+        hasUrls: '1'
+        template: _loader
+        uriFormat: help
+    type: single
+  37bf6eb3-7ab2-424a-a3a9-4afc6f9cfbae:
+    enableVersioning: '1'
+    entryTypes:
+      5d700c87-4012-4205-9fbe-b2981a345ce7:
+        fieldLayouts:
+          7eab0405-1021-4dc0-b0ce-baeb0e9db2ed:
+            tabs:
+              -
+                fields:
+                  665e1704-8c2b-4ecd-a773-47d06123d01d:
+                    required: '0'
+                    sortOrder: '1'
+                  960d2861-3081-4a49-8d4f-74c97d9c79f2:
+                    required: '0'
+                    sortOrder: '2'
+                name: Common
+                sortOrder: '1'
+        handle: services
+        hasTitleField: '1'
+        name: Services
+        sortOrder: '1'
+        titleFormat: null
+        titleLabel: Title
+    handle: services
+    name: Services
+    propagateEntries: '1'
+    siteSettings:
+      f3fb35ce-c831-4e8d-a003-163350df4c64:
+        enabledByDefault: '1'
+        hasUrls: '1'
+        template: _loader.twig
+        uriFormat: 'services/{slug}'
+    structure:
+      maxLevels: '1'
+      uid: 51e0138d-d991-4f93-9847-b9b06b66524a
+    type: structure
+  6fc4f360-e8db-4b87-a565-8b1bf27094df:
+    enableVersioning: true
+    entryTypes:
+      2fd25225-247c-444f-8495-4b1d6a904bab:
+        handle: test
+        hasTitleField: true
+        name: Test
+        sortOrder: 1
+        titleFormat: null
+        titleLabel: Title
+      44923cc0-bccf-46a0-9fca-d1a96fa3c59a:
+        fieldLayouts:
+          bd7ff88e-5b81-42bc-ba1d-f01f7eb09c71:
+            tabs:
+              -
+                fields:
+                  50821c29-a81a-4445-852b-b72e0e1fcffc:
                     required: false
                     sortOrder: 2
-                name: Common
+                  665e1704-8c2b-4ecd-a773-47d06123d01d:
+                    required: false
+                    sortOrder: 3
+                  960d2861-3081-4a49-8d4f-74c97d9c79f2:
+                    required: false
+                    sortOrder: 1
+                  de089ade-6517-4669-810f-c052af6417c7:
+                    required: false
+                    sortOrder: 4
+                name: Main
                 sortOrder: 1
+              -
+                fields:
+                  10a04218-dbaa-4fc5-854d-dc3d2c8f1ab7:
+                    required: false
+                    sortOrder: 2
+                  47f69289-083e-45ae-b6c7-423bf74288a9:
+                    required: false
+                    sortOrder: 1
+                name: Test
+                sortOrder: 2
+        handle: test
+        hasTitleField: true
+        name: Test
+        sortOrder: 1
+        titleFormat: ''
+        titleLabel: Title
+    handle: test
+    name: Test
+    propagateEntries: true
+    siteSettings:
+      f3fb35ce-c831-4e8d-a003-163350df4c64:
+        enabledByDefault: true
+        hasUrls: true
+        template: 'hello-world/what/is/up/{slug}'
+        uriFormat: 'test/{slug}'
+    type: channel
+  8b7f3923-dd3f-4802-bae7-1f888ee78bdd:
+    enableVersioning: '1'
+    entryTypes:
+      a3a523e8-18c9-40f1-a9f4-5cff064781e6:
+        handle: newsIntro
+        hasTitleField: '0'
+        name: 'News Introduction'
+        sortOrder: 1
+        titleFormat: '{section.name|raw}'
+        titleLabel: null
+    handle: newsIntro
+    name: 'News Introduction'
+    propagateEntries: '1'
+    siteSettings:
+      f3fb35ce-c831-4e8d-a003-163350df4c64:
+        enabledByDefault: '1'
+        hasUrls: '1'
+        template: _loader
+        uriFormat: news
+    type: single
+  c212e019-0b9a-4544-9ff0-f31d3343ddae:
+    enableVersioning: '1'
+    entryTypes:
+      209650fc-d908-493f-8e58-362a646730fd:
+        fieldLayouts:
+          8c88b904-c8a9-4f1d-85d8-bc81afb5d449:
+            tabs:
+              -
+                fields:
+                  665e1704-8c2b-4ecd-a773-47d06123d01d:
+                    required: false
+                    sortOrder: 1
+                  960d2861-3081-4a49-8d4f-74c97d9c79f2:
+                    required: false
+                    sortOrder: 2
+                name: Main
+                sortOrder: 1
+              -
+                fields:
+                  0ca42687-7633-486a-8133-8910332ac92e:
+                    required: false
+                    sortOrder: 13
+                  0f1f26e0-f68c-42ad-8dcc-916fcd774d07:
+                    required: false
+                    sortOrder: 5
+                  10a04218-dbaa-4fc5-854d-dc3d2c8f1ab7:
+                    required: false
+                    sortOrder: 3
+                  22df9dcf-9a95-4550-8a49-37c1e3cc162e:
+                    required: false
+                    sortOrder: 14
+                  2a3a0a28-3028-4469-b769-91ed9c9d442f:
+                    required: false
+                    sortOrder: 10
+                  30d947df-c32f-47af-a498-4cb594badc5f:
+                    required: false
+                    sortOrder: 7
+                  39cb9ec9-a3d4-4e70-bbaa-6b55018bc8e9:
+                    required: false
+                    sortOrder: 16
+                  47f69289-083e-45ae-b6c7-423bf74288a9:
+                    required: false
+                    sortOrder: 1
+                  4b625ba2-4e1e-47cc-8038-96588591256f:
+                    required: false
+                    sortOrder: 21
+                  50d42e19-a126-4c41-b43a-61b9efc6319d:
+                    required: false
+                    sortOrder: 2
+                  561d5a78-f8c3-4396-baa5-0a4414642525:
+                    required: false
+                    sortOrder: 17
+                  5f3e37bc-7848-4bfb-aed1-57f42fae06c7:
+                    required: false
+                    sortOrder: 18
+                  65fc606e-f939-41ec-afff-eb77ea4a6592:
+                    required: false
+                    sortOrder: 11
+                  6aa4ceb0-0c9b-404d-b677-fd62f4293ecc:
+                    required: false
+                    sortOrder: 15
+                  7f7d984f-24d9-4f7e-89b2-b872d9890cd6:
+                    required: false
+                    sortOrder: 6
+                  8fd53ba4-9852-4b34-b7b0-147be57bf738:
+                    required: false
+                    sortOrder: 8
+                  b9ea9613-3606-4843-83e6-b4f13d4ac3db:
+                    required: false
+                    sortOrder: 4
+                  bdf2ffeb-1a34-4124-b34f-e603beb7e14f:
+                    required: false
+                    sortOrder: 19
+                  c4ea2396-2904-4282-9de8-57f4e589f841:
+                    required: false
+                    sortOrder: 9
+                  c6ff7485-581e-46f2-8856-4c84a8aa8c9a:
+                    required: false
+                    sortOrder: 12
+                  d00240e7-4349-4988-9acb-93f31047aa9d:
+                    required: false
+                    sortOrder: 20
+                name: 'Test Fields'
+                sortOrder: 2
+        handle: news
+        hasTitleField: true
+        name: News
+        sortOrder: 1
+        titleFormat: ''
+        titleLabel: Title
+      76d656ad-f0bf-428e-8dc7-0ac62e16e1cd:
+        fieldLayouts:
+          16477fbb-5818-43dc-b195-6d44f365ea8e:
+            tabs:
+              -
+                fields:
+                  665e1704-8c2b-4ecd-a773-47d06123d01d:
+                    required: false
+                    sortOrder: 2
+                  960d2861-3081-4a49-8d4f-74c97d9c79f2:
+                    required: false
+                    sortOrder: 1
+                  de089ade-6517-4669-810f-c052af6417c7:
+                    required: false
+                    sortOrder: 3
+                name: Main
+                sortOrder: 1
+              -
+                fields:
+                  0ca42687-7633-486a-8133-8910332ac92e:
+                    required: false
+                    sortOrder: 13
+                  0f1f26e0-f68c-42ad-8dcc-916fcd774d07:
+                    required: false
+                    sortOrder: 6
+                  10a04218-dbaa-4fc5-854d-dc3d2c8f1ab7:
+                    required: false
+                    sortOrder: 4
+                  22df9dcf-9a95-4550-8a49-37c1e3cc162e:
+                    required: false
+                    sortOrder: 14
+                  2a3a0a28-3028-4469-b769-91ed9c9d442f:
+                    required: false
+                    sortOrder: 10
+                  30d947df-c32f-47af-a498-4cb594badc5f:
+                    required: false
+                    sortOrder: 8
+                  39cb9ec9-a3d4-4e70-bbaa-6b55018bc8e9:
+                    required: false
+                    sortOrder: 16
+                  47f69289-083e-45ae-b6c7-423bf74288a9:
+                    required: false
+                    sortOrder: 2
+                  4b625ba2-4e1e-47cc-8038-96588591256f:
+                    required: false
+                    sortOrder: 21
+                  50d42e19-a126-4c41-b43a-61b9efc6319d:
+                    required: false
+                    sortOrder: 3
+                  561d5a78-f8c3-4396-baa5-0a4414642525:
+                    required: false
+                    sortOrder: 17
+                  5f3e37bc-7848-4bfb-aed1-57f42fae06c7:
+                    required: false
+                    sortOrder: 18
+                  65fc606e-f939-41ec-afff-eb77ea4a6592:
+                    required: false
+                    sortOrder: 11
+                  6aa4ceb0-0c9b-404d-b677-fd62f4293ecc:
+                    required: false
+                    sortOrder: 15
+                  7f7d984f-24d9-4f7e-89b2-b872d9890cd6:
+                    required: false
+                    sortOrder: 7
+                  8fd53ba4-9852-4b34-b7b0-147be57bf738:
+                    required: false
+                    sortOrder: 9
+                  b9ea9613-3606-4843-83e6-b4f13d4ac3db:
+                    required: false
+                    sortOrder: 5
+                  bdf2ffeb-1a34-4124-b34f-e603beb7e14f:
+                    required: false
+                    sortOrder: 19
+                  c4ea2396-2904-4282-9de8-57f4e589f841:
+                    required: false
+                    sortOrder: 1
+                  c6ff7485-581e-46f2-8856-4c84a8aa8c9a:
+                    required: false
+                    sortOrder: 12
+                  d00240e7-4349-4988-9acb-93f31047aa9d:
+                    required: false
+                    sortOrder: 20
+                name: 'Test Fields'
+                sortOrder: 2
+        handle: events
+        hasTitleField: true
+        name: Events
+        sortOrder: 2
+        titleFormat: ''
+        titleLabel: Title
+      ee45d495-c3df-4a51-9616-847960649ed0:
+        fieldLayouts:
+          41e81fe4-5804-47da-bc40-87d348c45d0f:
+            tabs:
+              -
+                fields:
+                  665e1704-8c2b-4ecd-a773-47d06123d01d:
+                    required: false
+                    sortOrder: 2
+                  960d2861-3081-4a49-8d4f-74c97d9c79f2:
+                    required: false
+                    sortOrder: 1
+                  de089ade-6517-4669-810f-c052af6417c7:
+                    required: false
+                    sortOrder: 3
+                name: Main
+                sortOrder: 1
+        handle: events
+        hasTitleField: true
+        name: Events
+        sortOrder: 2
+        titleFormat: ''
+        titleLabel: Title
+    handle: news
+    name: News
+    propagateEntries: '1'
+    siteSettings:
+      f3fb35ce-c831-4e8d-a003-163350df4c64:
+        enabledByDefault: '1'
+        hasUrls: '1'
+        template: _loader
+        uriFormat: 'news/{slug}'
+    type: channel
+  f540d897-5d2a-4d32-b98e-6b945348cc3b:
+    enableVersioning: '1'
+    entryTypes:
+      6fff8343-df1e-4928-bb7e-1bcb91644b9d:
+        fieldLayouts:
+          c46eaa0f-b491-4bf9-9ee2-898e4a8d6f2d:
+            tabs:
+              -
+                fields:
+                  1610069d-b16b-43c1-bea5-4a1d7ab3d220:
+                    required: '0'
+                    sortOrder: '3'
+                  50821c29-a81a-4445-852b-b72e0e1fcffc:
+                    required: '0'
+                    sortOrder: '4'
+                  665e1704-8c2b-4ecd-a773-47d06123d01d:
+                    required: '0'
+                    sortOrder: '1'
+                  960d2861-3081-4a49-8d4f-74c97d9c79f2:
+                    required: '0'
+                    sortOrder: '2'
+                name: Main
+                sortOrder: '1'
+              -
+                fields:
+                  0ca42687-7633-486a-8133-8910332ac92e:
+                    required: '0'
+                    sortOrder: '14'
+                  0f1f26e0-f68c-42ad-8dcc-916fcd774d07:
+                    required: '0'
+                    sortOrder: '7'
+                  10a04218-dbaa-4fc5-854d-dc3d2c8f1ab7:
+                    required: '0'
+                    sortOrder: '5'
+                  22df9dcf-9a95-4550-8a49-37c1e3cc162e:
+                    required: '0'
+                    sortOrder: '15'
+                  2a3a0a28-3028-4469-b769-91ed9c9d442f:
+                    required: '0'
+                    sortOrder: '11'
+                  30d947df-c32f-47af-a498-4cb594badc5f:
+                    required: '0'
+                    sortOrder: '9'
+                  39cb9ec9-a3d4-4e70-bbaa-6b55018bc8e9:
+                    required: '0'
+                    sortOrder: '1'
+                  47f69289-083e-45ae-b6c7-423bf74288a9:
+                    required: '0'
+                    sortOrder: '3'
+                  4b625ba2-4e1e-47cc-8038-96588591256f:
+                    required: '0'
+                    sortOrder: '21'
+                  50d42e19-a126-4c41-b43a-61b9efc6319d:
+                    required: '0'
+                    sortOrder: '4'
+                  561d5a78-f8c3-4396-baa5-0a4414642525:
+                    required: '0'
+                    sortOrder: '17'
+                  5f3e37bc-7848-4bfb-aed1-57f42fae06c7:
+                    required: '0'
+                    sortOrder: '18'
+                  65fc606e-f939-41ec-afff-eb77ea4a6592:
+                    required: '0'
+                    sortOrder: '12'
+                  6aa4ceb0-0c9b-404d-b677-fd62f4293ecc:
+                    required: '0'
+                    sortOrder: '16'
+                  7f7d984f-24d9-4f7e-89b2-b872d9890cd6:
+                    required: '0'
+                    sortOrder: '8'
+                  8fd53ba4-9852-4b34-b7b0-147be57bf738:
+                    required: '0'
+                    sortOrder: '10'
+                  b9ea9613-3606-4843-83e6-b4f13d4ac3db:
+                    required: '0'
+                    sortOrder: '6'
+                  bdf2ffeb-1a34-4124-b34f-e603beb7e14f:
+                    required: '0'
+                    sortOrder: '19'
+                  c4ea2396-2904-4282-9de8-57f4e589f841:
+                    required: '0'
+                    sortOrder: '2'
+                  c6ff7485-581e-46f2-8856-4c84a8aa8c9a:
+                    required: '0'
+                    sortOrder: '13'
+                  d00240e7-4349-4988-9acb-93f31047aa9d:
+                    required: '0'
+                    sortOrder: '20'
+                name: 'Test Fields'
+                sortOrder: '2'
+              -
+                fields:
+                  de089ade-6517-4669-810f-c052af6417c7:
+                    required: '0'
+                    sortOrder: '1'
+                name: SEO
+                sortOrder: '3'
         handle: home
-        hasTitleField: false
+        hasTitleField: '0'
         name: Home
         sortOrder: 1
         titleFormat: '{section.name|raw}'
         titleLabel: ''
     handle: home
     name: Home
-    propagateEntries: true
+    propagateEntries: '1'
     siteSettings:
-      e04bc432-5d28-4450-8d34-92f17f081222:
-        enabledByDefault: true
-        hasUrls: true
-        template: _loader
+      f3fb35ce-c831-4e8d-a003-163350df4c64:
+        enabledByDefault: '1'
+        hasUrls: '1'
+        template: home
         uriFormat: __home__
     type: single
-  f64c3818-2029-4e55-b4a4-cdea5d5ec29d:
-    enableVersioning: true
+  f957ff2c-960c-4bbf-8f71-784333c9f462:
+    enableVersioning: '1'
     entryTypes:
-      a6fe92ed-592d-4f5f-add0-60506e4074fd:
-        handle: news
+      53654af8-d1cd-4509-b200-3aeeed5d538e:
+        fieldLayouts:
+          33f57eff-3c5c-4f37-bcd6-f15811c4723b:
+            tabs:
+              -
+                fields:
+                  665e1704-8c2b-4ecd-a773-47d06123d01d:
+                    required: false
+                    sortOrder: 1
+                  960d2861-3081-4a49-8d4f-74c97d9c79f2:
+                    required: false
+                    sortOrder: 2
+                  de089ade-6517-4669-810f-c052af6417c7:
+                    required: false
+                    sortOrder: 3
+                name: Main
+                sortOrder: 1
+              -
+                fields:
+                  0ca42687-7633-486a-8133-8910332ac92e:
+                    required: false
+                    sortOrder: 13
+                  0f1f26e0-f68c-42ad-8dcc-916fcd774d07:
+                    required: false
+                    sortOrder: 5
+                  10a04218-dbaa-4fc5-854d-dc3d2c8f1ab7:
+                    required: false
+                    sortOrder: 3
+                  22df9dcf-9a95-4550-8a49-37c1e3cc162e:
+                    required: false
+                    sortOrder: 14
+                  2a3a0a28-3028-4469-b769-91ed9c9d442f:
+                    required: false
+                    sortOrder: 10
+                  30d947df-c32f-47af-a498-4cb594badc5f:
+                    required: false
+                    sortOrder: 7
+                  39cb9ec9-a3d4-4e70-bbaa-6b55018bc8e9:
+                    required: false
+                    sortOrder: 16
+                  47f69289-083e-45ae-b6c7-423bf74288a9:
+                    required: false
+                    sortOrder: 1
+                  4b625ba2-4e1e-47cc-8038-96588591256f:
+                    required: false
+                    sortOrder: 21
+                  50d42e19-a126-4c41-b43a-61b9efc6319d:
+                    required: false
+                    sortOrder: 2
+                  561d5a78-f8c3-4396-baa5-0a4414642525:
+                    required: false
+                    sortOrder: 17
+                  5f3e37bc-7848-4bfb-aed1-57f42fae06c7:
+                    required: false
+                    sortOrder: 18
+                  65fc606e-f939-41ec-afff-eb77ea4a6592:
+                    required: false
+                    sortOrder: 11
+                  6aa4ceb0-0c9b-404d-b677-fd62f4293ecc:
+                    required: false
+                    sortOrder: 15
+                  7f7d984f-24d9-4f7e-89b2-b872d9890cd6:
+                    required: false
+                    sortOrder: 6
+                  8fd53ba4-9852-4b34-b7b0-147be57bf738:
+                    required: false
+                    sortOrder: 8
+                  b9ea9613-3606-4843-83e6-b4f13d4ac3db:
+                    required: false
+                    sortOrder: 4
+                  bdf2ffeb-1a34-4124-b34f-e603beb7e14f:
+                    required: false
+                    sortOrder: 19
+                  c4ea2396-2904-4282-9de8-57f4e589f841:
+                    required: false
+                    sortOrder: 9
+                  c6ff7485-581e-46f2-8856-4c84a8aa8c9a:
+                    required: false
+                    sortOrder: 12
+                  d00240e7-4349-4988-9acb-93f31047aa9d:
+                    required: false
+                    sortOrder: 20
+                name: 'Test Fields'
+                sortOrder: 2
+        handle: about
         hasTitleField: true
-        name: News
+        name: About
         sortOrder: 1
-        titleFormat: null
+        titleFormat: ''
         titleLabel: Title
-    handle: news
-    name: News
-    propagateEntries: true
+    handle: about
+    name: About
+    propagateEntries: '1'
     siteSettings:
-      e04bc432-5d28-4450-8d34-92f17f081222:
-        enabledByDefault: true
-        hasUrls: true
+      f3fb35ce-c831-4e8d-a003-163350df4c64:
+        enabledByDefault: '1'
+        hasUrls: '1'
         template: _loader
-        uriFormat: 'news/{slug}'
-    type: channel
+        uriFormat: 'about/{slug}'
+    structure:
+      maxLevels: '1'
+      uid: 64fdc504-4702-4c76-8c11-752b6d4b356a
+    type: structure
 siteGroups:
-  24060fe6-fc0a-47cc-982d-7a6a9d91489c:
+  802f1d2d-9c0f-433d-8dd9-5d02cd027d3c:
     name: 'Craft Master'
 sites:
-  e04bc432-5d28-4450-8d34-92f17f081222:
-    baseUrl: '@web'
+  f3fb35ce-c831-4e8d-a003-163350df4c64:
+    baseUrl: '@web/'
     handle: default
-    hasUrls: true
+    hasUrls: '1'
     language: en
     name: 'Craft Master'
-    primary: true
-    siteGroup: 24060fe6-fc0a-47cc-982d-7a6a9d91489c
-    sortOrder: 1
+    primary: '1'
+    siteGroup: 802f1d2d-9c0f-433d-8dd9-5d02cd027d3c
+    sortOrder: '1'
 system:
   edition: solo
   live: true
   name: 'Craft Master'
-  schemaVersion: 3.1.23
+  schemaVersion: 3.1.25
   timeZone: America/Los_Angeles
 users:
   allowPublicRegistration: false
@@ -178,3 +1309,13 @@ users:
   photoSubpath: ''
   photoVolumeUid: null
   requireEmailVerification: true
+volumes:
+  f928ffb7-03b4-485d-9725-4bdae95cb068:
+    handle: general
+    hasUrls: '1'
+    name: General
+    settings:
+      path: '@webroot/assets/uploads/'
+    sortOrder: '1'
+    type: craft\volumes\Local
+    url: /assets/uploads/

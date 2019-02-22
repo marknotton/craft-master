@@ -30,14 +30,14 @@
 
     "scripts" : {
       "source" : [
-        "{scripts}/extensions/*.js",
-  			"{scripts}/classes/*.js",
-        "{scripts}/components/*.js",
-  			"{scripts}/utilities/*.js",
-        "{scripts}/pages/*.js",
-        "{scripts}/global.js"
+        "src/scripts/extensions/*.js",
+  			"src/scripts/classes/*.js",
+        "src/scripts/components/*.js",
+  			"src/scripts/utilities/*.js",
+        "src/scripts/pages/*.js",
+        "src/scripts/global.js"
       ],
-      "output" : "{js}/global.js",
+      "output" : "/assets/js/global.js",
       "watcher" : {
         "reload" : true
       },
@@ -46,23 +46,23 @@
     "vendors" : {
       "source" : [
         "node_modules/plyr/dist/plyr.js",
-  			"{scripts}/vendor/gsap/TweenMax.js",
-  			"{scripts}/vendor/gsap/utils/SplitText.js",
-  			"{scripts}/vendor/gsap/TimelineMax.js",
-  			"{scripts}/vendor/gsap/easing/CustomEase.js"
+  			"src/scripts/vendor/gsap/TweenMax.js",
+  			"src/scripts/vendor/gsap/utils/SplitText.js",
+  			"src/scripts/vendor/gsap/TimelineMax.js",
+  			"src/scripts/vendor/gsap/easing/CustomEase.js"
       ],
-      "output" : "{js}/vendors.js"
+      "output" : "/assets/js/vendors.js"
     },
 
     "styles" : {
       "source" : [
-        "!{sass}/emailer.scss",
-        "{sass}/**/*.scss"
+        "!src/sass/emailer.scss",
+        "src/sass/**/*.scss"
       ],
-      "output" : "{css}",
+      "output" : "/assets/css",
       "watcher" : {
         "patterns": [
-          "{sass}/**/!(_symbols)*.scss",
+          "src/sass/**/!(_symbols)*.scss",
           "vendor/marknotton/doggistyle/dist/_doggistyle.scss"
         ],
         "reload" : false
@@ -71,11 +71,11 @@
       "options" : {
         "sass-injections" : {
           "variables" : {
-            "primary"   : "{primary}",
-            "secondary" : "{secondary}",
-            "fonts"     : "'{fonts}'",
-            "images"    : "'{images}'",
-            "sprites"   : "'{images}/sprites'"
+            "primary"   : "#3F4041",
+            "secondary" : "#EB9F24",
+            "fonts"     : "'/assets/fonts'",
+            "images"    : "'/assets/images'",
+            "sprites"   : "'/assets/images/sprites'"
           },
           "imports" : [
             "vendor/marknotton/doggistyle/dist/_imports"
@@ -86,18 +86,18 @@
 
     "symbols" : {
       "source" : [
-        "{webroot}/{images}/sprites/**/!(plyr)*.svg",
-        "{webroot}/{images}/icon.svg",
-        "{webroot}/{images}/logo.svg"
+        "web/assets/images/sprites/**/!(plyr)*.svg",
+        "web/assets/images/icon.svg",
+        "web/assets/images/logo.svg"
       ],
-      "output" : "{images}/sprites/symbols.svg",
+      "output" : "/assets/images/sprites/symbols.svg",
       "watcher" : {
         "reload" : true
       },
       "options" : {
         "exclude" : "logo.svg",
         "prefix"  : "icon",
-        "sass-map-output" : "{sass}/_symbols.scss"
+        "sass-map-output" : "src/sass/_symbols.scss"
       }
     },
 
@@ -120,8 +120,8 @@
   "_deployer" : {
     "repository"    : "git@bitbucket.org:yellostudio/craftmaster.git",
     "shared-files"  : [".env"],
-    "shared-dirs"   : ["vendor", "storage", "node_modules", "{webroot}/{uploads}"],
-    "writable-dirs" : ["storage", "node_modules", "{webroot}/assets"],
+    "shared-dirs"   : ["vendor", "storage", "node_modules", "web/assets/uploads"],
+    "writable-dirs" : ["storage", "node_modules", "web/assets"],
     "hosts" : {
       "production" : {
         "path"     : "deploy/production",
@@ -140,5 +140,31 @@
         "port"     : "822"
       }
     }
+  },
+
+  "files" : {
+    "js"      : [
+      {
+        "filename" : "global.js",
+        "size" : 42222,
+        "gzip" : 22364,
+        "cache" : 257587555
+      },
+      {
+        "filename" : "vendors.js",
+        "size" : 8934222,
+        "gzip" : 422364,
+        "cache" : 64651684
+      },
+    ],
+    "css"     : [
+
+    ],
+    "fonts"   : [
+      
+    ],
+    "images"  : [
+
+    ],
   }
 }

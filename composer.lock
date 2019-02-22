@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "content-hash": "2502cd982a98905b52abc3b889df09b8",
@@ -475,16 +475,16 @@
         },
         {
             "name": "craftcms/cms",
-            "version": "3.1.7",
+            "version": "3.1.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/craftcms/cms.git",
-                "reference": "d7d9166144138f7794510f816b776bb1ff6761b3"
+                "reference": "8089a0741d2dbbdf6b8d142b60b8ed3814ffe211"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craftcms/cms/zipball/d7d9166144138f7794510f816b776bb1ff6761b3",
-                "reference": "d7d9166144138f7794510f816b776bb1ff6761b3",
+                "url": "https://api.github.com/repos/craftcms/cms/zipball/8089a0741d2dbbdf6b8d142b60b8ed3814ffe211",
+                "reference": "8089a0741d2dbbdf6b8d142b60b8ed3814ffe211",
                 "shasum": ""
             },
             "require": {
@@ -559,7 +559,7 @@
                 "craftcms",
                 "yii2"
             ],
-            "time": "2019-01-31T20:49:25+00:00"
+            "time": "2019-02-15T19:35:25+00:00"
         },
         {
             "name": "craftcms/oauth2-craftid",
@@ -1949,19 +1949,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/marknotton/craft-module-helpers.git",
-                "reference": "c48e048f9aeff45b3d11822200035626db329dde"
+                "reference": "f1f2821f5d8bfceaad0050e2ec6f752ebd353363"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/marknotton/craft-module-helpers/zipball/c48e048f9aeff45b3d11822200035626db329dde",
-                "reference": "c48e048f9aeff45b3d11822200035626db329dde",
+                "url": "https://api.github.com/repos/marknotton/craft-module-helpers/zipball/f1f2821f5d8bfceaad0050e2ec6f752ebd353363",
+                "reference": "f1f2821f5d8bfceaad0050e2ec6f752ebd353363",
                 "shasum": ""
             },
             "type": "craft-module",
             "extra": {
                 "name": "Helpers",
                 "handle": "helpers",
-                "schemaVersion": "1.0.6",
+                "schemaVersion": "1.0.7",
                 "hasCpSettings": false,
                 "hasCpSection": false,
                 "changelogUrl": "https://github.com/marknotton/craft-module-helpers/blob/master/CHANGELOG.md",
@@ -1984,7 +1984,7 @@
                 "craft-module",
                 "craftcms"
             ],
-            "time": "2019-01-25T12:13:16+00:00"
+            "time": "2019-02-12T07:51:10+00:00"
         },
         {
             "name": "mikehaertl/php-shellcommand",
@@ -2379,16 +2379,16 @@
         },
         {
             "name": "nystudio107/craft-seomatic",
-            "version": "3.1.40",
+            "version": "3.1.44",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nystudio107/craft-seomatic.git",
-                "reference": "fcf29f417c089586bd9557e328712dfb343c67d0"
+                "reference": "d5552c7fee40af79429307f9f7ba289195f16e6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nystudio107/craft-seomatic/zipball/fcf29f417c089586bd9557e328712dfb343c67d0",
-                "reference": "fcf29f417c089586bd9557e328712dfb343c67d0",
+                "url": "https://api.github.com/repos/nystudio107/craft-seomatic/zipball/d5552c7fee40af79429307f9f7ba289195f16e6c",
+                "reference": "d5552c7fee40af79429307f9f7ba289195f16e6c",
                 "shasum": ""
             },
             "require": {
@@ -2448,7 +2448,7 @@
                 "tags",
                 "twitter"
             ],
-            "time": "2019-01-30T19:12:35+00:00"
+            "time": "2019-02-19T00:18:28+00:00"
         },
         {
             "name": "oomphinc/composer-installers-extender",

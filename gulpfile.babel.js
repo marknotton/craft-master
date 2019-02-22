@@ -10,12 +10,12 @@
 import gulp      from 'gulp'                       // Gulp.
 import log       from '@marknotton/lumberjack'     // CLI logging.
 import notifier  from '@marknotton/notifier'       // Manage notification messages and other aesthetics.
-import tasks from './gulp'
+// import tasks from './gulp'
 
-gulp.task('default', (resolved) => {
-	console.log("FDGDFG")
-	resolved()
-})
+// gulp.task('default', (resolved) => {
+// 	console.log("FDGDFG")
+// 	resolved()
+// })
 // // =============================================================================
 // // Tasks
 // // =============================================================================

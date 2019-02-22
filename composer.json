@@ -32,9 +32,13 @@
       "modules\\": "modules/",
       "modules\\helpers\\": "modules/helpers/src/",
       "modules\\template-maker\\": "modules/template-maker/src/",
-      "modules\\general\\": "modules/general/src/"
+      "modules\\general\\": "modules/general/src/",
+      "modules\\pokemongomodule\\": "modules/pokemongomodule/src/"
     }
   },
+
+
+
   "config": {
     "optimize-autoloader": true,
     "platform": {
